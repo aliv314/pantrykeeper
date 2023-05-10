@@ -1,0 +1,18 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+.register{
+    @include padding-baseline;
+    &__form{
+        display: flex;
+        flex-direction: column;
+    }
+    &__title{
+        @include margin-headline;
+    }
+    &__input{
+        @include margin-baseline;
+    }
+    &__label{
+
+    }
+}
