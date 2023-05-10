@@ -1,6 +1,8 @@
-import { useState } from 'react'
 import './Register.scss'
 import validator from 'validator';
+import { useState } from 'react'
+import {useNavigate} from 'react-router-dom';
+
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -10,6 +12,8 @@ const Register = () => {
     const [pass, setPass] = useState("");
     const [confirm, setConfirm] = useState("");
     const [submitted, setSubmitted] = useState(true);
+
+    const nav = useNavigate();
 
     const onSubmitHandler = (e) =>{
         e.preventDefault();
@@ -35,6 +39,7 @@ const Register = () => {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
+                nav('/')
             })
             .catch((error) => {
                 const errorCode = error.code;

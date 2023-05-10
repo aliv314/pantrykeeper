@@ -5,8 +5,11 @@ import  myKichenIcon from '../../assets/images/icons/kitchen.svg';
 import  friendsIcon from '../../assets/images/icons/group.svg'; 
 import { useNavigate } from 'react-router-dom';
 
+import { auth } from '../../firebase';
+import { signOut } from 'firebase/auth';
 const Home = () => {
     const nav = useNavigate();
+    const currentUser = auth.currentUser;
 
     const loginClickHandler = () => {
         nav('/login')
@@ -15,6 +18,15 @@ const Home = () => {
         nav('/register')
     }
     const logOutClickHandler = () => {
+        try{
+            signOut(auth).then(() => {
+                nav('/')
+            }).catch((error) => {
+                console.log(error);
+            });
+        }catch(error){
+            console.log(error)
+        }
     }
 
     return (
@@ -30,11 +42,11 @@ const Home = () => {
                     <HomeCard text = "Friends" icon = {friendsIcon}/>
                 </div>
                 {/* If not Logged in or Signed up */}
-                <p className='home-body__user' onClick = {loginClickHandler}> Login </p>
+                {!currentUser && <p className='home-body__user' onClick = {loginClickHandler}> Login </p>}
                 {/* If not logged in or signed up */}
-                <p className='home-body__user' onClick= {signUpClickHandler}> SignUp</p>
+                {!currentUser && <p className='home-body__user' onClick= {signUpClickHandler}> SignUp</p>}
                 {/* If not logged in or signed up */}
-                <p className='home-body__user' onClick= {logOutClickHandler}> Logout </p>
+                {currentUser && <p className='home-body__user' onClick= {logOutClickHandler}> Logout </p>}
             </section>
         </>
     )
