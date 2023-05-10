@@ -1,13 +1,12 @@
-const {db} = require('./firebase')
-const admin = require('firebase-admin')
-const firebase = require('firebase')
 const express = require('express');
-const app = express()
 const cors = require('cors')
-app.use(cors())
-
 const dotenv = require('dotenv')
+const {db} = require('./firebase')
+
+const app = express()
+
 dotenv.config();
+app.use(cors())
 
 const port = process.env.PORT || 8080;
 

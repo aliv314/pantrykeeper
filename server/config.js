@@ -38,12 +38,12 @@ module.exports = {
         "client_x509_cert_url": client_x509_cert_url
     },
     firebaseConfig : {
-        apiKey: apiKey,
-        authDomain: authDomain,
-        projectId: projectId,
-        storageBucket: storageBucket,
-        messagingSenderId: messagingSenderId,
-        appId: appId,
-        measurementId: measurementId,
+        "apiKey": apiKey,
+        "authDomain": authDomain,
+        "projectId": projectId,
+        "storageBucket": storageBucket,
+        "messagingSenderId": messagingSenderId,
+        "appId": appId,
+        "measurementId": measurementId,
     }
 }

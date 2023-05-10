@@ -1,9 +1,12 @@
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
+const dotenv = require('dotenv')
+dotenv.config();
 
-const {serviceAccount, firebaseConfig} = require('./config');
+// const {serviceAccount, firebaseConfig} = require('./config');
 
-const app = initializeApp({
+const serviceAccount = require(`./${process.env.service_account_path}`);
+initializeApp({
   credential: cert(serviceAccount)
 });
 
