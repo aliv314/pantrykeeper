@@ -43,13 +43,13 @@ const Login = () => {
     }
 
     return (
-        <section className='register'>
-            <h2 className='register__title'> Login </h2>
-            <form className='register__form' onSubmit={onSubmitHandler}>
-                <p className='register__label'>Email</p>
-                <input className='register__input' placeholder='e-Mail' type='text' value={mail} onChange={(e) => setMail(e.target.value)}></input>
-                <p className='register__label'>Password</p> 
-                <input className='register__input' placeholder='Password' type='password' value ={pass} onChange={(e) => setPass(e.target.value)}></input>
+        <section className='login'>
+            <h2 className='login__title'> Login </h2>
+            <form className='login__form' onSubmit={onSubmitHandler}>
+                <p className='login__label'>Email</p>
+                <input className='login__input' placeholder='e-Mail' type='text' value={mail} onChange={(e) => setMail(e.target.value)}></input>
+                <p className='login__label'>Password</p> 
+                <input className='login__input' placeholder='Password' type='password' value ={pass} onChange={(e) => setPass(e.target.value)}></input>
                 
                 <button type="submit"> Submit </button> 
             </form>
