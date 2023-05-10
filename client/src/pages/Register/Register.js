@@ -48,8 +48,7 @@ const Register = () => {
             }); 
         }catch (error){
             
-        }
-        
+        }  
     }
 
     return (

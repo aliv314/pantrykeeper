@@ -11,6 +11,12 @@ const Home = () => {
     const nav = useNavigate();
     const currentUser = auth.currentUser;
 
+    const myKitchenHandler = () =>{
+        nav('/my-kitchen');
+    }
+    const friendsHandler = () =>{
+        nav('/friends')
+    }
     const loginClickHandler = () => {
         nav('/login')
     }
@@ -35,10 +41,10 @@ const Home = () => {
                 <h1>PantryKeeper</h1>
             </div>
             <section className='home-body'>
-                <div className='home-body__card'>
-                    <HomeCard text = "My Kitchen" icon = {myKichenIcon}/>
+                <div className='home-body__card' onClick={myKitchenHandler}>
+                    <HomeCard text = "My Kitchen" icon = {myKichenIcon} />
                 </div>
-                <div className='home-body__card'>
+                <div className='home-body__card' onClick={friendsHandler}>
                     <HomeCard text = "Friends" icon = {friendsIcon}/>
                 </div>
                 {/* If not Logged in or Signed up */}

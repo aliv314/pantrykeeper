@@ -21,6 +21,7 @@
     
     &__card{
         @include margin-baseline;
+        cursor: pointer;
     }
     &__user{
         margin: auto 0;
