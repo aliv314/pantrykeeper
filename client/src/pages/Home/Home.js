@@ -3,8 +3,20 @@ import HomeCard from '../../components/HomeCard/HomeCard';
 
 import  myKichenIcon from '../../assets/images/icons/kitchen.svg'; 
 import  friendsIcon from '../../assets/images/icons/group.svg'; 
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const nav = useNavigate();
+
+    const loginClickHandler = () => {
+        nav('/login')
+    }
+    const signUpClickHandler = () => {
+        nav('/register')
+    }
+    const logOutClickHandler = () => {
+    }
+
     return (
         <>
             <div className='hero'>
@@ -17,9 +29,12 @@ const Home = () => {
                 <div className='home-body__card'>
                     <HomeCard text = "Friends" icon = {friendsIcon}/>
                 </div>
-                <p className='home-body__user'> Login </p>
-                <p className='home-body__user'> SignUp</p>
-                <p className='home-body__user'> Logout </p>
+                {/* If not Logged in or Signed up */}
+                <p className='home-body__user' onClick = {loginClickHandler}> Login </p>
+                {/* If not logged in or signed up */}
+                <p className='home-body__user' onClick= {signUpClickHandler}> SignUp</p>
+                {/* If not logged in or signed up */}
+                <p className='home-body__user' onClick= {logOutClickHandler}> Logout </p>
             </section>
         </>
     )

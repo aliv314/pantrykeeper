@@ -14,13 +14,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 3rem;
-    margin: 25% 0;
+    width: 100%;
+    height: 100%;
+    @include margin-headline;
+    @include padding-baseline;
+    
     &__card{
         @include margin-baseline;
     }
     &__user{
         margin: auto 0;
         margin-bottom: 4px;
+        cursor: pointer;
     }
 }
