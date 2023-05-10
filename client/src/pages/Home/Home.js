@@ -12,10 +12,10 @@ const Home = () => {
     const currentUser = auth.currentUser;
 
     const myKitchenHandler = () =>{
-        nav('/my-kitchen');
+        nav('/my-pantry');
     }
     const friendsHandler = () =>{
-        nav('/friends')
+        nav('/friend-pantry')
     }
     const loginClickHandler = () => {
         nav('/login')
