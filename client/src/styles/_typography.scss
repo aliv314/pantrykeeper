@@ -19,3 +19,59 @@
     src: url('../../src/assets/fonts/Cabin-Bold.ttf');
     font-weight: 700;
 }
+
+@mixin font-header {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700; 
+    @include display-tablet{
+        font-size: 2.0625rem;
+        line-height: 2.75rem;
+    }
+}
+
+@mixin font-section {
+    font-size: 0.75rem;
+    line-height: 2.5rem;
+    @include display-tablet{
+        font-size: 0.75rem;
+        line-height: 2.25rem;
+    }
+}
+
+@mixin font-subheader {
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+    @include display-tablet{
+        font-size: 0.875rem;
+        line-height: 1.375rem;
+    }
+}
+@mixin font-body {
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+    @include display-tablet{
+        font-size: 0.875rem;
+        line-height: 1.375rem;
+    }
+}
+@mixin font-label{
+    font-size: 0.625rem;
+    line-height: 1.25rem;
+    @include display-tablet{
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+    }
+}
+@mixin font-section-bold {
+    font-weight: 700;
+}
+@mixin font-subheader-bold {
+    font-weight: 700;
+}
+@mixin font-body-bold{
+    font-weight: 700;
+}
+@mixin font-label-bold{
+    font-weight: 700;
+}
