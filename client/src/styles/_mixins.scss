@@ -1,4 +1,4 @@
-@use './variables';
+@use './variables' as *;
 
 @mixin display-tablet {
     @media screen and (min-width: $display-tablet) {
@@ -9,4 +9,20 @@
     @media screen and (min-width: $display-desktop) {
         
     }
+}
+
+//Padding 
+@mixin padding-baseline {
+    padding: 0 1rem;
+}
+
+//Margins 
+// Vertical Space between header and elements below
+@mixin margin-headline {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+// Vertical Space between elements
+@mixin margin-baseline {
+    margin-bottom: 1rem;
 }

@@ -1,19 +1,25 @@
 import './Home.scss'
 import HomeCard from '../../components/HomeCard/HomeCard';
 
-import ingredientsIcon from "../../assets/images/icons/nutrition.svg"
-import dishesIcon from '../../assets/images/icons/dinner_dining.svg'
+import  myKichenIcon from '../../assets/images/icons/kitchen.svg'; 
+import  friendsIcon from '../../assets/images/icons/group.svg'; 
 
 const Home = () => {
     return (
         <>
-            <section className='hero'>
+            <div className='hero'>
                 <h1>PantryKeeper</h1>
-            </section>
-
+            </div>
             <section className='home-body'>
-                <HomeCard text = "Ingredients" icon = {ingredientsIcon}/>
-                <HomeCard text = "Dishes" icon = {dishesIcon}/>
+                <div className='home-body__card'>
+                    <HomeCard text = "My Kitchen" icon = {myKichenIcon}/>
+                </div>
+                <div className='home-body__card'>
+                    <HomeCard text = "Friends" icon = {friendsIcon}/>
+                </div>
+                <p className='home-body__user'> Login </p>
+                <p className='home-body__user'> SignUp</p>
+                <p className='home-body__user'> Logout </p>
             </section>
         </>
     )
