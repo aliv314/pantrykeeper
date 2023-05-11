@@ -7,25 +7,17 @@ const app = express()
 
 dotenv.config();
 app.use(cors())
+app.use(express.json())
 
 const port = process.env.PORT || 8080;
 
-app.get('/', async (req, res) => {
-    const docRef = db.collection('users').doc('alovelace');
-    try{
-       await docRef.set({
-            first: 'Ada',
-            last: 'Lovelace',
-            born: 1815
-        }); 
-    }catch (e) {
-        console.log(e);
-    }
-    
-    res.send('Hello World!')
-})
+const usersRoute = require('./routes/usersRouter');
 
-
+app.use('/api/users', usersRoute);
+app.use('/api/pantries');
+app.use('/api/friends');
+app.use('/api/ingredients');
+app.use('/api/leftovers');
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

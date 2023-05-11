@@ -1,9 +1,10 @@
 import './Register.scss'
 import validator from 'validator';
+import axios from 'axios';
+
 import { useState } from 'react'
 import {useNavigate} from 'react-router-dom';
-
-import { auth } from '../../firebase';
+import { url, auth } from '../../firebase';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Register = () => {
@@ -39,16 +40,19 @@ const Register = () => {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                nav('/')
+                console.log(user.uid);
+                const postReq = {
+                    userId: user.id,
+                    friendCode: String(user.id).substring(0, 7),
+                }
+                axios.post(`${url}/api/users`)
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 // ..
             }); 
-        }catch (error){
-            
-        }  
+        }catch (error){}  
     }
 
     return (
