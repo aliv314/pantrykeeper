@@ -57,6 +57,24 @@ exports.postPantry = async (req, res) => {
 
 exports.getPantry = async (req, res) => {
     try{
+        const userRef = await db.collection('users').doc(req.body.userId);
+        const userSnapshot = await userRef.get();
+
+        if(!userSnapshot.exists){
+            return res.status(404).send("User not found.");
+        }
+
+        const pantrySnapshot = await userRef.collection('pantries').doc(req.params.pantryId).get();
+        const pantry = pantrySnapshot.data()
+        
+        res.status(200).json(pantry);
+    }catch(error){
+        res.status(404).send("Error getting pantries.")
+    }
+}
+
+exports.putPantry = async (req, res) => {
+try{
         const userRef = await db.collection('users').doc(req.body.userId)
         if (!req.body.userId || !req.body.userName || !req.body.pantryName){
             return res.status(400).send("Missing parameters");
@@ -69,10 +87,6 @@ exports.getPantry = async (req, res) => {
     }catch(error){
         res.status(400).send("Error posting new pantry.");
     }
-}
-
-exports.putPantry = async (req, res) => {
-
 }
 
 exports.delPantry = (req, res) => {
