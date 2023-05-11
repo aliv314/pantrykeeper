@@ -12,7 +12,7 @@ exports.postUser = async (req, res) => {
         const result = await db.collection('users').doc(req.body.userId).set({
             friendCode: req.body.friendCode,
         })
-        res.status(200).send(result);
+        res.status(200).send("Success!");
     }catch(e){
         res.status(400).send("Error updating user.");
     }
