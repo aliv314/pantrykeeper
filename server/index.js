@@ -12,9 +12,10 @@ app.use(express.json())
 const port = process.env.PORT || 8080;
 
 const usersRoutes = require('./routes/usersRouter');
+const pantriesRoutes = require('./routes/pantriesRouter');
 
 app.use('/api/users', usersRoutes);
-// app.use('/api/pantries');
+app.use('/api/pantries', pantriesRoutes);
 // app.use('/api/friends');
 // app.use('/api/ingredients');
 // app.use('/api/leftovers');

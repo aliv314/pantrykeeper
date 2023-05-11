@@ -1,6 +1,6 @@
 const {db} = require('../firebase');
 
-function Users(friendCode) {
+function newUser(friendCode) {
     return {
         friendCode: friendCode
     }

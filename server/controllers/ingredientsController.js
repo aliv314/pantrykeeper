@@ -1,6 +1,8 @@
-function Ingredients (name, img, timestamp, qty){
-    this.name = name;
-    this.img = img; 
-    this. timestamp = timestamp; 
-    this.qty = qty;
+function newIngredient (name, img, timestamp, qty){
+    return {
+        name : name,
+        img : img, 
+        timestamp : timestamp, 
+        qty : qty,
+    }
 }
