@@ -14,4 +14,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-export const url = `${process.env.REACT_APP_BACKEND}${process.env.REACT_APP_PORT}`;
+export const backend = `${process.env.REACT_APP_BACKEND}${process.env.REACT_APP_PORT}`;

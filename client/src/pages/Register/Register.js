@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { useState } from 'react'
 import {useNavigate} from 'react-router-dom';
-import { url, auth } from '../../firebase';
+import { backend, auth } from '../../firebase';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Register = () => {
@@ -45,12 +45,19 @@ const Register = () => {
                     userId: user.id,
                     friendCode: String(user.id).substring(0, 7),
                 }
-                axios.post(`${url}/api/users`)
+                axios.post(` ${backend}/api/users`, postReq)
+                .then(res => {
+                    console.log(res);
+                    nav('/')
+                }).catch(err => {
+                    console.log(err);
+                })
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                // ..
+                console.log(errorCode)
+                console.log(errorMessage)
             }); 
         }catch (error){}  
     }
