@@ -1,12 +1,19 @@
-import NewItemCard from '../../components/NewItemCard/NewItemCard';
+import NewCard from '../../components/NewCard/NewCard';
 import './Pantries.scss'
 
-const Kitchen = () => {
+const Pantries = () => {
     return (
-    <>
-        <NewItemCard title = {`Pantry`}/>
-    </>
+    <div className='pantries'>
+        <div className='pantries__title'>
+            <img/>
+            <h2> Pantries </h2>
+        </div>
+        <div className='pantries__cards'>
+
+            <NewCard title = {`Pantry`}/>
+        </div>
+    </div>
     )
 }
 
-export default Kitchen;
+export default Pantries;

@@ -1,0 +1,12 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.pantries{
+    @include padding-baseline;
+    &__title{
+
+    }
+    &__cards{
+
+    }
+}
