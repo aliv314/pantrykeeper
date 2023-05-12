@@ -27,8 +27,7 @@ exports.getPantries = async(req, res) => {
             return res.status(404).send("User not found.");
         }
 
-        const pantriesSnapshot = await userRef.collection('pantries').get();
-
+        const pantriesSnapshot = await db.collection('pantries').where('owner_id', '==', req.body.userId).get();
         let pantries = []
         pantriesSnapshot.forEach( (doc) => {
             pantries.push(doc.data());
@@ -49,7 +48,7 @@ exports.postPantry = async (req, res) => {
 
         const pantryObj = newPantry(req.body.userId, req.body.userName, req.body.pantryName, 
             '', 0, 0);
-        const result = await userRef.collection('pantries').add(pantryObj);
+        const result = await db.collection('pantries').add(pantryObj);
         res.status(200).send("Success!");
     }catch(error){
         res.status(400).send("Error posting new pantry.");
@@ -72,7 +71,7 @@ exports.getPantry = async (req, res) => {
             return res.status(404).send("User not found.");
         }
 
-        const pantrySnapshot = await userRef.collection('pantries').doc(req.params.id).get();
+        const pantrySnapshot = await db.collection('pantries').doc(req.params.id).get();
         const pantry = pantrySnapshot.data()
 
         res.status(200).json(pantry);
@@ -83,8 +82,7 @@ exports.getPantry = async (req, res) => {
 
 exports.putPantry = async (req, res) => {
     try{
-        const userRef = await db.collection('users').doc(req.body.userId)
-        const pantryRef = await userRef.collection('pantries').doc(res.params.id);
+        const pantryRef = await db.collection('pantries').doc(req.params.id);
 
         const result = pantryRef.update({pantry_name: pantryName, pantry_img: pantryImg});
     
@@ -96,10 +94,8 @@ exports.putPantry = async (req, res) => {
 
 exports.delPantry = async(req, res) => {
     try{
-        const userRef = await db.collection('users').doc(req.body.userId)
-        const pantryRef = await userRef.collection('pantries').doc(res.params.id);
+        const pantryRef = await db.collection('pantries').doc(res.params.id);
         const result = pantryRef.delete();
-
         res.status(200).send('Success!');
     }catch(error){
         res.status(400).send("Error deleting pantry")
