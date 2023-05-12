@@ -1,0 +1,45 @@
+@use '../../../../styles/mixins' as *;
+@use '../../../../styles/variables' as *;
+
+.new-pantry{
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    width: 100%;
+    height: 100%;
+    
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &__content{
+        background-color: white;
+        @include padding-baseline;
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+    }
+    &__head{
+        display: flex;
+        align-items: center;
+    }
+    &__title{
+        margin-right: auto;
+        @include margin-headline;
+    }
+    &__icon{
+        height: 10rem;
+    }
+    &__form{
+        display: flex;
+        flex-direction: column;
+    }
+    &__buttons{
+    }
+    &__button{
+        width: 100%;
+    }
+}
