@@ -1,16 +1,20 @@
 const {db} = require('../firebase');
 
 
-function newPantry (owner_id, owner_name, pantry_name, icon, num_ingredients, num_leftovers){
+function newPantry (owner_id, owner_name, pantry_name, pantry_img, num_ingredients, num_leftovers){
     return{
         owner_id : owner_id,
         owner_name : owner_name,
         pantry_name: pantry_name,
-        icon : icon,
+        pantry_img: pantry_img,
         num_ingredients : num_ingredients,
         num_leftovers : num_leftovers,
     }    
 }
+
+/*
+    WITHOUT ID / PARAMS
+*/
 
 //REQ: USERID
 //RES: [{PANTRYOBJ}]
@@ -52,6 +56,10 @@ exports.postPantry = async (req, res) => {
     }
 }
 
+/*
+    WITH PARAMS
+*/
+
 //PARAM: PANTRYID
 //REQ: USERID
 
@@ -66,7 +74,7 @@ exports.getPantry = async (req, res) => {
 
         const pantrySnapshot = await userRef.collection('pantries').doc(req.params.pantryId).get();
         const pantry = pantrySnapshot.data()
-        
+
         res.status(200).json(pantry);
     }catch(error){
         res.status(404).send("Error getting pantries.")
@@ -74,21 +82,26 @@ exports.getPantry = async (req, res) => {
 }
 
 exports.putPantry = async (req, res) => {
-try{
+    try{
         const userRef = await db.collection('users').doc(req.body.userId)
-        if (!req.body.userId || !req.body.userName || !req.body.pantryName){
-            return res.status(400).send("Missing parameters");
-        }
+        const pantryRef = await userRef.collection('pantries').doc(res.params.pantryId);
 
-        const pantryObj = newPantry(req.body.userId, req.body.userName, req.body.pantryName, 
-            '', 0, 0);
-        const result = await userRef.collection('pantries').add(pantryObj);
+        const result = pantryRef.update({pantry_name: pantryName, pantry_img: pantryImg});
+    
         res.status(200).send("Success!");
     }catch(error){
         res.status(400).send("Error posting new pantry.");
     }
 }
 
-exports.delPantry = (req, res) => {
-    
-}
+exports.delPantry = async(req, res) => {
+    try{
+        const userRef = await db.collection('users').doc(req.body.userId)
+        const pantryRef = await userRef.collection('pantries').doc(res.params.pantryId);
+        const result = pantryRef.delete();
+
+        res.status(200).send('Success!');
+    }catch(error){
+        res.status(400).send("Error deleting pantry")
+    }
+}   
