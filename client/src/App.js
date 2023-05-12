@@ -20,18 +20,11 @@ function App() {
         <Route path='/register' element = {<Register/>}/>
 
         <Route path='/my-pantry' element={<Pantries/>}/>
-        <Route path='/new-pantry'/>
-        <Route path='/edit-pantry'/>
-        <Route path='/my-pantry/:id'/>
-        
         <Route path='/friend-pantry'/>
-        <Route path='/friend-pantry/:id'/>
 
         {/* leftover:id and ingredient:id can also used to edit */}
-        <Route path='/new-leftover'/>
-        <Route path='/leftover/:id'/>
-        <Route path='/new-ingredients'/>
-        <Route path='/ingredient/:id'/>
+        <Route path='/leftovers'/>
+        <Route path='/ingredients'/>
       </Routes>
     </main>
     </BrowserRouter>

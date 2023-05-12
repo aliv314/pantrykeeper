@@ -1,5 +1,5 @@
 import './Home.scss'
-import HomeCard from '../../components/HomeCard/HomeCard';
+import HomeCard from '../../components/Cards/HomeCard/HomeCard';
 
 import  myKichenIcon from '../../assets/images/icons/kitchen.svg'; 
 import  friendsIcon from '../../assets/images/icons/group.svg'; 
