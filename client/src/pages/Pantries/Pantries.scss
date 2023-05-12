@@ -4,9 +4,9 @@
 .pantries{
     @include padding-baseline;
     &__title{
-
+        @include margin-headline;
     }
     &__cards{
-
+        
     }
 }

@@ -5,11 +5,9 @@ const Pantries = () => {
     return (
     <div className='pantries'>
         <div className='pantries__title'>
-            <img/>
             <h2> Pantries </h2>
         </div>
         <div className='pantries__cards'>
-
             <NewCard title = {`Pantry`}/>
         </div>
     </div>
