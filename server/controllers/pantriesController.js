@@ -72,7 +72,7 @@ exports.getPantry = async (req, res) => {
             return res.status(404).send("User not found.");
         }
 
-        const pantrySnapshot = await userRef.collection('pantries').doc(req.params.pantryId).get();
+        const pantrySnapshot = await userRef.collection('pantries').doc(req.params.id).get();
         const pantry = pantrySnapshot.data()
 
         res.status(200).json(pantry);
@@ -84,7 +84,7 @@ exports.getPantry = async (req, res) => {
 exports.putPantry = async (req, res) => {
     try{
         const userRef = await db.collection('users').doc(req.body.userId)
-        const pantryRef = await userRef.collection('pantries').doc(res.params.pantryId);
+        const pantryRef = await userRef.collection('pantries').doc(res.params.id);
 
         const result = pantryRef.update({pantry_name: pantryName, pantry_img: pantryImg});
     
@@ -97,7 +97,7 @@ exports.putPantry = async (req, res) => {
 exports.delPantry = async(req, res) => {
     try{
         const userRef = await db.collection('users').doc(req.body.userId)
-        const pantryRef = await userRef.collection('pantries').doc(res.params.pantryId);
+        const pantryRef = await userRef.collection('pantries').doc(res.params.id);
         const result = pantryRef.delete();
 
         res.status(200).send('Success!');
