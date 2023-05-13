@@ -3,7 +3,6 @@
 
 .item-card{
     @include card-container;
-    @include margin-headline;
     &__body{
         display: flex;
         flex-direction: column;

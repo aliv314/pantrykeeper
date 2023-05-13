@@ -4,12 +4,12 @@ import editIcon from '../../../assets/images/icons/edit.svg'
 import deleteIcon from '../../../assets/images/icons/delete.svg'
 
 const ItemCard = (props) => {
-    const {title, img, onClickItem, onClickEdit, onClickDelete} = props;
+    const {pantry, onClickItem, onClickEdit, onClickDelete} = props;
     return (
         <>
             <div className='item-card'>
                 <div onClick={onClickItem} className='item-card__body'>
-                    <h4 className='item-card__title'> {title} </h4>
+                    <h4 className='item-card__title'> {pantry && pantry.pantry_name} </h4>
                     <img  className='item-card__icon'src={pantryIcon} alt="icon"></img>
                 </div>
                 <div className='item-card__buttons'>
