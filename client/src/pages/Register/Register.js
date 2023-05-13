@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import { backend, auth } from '../../firebase';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const Register = () => {
     const [mail, setMail] = useState("");
@@ -39,11 +39,18 @@ const Register = () => {
             createUserWithEmailAndPassword(auth, mail, pass)
             .then((userCredential) => {
                 // Signed in 
-                const user = userCredential.user;
-                console.log(user.uid);
+                const userObj = userCredential.user;
+                updateProfile( userObj, {
+                    displayName: user
+                }).then(() => {
+                    console.log("Profile updated!")
+                }).catch(() => {
+                    console.log("Profile failed to update!")
+                })
+                console.log(userCredential)
                 const postReq = {
-                    userId: user.id,
-                    friendCode: String(user.id).substring(0, 7),
+                    userId: userObj.uid,
+                    friendCode: String(userObj.uid).substring(0, 7),
                 }
                 axios.post(` ${backend}/api/users`, postReq)
                 .then(res => {

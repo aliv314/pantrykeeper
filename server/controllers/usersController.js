@@ -6,6 +6,29 @@ function newUser(friendCode) {
     }
 }
 
+//REQ: id
+//RES: [{PANTRYOBJ}]
+exports.getUserPantries = async(req, res) => {
+    try{
+        const userRef = await db.collection('users').doc(req.params.id);
+        const userSnapshot = await userRef.get();
+
+        if(!userSnapshot.exists){
+            return res.status(404).send("User not found.");
+        }
+
+        const pantriesSnapshot = await db.collection('pantries').where('owner_id', '==', req.params.id).get();
+        let pantries = []
+        pantriesSnapshot.forEach( (doc) => {
+            pantries.push(doc.data());
+        });
+        res.status(200).json(pantries);
+    }catch(error){
+        console.log(error)
+        res.status(404).send("Error getting pantries.")
+    }
+}
+
 //Posts user Friend code to 
 exports.postUser = async (req, res) => {
     try{

@@ -5,11 +5,22 @@ import  myKichenIcon from '../../assets/images/icons/kitchen.svg';
 import  friendsIcon from '../../assets/images/icons/group.svg'; 
 import { useNavigate } from 'react-router-dom';
 
-import { auth } from '../../firebase';
-import { signOut } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { useState } from 'react';
 const Home = () => {
-    const nav = useNavigate();
-    const currentUser = auth.currentUser;
+    const nav = useNavigate();  
+    const [user, setUser] = useState();
+
+    const auth = getAuth()
+
+    onAuthStateChanged(auth, (user) => {
+        if (user){
+            setUser(user);
+        } else{
+            setUser(false);
+        }
+    
+    })
 
     const myKitchenHandler = () =>{
         nav('/my-pantry');
@@ -26,7 +37,7 @@ const Home = () => {
     const logOutClickHandler = () => {
         try{
             signOut(auth).then(() => {
-                nav('/')
+                console.log("Signed out!")
             }).catch((error) => {
                 console.log(error);
             });
@@ -48,11 +59,11 @@ const Home = () => {
                     <HomeCard text = "Friends" icon = {friendsIcon}/>
                 </div>
                 {/* If not Logged in or Signed up */}
-                {!currentUser && <p className='home-body__user' onClick = {loginClickHandler}> Login </p>}
+                {!user && <p className='home-body__user' onClick = {loginClickHandler}> Login </p>}
                 {/* If not logged in or signed up */}
-                {!currentUser && <p className='home-body__user' onClick= {signUpClickHandler}> SignUp</p>}
+                {!user && <p className='home-body__user' onClick= {signUpClickHandler}> SignUp</p>}
                 {/* If not logged in or signed up */}
-                {currentUser && <p className='home-body__user' onClick= {logOutClickHandler}> Logout </p>}
+                {user && <p className='home-body__user' onClick= {logOutClickHandler}> Logout </p>}
             </section>
         </>
     )

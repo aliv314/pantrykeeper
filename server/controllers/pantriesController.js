@@ -16,37 +16,15 @@ function newPantry (owner_id, owner_name, pantry_name, pantry_img, num_ingredien
     WITHOUT ID / PARAMS
 */
 
-//REQ: USERID
-//RES: [{PANTRYOBJ}]
-exports.getPantries = async(req, res) => {
-    try{
-        const userRef = await db.collection('users').doc(req.body.userId);
-        const userSnapshot = await userRef.get();
-
-        if(!userSnapshot.exists){
-            return res.status(404).send("User not found.");
-        }
-
-        const pantriesSnapshot = await db.collection('pantries').where('owner_id', '==', req.body.userId).get();
-        let pantries = []
-        pantriesSnapshot.forEach( (doc) => {
-            pantries.push(doc.data());
-        });
-        res.status(200).json(pantries);
-    }catch(error){
-        res.status(404).send("Error getting pantries.")
-    }
-}
 //REQ: USERID, OWNERNAME, OWNERID, TIMESTAMP, ICON, NUM_INGREDIENTS, NUM_LEFTOVERS
-//RES: 
+//RES: Success!
 exports.postPantry = async (req, res) => {
     try{
-        const userRef = await db.collection('users').doc(req.body.userId)
-        if (!req.body.userId || !req.body.userName || !req.body.pantryName){
+        if (!req.body.ownerId || !req.body.ownerName || !req.body.pantryName){
             return res.status(400).send("Missing parameters");
         }
 
-        const pantryObj = newPantry(req.body.userId, req.body.userName, req.body.pantryName, 
+        const pantryObj = newPantry(req.body.ownerId, req.body.ownerName, req.body.pantryName, 
             '', 0, 0);
         const result = await db.collection('pantries').add(pantryObj);
         res.status(200).send("Success!");
