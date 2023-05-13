@@ -59,12 +59,18 @@ const Pantries = () => {
         <div className='pantries__title'>
             <h2> Pantries </h2>
         </div>
-        <div className='pantries__cards'>
+        <ul className='pantries__cards'>
             {pantries && pantries.map( (pantry) => {
-                return <ItemCard pantry={pantry}> </ItemCard>
+                return (
+                    <li className='pantries__card'>
+                        <ItemCard pantry={pantry}/>
+                    </li>
+                )
             })}
-            <NewCard title = {`Pantry`} onClickHandler={()=>setShowNew(true)}/>
-        </div>
+            <li className='pantries__card'>
+                <NewCard title = {`Pantry`} onClickHandler={()=>setShowNew(true)}/>
+            </li>
+        </ul>
     </div>
     )
 }

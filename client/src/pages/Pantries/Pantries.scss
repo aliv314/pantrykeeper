@@ -2,11 +2,16 @@
 @use '../../styles/variables' as *;
 
 .pantries{
-    @include padding-baseline;
     &__title{
+        @include padding-baseline;
         @include margin-headline;
     }
     &__cards{
-        
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+    }
+    &__card{
+        @include padding-baseline;
     }
 }
