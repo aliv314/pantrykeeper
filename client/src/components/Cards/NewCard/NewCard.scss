@@ -2,16 +2,9 @@
 @use '../../../styles/variables' as *;
 
 .new-card{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 120px;
-    height: 144px;
-    border-radius: 25px;
-    width: 33%;
-    border: 3px solid black;
-    cursor: pointer;
     
+    @include card-container;
+
     &__title{
         display: flex;
         justify-content: center;

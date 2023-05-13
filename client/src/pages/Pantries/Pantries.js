@@ -6,6 +6,7 @@ import './Pantries.scss'
 import { useEffect, useState } from 'react';
 import { backend } from '../../firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import ItemCard from '../../components/Cards/ItemCard/ItemCard';
 
 const Pantries = () => {
     // const nav = useNavigate();
@@ -59,6 +60,7 @@ const Pantries = () => {
             <h2> Pantries </h2>
         </div>
         <div className='pantries__cards'>
+            <ItemCard></ItemCard>
             <NewCard title = {`Pantry`} onClickHandler={()=>setShowNew(true)}/>
         </div>
     </div>
