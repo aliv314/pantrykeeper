@@ -9,10 +9,13 @@ function newIngredient (name, img, timestamp, qty){
 }
 
 // api/ingredients/:pantry_id
-exports.getIngredients = (req, res) => {
+exports.getIngredients = async (req, res) => {
     try{
-        const ingredientsRef = db.collection('pantries').doc(req.params.pantry_id).collection('ingredients').get();
+        const ingredientsRef = await db.collection('pantries').doc(req.params.pantry_id).collection('ingredients');
         const ingredientsSnapshot = ingredientsRef.get();
+        if (!ingredientsSnapshot.exists){
+            return res.send("No ingredients.")
+        }
         let ingredients = [];
         ingredientsSnapshot.forEach( (ingredient) => {
             ingredients.push({
@@ -22,6 +25,7 @@ exports.getIngredients = (req, res) => {
         })
         res.status(200).json(ingredients);
     }catch (err) {
+        console.log(err)
         res.status(400).send("Error getting ingredients.")
     }
 }

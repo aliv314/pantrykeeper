@@ -1,4 +1,3 @@
-const { default: Pantries } = require('../../client/src/pages/Pantries/Pantries');
 const {db} = require('../firebase');
 
 function newLeftovers (leftover_name, leftover_description, leftover_img, timestamp, leftover_qty){
@@ -12,10 +11,13 @@ function newLeftovers (leftover_name, leftover_description, leftover_img, timest
 }
 
 // api/leftovers/:pantry_id
-exports.getLeftovers = (req, res) => {
+exports.getLeftovers = async (req, res) => {
     try{
-        const leftoversRef = db.collection('pantries').doc(req.params.pantry_id).collection('leftovers').get();
+        const leftoversRef = await db.collection('pantries').doc(req.params.pantry_id).collection('leftovers');
         const leftoversSnapshot = leftoversRef.get();
+        if (!leftoversSnapshot.exists){
+            return res.status(200).send("No leftovers.")
+        }
         let leftovers = [];
         leftoversSnapshot.forEach( (leftover) => {
             leftovers.push({
