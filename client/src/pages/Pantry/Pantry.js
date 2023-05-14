@@ -1,19 +1,22 @@
 import './Pantry.scss'
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { backend } from '../../firebase';
 
 import backIcon from '../../assets/images/icons/arrow_back.svg'
 import ingredientsIcon from '../../assets/images/icons/nutrition.svg'
 import leftoversIcon from '../../assets/images/icons/dinner_dining.svg'
+import LeftoversList from '../../components/LeftoversList/LeftoversList';
+import IngredientsList from '../../components/IngredientsList/IngredientsList';
+import SectionButton from '../../components/SectionButton/SectionButton';
 
 const Pantry = () => {
     const {id} = useParams();
     const [pantry, setPantry] = useState({})
-    
     const [ingredients, setIngredients] = useState([])
     const [leftovers, setLeftovers] = useState([])
+    const nav = useNavigate();
 
     useEffect(() => {
         axios.get(`${backend}/api/pantries/${id}`)
@@ -36,34 +39,27 @@ const Pantry = () => {
             console.log(e);
         })
 
-    }, [])
+    }, [id])
 
 
     return (
         <div className='pantry'>
             <div className='pantry__head'>
                 <div className='pantry__head-left'>
-                    <img src={backIcon} ></img>
+                    <img className='pantry__icon' src={backIcon} alt="Back arrow icon" onClick={() => nav(-1)}/>
                     <h2> Pantry: {pantry.pantry_name}</h2>
                 </div>
                 <div className='pantry__head-right'>
-                    <div>
-                        <img src={ingredientsIcon}></img>
-                        <p>Ingredients</p>
+                    <div className='pantry__button'>
+                        <SectionButton icon={ingredientsIcon} text={`Ingredients`}></SectionButton>
                     </div>
-                    <div>
-                        <img src={leftoversIcon}></img>
-                        <p>Leftovers</p>
+                    <div className='pantry__button'>
+                        <SectionButton icon={leftoversIcon} text={`Leftovers`}></SectionButton>
                     </div>
                 </div>
             </div>
-
-            <section className='ingredients'>
-                <h3> {pantry.pantry_name} Ingredients </h3>
-            </section>
-            <section className='leftovers'>
-                <h3> {pantry.pantry_name} Leftovers </h3>
-            </section>
+            <IngredientsList ingredients = {ingredients}></IngredientsList>
+            <LeftoversList  leftovers = {leftovers} ></LeftoversList>
         </div>
     )
 }

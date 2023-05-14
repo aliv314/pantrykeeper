@@ -1,2 +1,17 @@
 @use '../../styles/mixins' as *;
 @use '../../styles/variables' as *;
+
+.pantry{
+    &__head{
+        display: flex;
+
+        &-left{
+            display: flex;
+        }
+        
+        &-right{
+            display: flex;
+        }
+    }
+    
+}

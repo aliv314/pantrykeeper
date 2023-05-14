@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import NewCard from '../../components/Cards/NewCard/NewCard';
-import NewPantryModal from '../../components/Modals/ModalPantries/NewPantryModal/NewPantryModal';
+import NewPantryModal from '../../components/Modals/PantriesModals/NewPantryModal/NewPantryModal';
 import './Pantries.scss'
 import { useEffect, useState } from 'react';
 import { backend } from '../../firebase';
@@ -32,7 +32,6 @@ const Pantries = () => {
         if(!user) return
         axios.get(`${backend}/api/users/${user.uid}`)
         .then((res) => {
-            console.log(res.data)
             setPantries(res.data);
         }).catch((e) => {
             console.log(e);
