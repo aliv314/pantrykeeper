@@ -1,15 +1,14 @@
 const router = require('express').Router();
 const leftoversRouter = require('../controllers/leftoversController');
 
-// router.route('/')
-// .get(leftoversRouter.getIngredients)
+router.route('/:pantry_id')
+.get(leftoversRouter.getLeftovers)
+.post(leftoversRouter.postLeftover)
 
-// router.route('/:id')
-// .get(leftoversRouter.getIngredient)
-// .post(leftoversRouter.postIngredient)
-// .put(leftoversRouter.putIngredient)
-// .delete(leftoversRouter.delIngredient)
+router.route('/:pantry_id/:leftover_id')
+.get(leftoversRouter.getLeftover)
+.put(leftoversRouter.putLeftover)
+.delete(leftoversRouter.delLeftover)
 
-//FIGURE OUT FRIENDS LATER X(
 
 module.exports = router;

@@ -15,6 +15,8 @@ const Pantries = () => {
     const [showNew, setShowNew] = useState(false);
     const [user, setUser] = useState();
 
+    const navigator = useNavigate();
+
     const auth = getAuth();
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -62,8 +64,8 @@ const Pantries = () => {
         <ul className='pantries__cards'>
             {pantries && pantries.map( (pantry) => {
                 return (
-                    <li className='pantries__card'>
-                        <ItemCard pantry={pantry}/>
+                    <li className='pantries__card' key={pantry && pantry.pantry_id}>
+                        <ItemCard pantry={pantry} onClickItem={() => navigator(`/my-pantry/${pantry.pantry_id}`)}/>
                     </li>
                 )
             })}

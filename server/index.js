@@ -19,7 +19,7 @@ app.use('/api/users', usersRoutes);
 app.use('/api/pantries', pantriesRoutes);
 // app.use('/api/friends');
 // app.use('/api/ingredients', ingredientsRoutes);
-// app.use('/api/leftovers');
+// app.use('/api/leftovers', leftoversRoutes);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
