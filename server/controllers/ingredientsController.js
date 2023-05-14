@@ -14,7 +14,7 @@ exports.getIngredients = async (req, res) => {
         const ingredientsRef = await db.collection('pantries').doc(req.params.pantry_id).collection('ingredients');
         const ingredientsSnapshot = ingredientsRef.get();
         if (!ingredientsSnapshot.exists){
-            return res.send("No ingredients.")
+            return res.status(200).json([])
         }
         let ingredients = [];
         ingredientsSnapshot.forEach( (ingredient) => {

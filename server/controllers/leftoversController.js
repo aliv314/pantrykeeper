@@ -16,7 +16,7 @@ exports.getLeftovers = async (req, res) => {
         const leftoversRef = await db.collection('pantries').doc(req.params.pantry_id).collection('leftovers');
         const leftoversSnapshot = leftoversRef.get();
         if (!leftoversSnapshot.exists){
-            return res.status(200).send("No leftovers.")
+            return res.status(200).json([])
         }
         let leftovers = [];
         leftoversSnapshot.forEach( (leftover) => {

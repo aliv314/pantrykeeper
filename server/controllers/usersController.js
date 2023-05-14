@@ -14,11 +14,13 @@ exports.getUserPantries = async(req, res) => {
         const userSnapshot = await userRef.get();
 
         if(!userSnapshot.exists){
-            return res.status(404).send("User not found.");
+            return res.send("User not found.");
         }
         const pantriesRef = await db.collection('pantries').where('owner_id', '==', req.params.id);
-        const pantriesSnapshot = pantriesRef.get();
-
+        const pantriesSnapshot = await pantriesRef.get();
+        if(pantriesSnapshot.exists){
+            return res.status(200).json([]);
+        }
         let pantries = []
         pantriesSnapshot.forEach( (pantry) => {
             pantries.push({pantry_id: pantry.id,
