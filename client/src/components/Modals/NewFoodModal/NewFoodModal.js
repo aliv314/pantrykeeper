@@ -1,5 +1,5 @@
 import './NewFoodModal.scss'
-import { uuidv4 } from '@firebase/util';
+
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import SearchSuggestions from '../../SearchSuggestions/SearchSuggestions';
@@ -53,7 +53,7 @@ const NewFoodModal = (props) => {
     const suggestionSelected = (suggestion) => {
         //Set suggestion to update food input bar.
         setSuggestion(suggestion)
-        //Closes suggestion.
+        //Restarts suggestions
         setSuggestions([]);
     } 
 
@@ -100,12 +100,24 @@ const NewFoodModal = (props) => {
                     <h2> Add Food </h2>
                     <img src={closeIcon} onClick={onCloseHandler} alt='close modal'/>
                 </div>
-                <p> Search </p>
                 <form className='new-food__form' onSubmit={handleAddFood}>
+                    <p className='new-food__text'> Search </p>
                     <input className= 'new-food__input' onChange={(e)=>setFood(e.target.value)} onKeyUp={getSuggestions} value={food}></input>
-                    <button className= 'new-food__input-button' type='Submit'>Add</button>
+                    {suggestions && <SearchSuggestions suggestions={suggestions} onClickSuggestion={(suggestion)=>{suggestionSelected(suggestion)}}></SearchSuggestions>}
+                    <p className='new-food__text'> Type </p>
+                    <div className='new-food__radio-group'>
+                        <div className='new-food__radio'>
+                            <input className='new-food__radio-button'  name="foodType" type={"radio"} value = "Ingredient"/>
+                            <p className='new-food__radio-text'> Ingredient</p>
+                        </div>
+                        <div className='new-food__radio'>
+                            <input className='new-food__radio-button' name="foodType" type={"radio"} value = "Dish"/>
+                            <p className='new-food__radio-text'> Dish </p>
+                        </div>
+                    </div>
+                    <button className= 'new-food__button' type='Submit'>Add</button>
                 </form>
-                {suggestions && <SearchSuggestions suggestions={suggestions} onClickSuggestion={(suggestion)=>{suggestionSelected(suggestion)}}></SearchSuggestions>}
+                
                 <h3 className='new-food__list-title'> Foods </h3>
                 <NewFoodList foods={foods}></NewFoodList>
                 <button className='new-food__button' onClick={submitList}> Submit </button>
