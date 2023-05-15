@@ -10,7 +10,14 @@
         
     }
 }
-
+@mixin card-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+@mixin card-item {
+    @include padding-baseline;
+}
 @mixin card-container {
     display: flex;
     flex-direction: column;
@@ -24,6 +31,8 @@
     
     cursor: pointer;
 }
+
+
 
 @mixin icon{
     height: 3rem;

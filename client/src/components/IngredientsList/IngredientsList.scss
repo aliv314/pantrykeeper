@@ -1,0 +1,15 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.ingredients{
+    @include padding-baseline;
+    &__header{
+        padding-bottom: 1rem;
+    }
+    &__list{
+        @include card-list;
+    }
+    &__list-item{
+        @include card-item;
+    }
+}

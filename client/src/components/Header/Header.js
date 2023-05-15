@@ -9,6 +9,7 @@ const Header = () => {
     const auth = getAuth();
     const [username, setUsername] = useState("");
     const [profileImg, setProfileImg] = useState("");
+    
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if(user != null){

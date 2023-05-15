@@ -7,11 +7,9 @@
         @include margin-headline;
     }
     &__cards{
-        display: flex;
-        flex-wrap: wrap;
-        list-style: none;
+        @include card-list;
     }
     &__card{
-        @include padding-baseline;
+       @include card-item;
     }
 }

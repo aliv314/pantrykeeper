@@ -31,12 +31,16 @@ const IngredientsList = () => {
         <>  
             <NewIngredientModal show={showNew} onCloseHandler={() => setShowNew(false)}></NewIngredientModal>
             <section className='ingredients'>
-                <h3> Ingredients </h3>
-                <ul>
+                <h3 className='ingredients__header'> Ingredients </h3>
+                <ul className='ingredients__list'>
                     {ingredients && ingredients.map(ingredient => {
-                        return ( <ItemCard key={uuidv4()} itemName={ingredient.ingredient_name} icon ={ingredientIcon}></ItemCard>)
+                        return ( 
+                        <li className='ingredients__list-item'>
+                            <ItemCard key={uuidv4()} itemName={ingredient.ingredient_name} icon ={ingredientIcon}></ItemCard>
+                        </li>
+                        )
                     })}
-                    <li>
+                    <li className='ingredients__list-item'>
                         <NewItemCard title={'Ingredient'} onClickHandler = {() => setShowNew(true)}></NewItemCard>
                     </li>
                 </ul>
