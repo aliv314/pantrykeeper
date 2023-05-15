@@ -5,10 +5,7 @@ import axios from 'axios';
 import { backend } from '../../firebase';
 
 import backIcon from '../../assets/images/icons/arrow_back.svg'
-import ingredientsIcon from '../../assets/images/icons/nutrition.svg'
-import leftoversIcon from '../../assets/images/icons/dinner_dining.svg'
 import IngredientsList from '../../components/IngredientsList/IngredientsList';
-import SectionButton from '../../components/SectionButton/SectionButton';
 
 const Pantry = () => {
     const {id} = useParams();
