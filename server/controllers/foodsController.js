@@ -1,6 +1,7 @@
 const {db} = require('../firebase');
 const axios = require('axios');
 process.config;
+
 function newFood (name, img, timestamp, qty){
     return {
         food_name : name,
