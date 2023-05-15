@@ -1,27 +1,37 @@
 import './NewIngredientModal.scss'
 import { uuidv4 } from '@firebase/util';
-import searchIcon from '../../../assets/images/icons/search.svg'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import SearchSuggestions from '../../SearchSuggestions/SearchSuggestions';
-
+import {useParams} from 'react-router-dom';
+import searchIcon from '../../../assets/images/icons/search.svg'
+import closeIcon from '../../../assets/images/icons/close.svg'
+import { backend } from '../../../firebase';
 const NewIngredientModal = (props) => {
-    const {show, onOpen, onClose} = props;
+    const {id} = useParams();
+    const {show, onCloseHandler} = props;
+
     //Ingredient in search bar
     const [ingredient, setIngredient] = useState("");
-    //Suggestion selected from autocomplete
     //Set of ingredients used to send to the api.
     const [ingredients, setIngredients] = useState([])
     //Suggestion to update input
+    //Suggestion selected from autocomplete
     const [suggestion, setSuggestion] = useState("");
     //List of suggestions sent as prop to suggestion list component
     const [suggestions, setSuggestions] = useState([]);
     //Timer to delay api call.
     const [timer, setTimer] = useState(null);
 
-    const ingredientsUrl = `https://api.edamam.com/auto-complete?app_id=${process.env.REACT_APP_EDAMAM_APP_ID}&app_key=${process.env.REACT_APP_EDAMAM_APP_KEY}`
+    useEffect(() => {
+        setIngredient(suggestion);
+    }, [suggestion])
+
+    if(!show){
+        return null;
+    }
     
-    const ingredientSet = new Set();
+    const ingredientsUrl = `https://api.edamam.com/auto-complete?app_id=${process.env.REACT_APP_EDAMAM_APP_ID}&app_key=${process.env.REACT_APP_EDAMAM_APP_KEY}`
     
     const getSuggestions = e => {
         clearTimeout(timer)
@@ -43,9 +53,7 @@ const NewIngredientModal = (props) => {
         setSuggestions([]);
     } 
 
-    useEffect(() => {
-        setIngredient(suggestion);
-    }, [suggestion])
+    
 
     const handleAddIngredient = (e) => {
         e.preventDefault();
@@ -61,16 +69,33 @@ const NewIngredientModal = (props) => {
             return;
         }
         setIngredients([ingredient, ...ingredients])
-        //Axios call.
+    }
 
-        //Clear hashset for safety.
+    const submitList= (e) => {
+        e.preventDefault();
+        //Post body 
+        const ingredientPost = {
+            ingredients: ingredients,
+        }
+        //Axios call to add all ingredients. 
+        axios.post(`${backend}/api/ingredients/${id}`, ingredientPost)
+        .then( res => {
+            //Clear array.
+            setIngredients([])
+            //Close modal.
+            onCloseHandler();
+        })
+        .catch( error => {})
     }
 
 
     return (
         <div className='new-ingredient'>
             <div className='new-ingredient__content'>
-                <h2> Add Ingredient </h2>
+                <div>
+                    <h2> Add Ingredient </h2>
+                    <img src={closeIcon} onClick={onCloseHandler} alt='close modal'/>
+                </div>
                 <p> Search </p>
                 <form className='new-ingredient__form' onSubmit={handleAddIngredient}>
                     <input className= 'new-ingredient__input' onChange={(e)=>setIngredient(e.target.value)} onKeyUp={getSuggestions} value={ingredient}></input>
@@ -86,8 +111,8 @@ const NewIngredientModal = (props) => {
                         </div>)
                     })}
                 </section>
-
-                <button> Submit </button>
+                <button onClick={submitList}> Submit </button>
+                <button onClick={onCloseHandler}> Cancel </button>
             </div>
         </div>
     )
