@@ -2,16 +2,22 @@
 @use '../../styles/variables' as *;
 
 .pantry{
+    padding-top: 1rem;
+    @include padding-baseline;
     &__head{
         display: flex;
-
-        &-left{
-            display: flex;
-        }
-        
-        &-right{
-            display: flex;
-        }
     }
-    
+    &__header{
+        display: flex;
+        align-items: center;
+        margin-right: auto;
+    }
+
+    &__icon{
+        @include icon;
+    }
+
+    &__buttons{
+        display: flex;
+    }
 }

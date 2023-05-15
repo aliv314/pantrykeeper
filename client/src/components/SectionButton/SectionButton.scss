@@ -1,0 +1,17 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.section-button{
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    border: 3px solid black;
+    border-radius: 40%;
+    &__icon{
+        @include icon;
+    }
+    &__label{
+        display: none;
+    }
+}

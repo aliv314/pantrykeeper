@@ -45,19 +45,18 @@ const Pantry = () => {
     return (
         <div className='pantry'>
             <div className='pantry__head'>
-                <div className='pantry__head-left'>
+                {/* Title and Back Arrow */}
+                <div className='pantry__header'>
                     <img className='pantry__icon' src={backIcon} alt="Back arrow icon" onClick={() => nav(-1)}/>
                     <h2> Pantry: {pantry.pantry_name}</h2>
                 </div>
-                <div className='pantry__head-right'>
-                    <div className='pantry__button'>
-                        <SectionButton icon={ingredientsIcon} text={`Ingredients`}></SectionButton>
-                    </div>
-                    <div className='pantry__button'>
-                        <SectionButton icon={leftoversIcon} text={`Leftovers`}></SectionButton>
-                    </div>
+                {/* Buttons */}
+                <div className='pantry__buttons'>
+                        <SectionButton icon={ingredientsIcon} text={`Ingredients`}/>
+                        <SectionButton icon={leftoversIcon} text={`Leftovers`}/>
                 </div>
             </div>
+
             <IngredientsList ingredients = {ingredients}></IngredientsList>
             <LeftoversList  leftovers = {leftovers} ></LeftoversList>
         </div>
