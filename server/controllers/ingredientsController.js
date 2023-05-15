@@ -15,16 +15,18 @@ exports.getIngredients = async (req, res) => {
     try{
         const ingredientsRef = await db.collection('pantries').doc(req.params.pantry_id).collection('ingredients');
         const ingredientsSnapshot = await ingredientsRef.get();
-        if (!ingredientsSnapshot.exists){
+        if (ingredientsSnapshot.exists){
             return res.status(200).json([])
         }
         let ingredients = [];
         ingredientsSnapshot.forEach( (ingredient) => {
+            console.log(ingredient);
             ingredients.push({
                 ingredient_id: ingredient.id,
                 ...ingredient.data() 
             })
         })
+        console.log("Get ingredients array",ingredients)
         res.status(200).json(ingredients);
     }catch (err) {
         console.log(err)
@@ -34,7 +36,6 @@ exports.getIngredients = async (req, res) => {
 
 exports.postIngredients = async (req, res) => {
     try{
-        //
         if(!req.body.ingredients){
             return res.status(400).send("Missing body params");
         }
@@ -49,7 +50,7 @@ exports.postIngredients = async (req, res) => {
             const result = ingredientsRef.doc(ingredient).set(ingredientObj);
             return ingredientObj;
         })
-        console.log(ingredientsRes);
+        console.log("Posted an ingredient", ingredientsRes);
         res.status(200).json(ingredientsRes);
     }catch (err) {
         console.log(err)
