@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios';
 import SearchSuggestions from '../../SearchSuggestions/SearchSuggestions';
 import {useParams} from 'react-router-dom';
-import searchIcon from '../../../assets/images/icons/search.svg'
+
 import closeIcon from '../../../assets/images/icons/close.svg'
 import { backend } from '../../../firebase';
 const NewIngredientModal = (props) => {
@@ -34,7 +34,9 @@ const NewIngredientModal = (props) => {
     const ingredientsUrl = `https://api.edamam.com/auto-complete?app_id=${process.env.REACT_APP_EDAMAM_APP_ID}&app_key=${process.env.REACT_APP_EDAMAM_APP_KEY}`
     
     const getSuggestions = e => {
+        //Timer undone
         clearTimeout(timer)
+        //Create a new timer async.
         const newTimer = setTimeout(() => {
             axios.get(`${ingredientsUrl}&q=${ingredient}&limit=3`).then( res => {
                 console.log(res.data)
@@ -43,6 +45,7 @@ const NewIngredientModal = (props) => {
                 console.log(e)
             })
         }, 500)
+        //Set the timer.
         setTimer(newTimer)
     }
 
@@ -99,10 +102,10 @@ const NewIngredientModal = (props) => {
                 <p> Search </p>
                 <form className='new-ingredient__form' onSubmit={handleAddIngredient}>
                     <input className= 'new-ingredient__input' onChange={(e)=>setIngredient(e.target.value)} onKeyUp={getSuggestions} value={ingredient}></input>
-                    <button type='Submit'>Add</button>
+                    <button className= 'new-ingredient__input-button' type='Submit'>Add</button>
                 </form>
                 {suggestions && <SearchSuggestions suggestions={suggestions} onClickSuggestion={(suggestion)=>{suggestionSelected(suggestion)}}></SearchSuggestions>}
-                <h3> Ingredients </h3>
+                <h3 className='new-ingredient__list-title'> Ingredients </h3>
                 <section>
                     {ingredients && ingredients.map(item => {
                         return(
@@ -111,8 +114,8 @@ const NewIngredientModal = (props) => {
                         </div>)
                     })}
                 </section>
-                <button onClick={submitList}> Submit </button>
-                <button onClick={onCloseHandler}> Cancel </button>
+                <button className='new-ingredient__button' onClick={submitList}> Submit </button>
+                <button className='new-ingredient__button' onClick={onCloseHandler}> Cancel </button>
             </div>
         </div>
     )
