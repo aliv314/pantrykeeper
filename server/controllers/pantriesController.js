@@ -1,14 +1,15 @@
 const {db} = require('../firebase');
 
 
-function newPantry (owner_id, owner_name, pantry_name, pantry_img, num_foods, num_leftovers){
+function newPantry (owner_id, owner_name, pantry_name, pantry_img, num_foods, num_dishes, num_ingredients){
     return{
         owner_id : owner_id,
         owner_name : owner_name,
         pantry_name: pantry_name,
         pantry_img: pantry_img,
         num_foods : num_foods,
-        num_leftovers : num_leftovers,
+        num_dishes: num_dishes,
+        num_ingredients: num_ingredients
     }    
 }
 

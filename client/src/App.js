@@ -22,10 +22,6 @@ function App() {
         <Route path='/my-pantry' element={<Pantries/>}/>
         <Route path='/my-pantry/:id' element={<Pantry/>}></Route>
         <Route path='/friend-pantry'/>
-
-        {/* leftover:id and food:id can also used to edit */}
-        <Route path='/leftovers'/>
-        <Route path='/foods'/>
       </Routes>
     </main>
     </BrowserRouter>

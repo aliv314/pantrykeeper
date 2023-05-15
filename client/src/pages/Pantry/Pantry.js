@@ -11,7 +11,6 @@ const Pantry = () => {
     const {id} = useParams();
     const [pantry, setPantry] = useState({})
     const [foods, setFoods] = useState([])
-    const [leftovers, setLeftovers] = useState([])
     const nav = useNavigate();
 
     useEffect(() => {
@@ -27,14 +26,6 @@ const Pantry = () => {
         }).catch((e) => {
             console.log(e);
         })
-
-        axios.get(`${backend}/api/leftovers/${id}`)
-        .then((res) => {
-            setLeftovers(res.data);
-        }).catch((e) => {
-            console.log(e);
-        })
-
     }, [id])
 
 
