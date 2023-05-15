@@ -1,13 +1,13 @@
-import './NewIngredientList.scss';
+import './NewFoodList.scss';
 import closeIcon from '../../assets/images/icons/close.svg'
 import { uuidv4 } from '@firebase/util';
-const NewIngredientList = (props) =>{ 
-    const {ingredients} = props;
+const NewFoodList = (props) =>{ 
+    const {foods} = props;
     return (<>
         <section className='ni-list'>
-            {ingredients && ingredients.map(item => {
+            {foods && foods.map(item => {
                 return(
-                <div className= 'new-ingredient__list-item' key={uuidv4()}> 
+                <div className= 'new-food__list-item' key={uuidv4()}> 
                     <p> {item} </p>
                     <img src={closeIcon} alt={"close icon"}></img>
                 </div>)
@@ -16,4 +16,4 @@ const NewIngredientList = (props) =>{
     </>)
 }
 
-export default NewIngredientList;
+export default NewFoodList;

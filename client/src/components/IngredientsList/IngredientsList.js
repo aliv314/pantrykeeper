@@ -1,26 +1,26 @@
-import './IngredientsList.scss';
+import './FoodsList.scss';
 import NewItemCard from '../Cards/NewCard/NewCard';
 import { useEffect, useState } from 'react';
-import NewIngredientModal from '../Modals/NewIngredientModal/NewIngredientModal';
+import NewFoodModal from '../Modals/NewFoodModal/NewFoodModal';
 import ItemCard from '../Cards/ItemCard/ItemCard';
 import axios from 'axios';
 import { uuidv4 } from '@firebase/util';
 import { backend } from '../../firebase';
 import { useParams } from 'react-router-dom';
 
-import ingredientIcon from '../../assets/images/icons/nutrition.svg'
+import foodIcon from '../../assets/images/icons/nutrition.svg'
 
-const IngredientsList = () => {
+const FoodsList = () => {
     const {id} = useParams();
 
     const [showNew, setShowNew] = useState(false);
-    const [ingredients, setIngredients] = useState([]);
+    const [foods, setFoods] = useState([]);
    
     useEffect(() =>{
-        axios.get(`${backend}/api/ingredients/${id}`)
+        axios.get(`${backend}/api/foods/${id}`)
         .then(res =>{
             console.log(res.data);
-            setIngredients(res.data);
+            setFoods(res.data);
             }
         )
         .catch( e => {
@@ -29,19 +29,19 @@ const IngredientsList = () => {
     }, [id])
     return (
         <>  
-            <NewIngredientModal show={showNew} onCloseHandler={() => setShowNew(false)}></NewIngredientModal>
-            <section className='ingredients'>
-                <h3 className='ingredients__header'> Ingredients </h3>
-                <ul className='ingredients__list'>
-                    {ingredients && ingredients.map(ingredient => {
+            <NewFoodModal show={showNew} onCloseHandler={() => setShowNew(false)}></NewFoodModal>
+            <section className='foods'>
+                <h3 className='foods__header'> Foods </h3>
+                <ul className='foods__list'>
+                    {foods && foods.map(food => {
                         return ( 
-                        <li key={uuidv4()}className='ingredients__list-item'>
-                            <ItemCard key={uuidv4()} itemName={ingredient.ingredient_name} icon ={ingredientIcon}></ItemCard>
+                        <li key={uuidv4()}className='foods__list-item'>
+                            <ItemCard key={uuidv4()} itemName={food.food_name} icon ={foodIcon}></ItemCard>
                         </li>
                         )
                     })}
-                    <li className='ingredients__list-item'>
-                        <NewItemCard title={'Ingredient'} onClickHandler = {() => setShowNew(true)}></NewItemCard>
+                    <li className='foods__list-item'>
+                        <NewItemCard title={'Food'} onClickHandler = {() => setShowNew(true)}></NewItemCard>
                     </li>
                 </ul>
             </section>
@@ -50,4 +50,4 @@ const IngredientsList = () => {
     )
 }
 
-export default IngredientsList;
+export default FoodsList;

@@ -1,14 +1,14 @@
 const router = require('express').Router();
-const ingredientsRouter = require('../controllers/ingredientsController');
+const foodsRouter = require('../controllers/foodsController');
 
 router.route('/:pantry_id')
-.get(ingredientsRouter.getIngredients)
-.post(ingredientsRouter.postIngredients)
+.get(foodsRouter.getFoods)
+.post(foodsRouter.postFoods)
 
 router.route('/:pantry_id/:leftover_id')
-.get(ingredientsRouter.getIngredient)
-.put(ingredientsRouter.putIngredient)
-.delete(ingredientsRouter.delIngredient)
+.get(foodsRouter.getFood)
+.put(foodsRouter.putFood)
+.delete(foodsRouter.delFood)
 
 
 module.exports = router;

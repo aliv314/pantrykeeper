@@ -1,4 +1,4 @@
-import './NewIngredientModal.scss'
+import './NewFoodModal.scss'
 import { uuidv4 } from '@firebase/util';
 import { useEffect, useState } from 'react'
 import axios from 'axios';
@@ -7,15 +7,15 @@ import {useParams} from 'react-router-dom';
 
 import closeIcon from '../../../assets/images/icons/close.svg'
 import { backend } from '../../../firebase';
-import NewIngredientList from '../../NewIngredientList/NewIngredientList';
-const NewIngredientModal = (props) => {
+import NewFoodList from '../../NewFoodList/NewFoodList';
+const NewFoodModal = (props) => {
     const {id} = useParams();
     const {show, onCloseHandler} = props;
 
-    //Ingredient in search bar
-    const [ingredient, setIngredient] = useState("");
-    //Set of ingredients used to send to the api.
-    const [ingredients, setIngredients] = useState([])
+    //Food in search bar
+    const [food, setFood] = useState("");
+    //Set of foods used to send to the api.
+    const [foods, setFoods] = useState([])
     //Suggestion to update input
     //Suggestion selected from autocomplete
     const [suggestion, setSuggestion] = useState("");
@@ -25,21 +25,21 @@ const NewIngredientModal = (props) => {
     const [timer, setTimer] = useState(null);
 
     useEffect(() => {
-        setIngredient(suggestion);
+        setFood(suggestion);
     }, [suggestion])
 
     if(!show){
         return null;
     }
     
-    const ingredientsUrl = `https://api.edamam.com/auto-complete?app_id=${process.env.REACT_APP_EDAMAM_APP_ID}&app_key=${process.env.REACT_APP_EDAMAM_APP_KEY}`
+    const foodsUrl = `https://api.edamam.com/auto-complete?app_id=${process.env.REACT_APP_EDAMAM_APP_ID}&app_key=${process.env.REACT_APP_EDAMAM_APP_KEY}`
     
     const getSuggestions = e => {
         //Timer undone
         clearTimeout(timer)
         //Create a new timer async.
         const newTimer = setTimeout(() => {
-            axios.get(`${ingredientsUrl}&q=${ingredient}&limit=3`).then( res => {
+            axios.get(`${foodsUrl}&q=${food}&limit=3`).then( res => {
                 console.log(res.data)
                 setSuggestions(res.data)
             }).catch(e => {
@@ -51,7 +51,7 @@ const NewIngredientModal = (props) => {
     }
 
     const suggestionSelected = (suggestion) => {
-        //Set suggestion to update ingredient input bar.
+        //Set suggestion to update food input bar.
         setSuggestion(suggestion)
         //Closes suggestion.
         setSuggestions([]);
@@ -59,33 +59,33 @@ const NewIngredientModal = (props) => {
 
     
 
-    const handleAddIngredient = (e) => {
+    const handleAddFood = (e) => {
         e.preventDefault();
-        //Ingredient must match suggestion to fit the api.
-        if (ingredient !== suggestion){
+        //Food must match suggestion to fit the api.
+        if (food !== suggestion){
             return;
         }
-        //There can't be repeat ingredients in array sent to the API
+        //There can't be repeat foods in array sent to the API
         //Would normally use a set for this, but useState doesn't allow it.
-        if(ingredients.includes(ingredient)){
+        if(foods.includes(food)){
             //Add error here later for validation.
             console.log("Already in set!")
             return;
         }
-        setIngredients([ingredient, ...ingredients])
+        setFoods([food, ...foods])
     }
 
     const submitList= (e) => {
         e.preventDefault();
         //Post body 
-        const ingredientPost = {
-            ingredients: ingredients,
+        const foodPost = {
+            foods: foods,
         }
-        //Axios call to add all ingredients. 
-        axios.post(`${backend}/api/ingredients/${id}`, ingredientPost)
+        //Axios call to add all foods. 
+        axios.post(`${backend}/api/foods/${id}`, foodPost)
         .then( res => {
             //Clear array.
-            setIngredients([])
+            setFoods([])
             //Close modal.
             onCloseHandler();
         })
@@ -94,26 +94,26 @@ const NewIngredientModal = (props) => {
 
 
     return (
-        <div className='new-ingredient'>
-            <div className='new-ingredient__content'>
+        <div className='new-food'>
+            <div className='new-food__content'>
                 <div>
-                    <h2> Add Ingredient </h2>
+                    <h2> Add Food </h2>
                     <img src={closeIcon} onClick={onCloseHandler} alt='close modal'/>
                 </div>
                 <p> Search </p>
-                <form className='new-ingredient__form' onSubmit={handleAddIngredient}>
-                    <input className= 'new-ingredient__input' onChange={(e)=>setIngredient(e.target.value)} onKeyUp={getSuggestions} value={ingredient}></input>
-                    <button className= 'new-ingredient__input-button' type='Submit'>Add</button>
+                <form className='new-food__form' onSubmit={handleAddFood}>
+                    <input className= 'new-food__input' onChange={(e)=>setFood(e.target.value)} onKeyUp={getSuggestions} value={food}></input>
+                    <button className= 'new-food__input-button' type='Submit'>Add</button>
                 </form>
                 {suggestions && <SearchSuggestions suggestions={suggestions} onClickSuggestion={(suggestion)=>{suggestionSelected(suggestion)}}></SearchSuggestions>}
-                <h3 className='new-ingredient__list-title'> Ingredients </h3>
-                <NewIngredientList ingredients={ingredients}></NewIngredientList>
-                <button className='new-ingredient__button' onClick={submitList}> Submit </button>
-                <button className='new-ingredient__button' onClick={() => {onCloseHandler(); setIngredients([])}}> Cancel </button>
+                <h3 className='new-food__list-title'> Foods </h3>
+                <NewFoodList foods={foods}></NewFoodList>
+                <button className='new-food__button' onClick={submitList}> Submit </button>
+                <button className='new-food__button' onClick={() => {onCloseHandler(); setFoods([])}}> Cancel </button>
             </div>
         </div>
     )
 }
 
-export default NewIngredientModal;
+export default NewFoodModal;
 

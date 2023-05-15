@@ -5,12 +5,12 @@ import axios from 'axios';
 import { backend } from '../../firebase';
 
 import backIcon from '../../assets/images/icons/arrow_back.svg'
-import IngredientsList from '../../components/IngredientsList/IngredientsList';
+import FoodsList from '../../components/FoodsList/FoodsList';
 
 const Pantry = () => {
     const {id} = useParams();
     const [pantry, setPantry] = useState({})
-    const [ingredients, setIngredients] = useState([])
+    const [foods, setFoods] = useState([])
     const [leftovers, setLeftovers] = useState([])
     const nav = useNavigate();
 
@@ -21,9 +21,9 @@ const Pantry = () => {
         }).catch((e) => {
             console.log(e);
         })
-        axios.get(`${backend}/api/ingredients/${id}`)
+        axios.get(`${backend}/api/foods/${id}`)
         .then((res) => {
-            setIngredients(res.data);
+            setFoods(res.data);
         }).catch((e) => {
             console.log(e);
         })
@@ -48,7 +48,7 @@ const Pantry = () => {
                 </div>
             </div>
 
-            <IngredientsList ingredients = {ingredients}></IngredientsList>
+            <FoodsList foods = {foods}></FoodsList>
         </div>
     )
 }

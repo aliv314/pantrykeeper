@@ -1,91 +1,91 @@
 const {db} = require('../firebase');
 const axios = require('axios');
 process.config;
-function newIngredient (name, img, timestamp, qty){
+function newFood (name, img, timestamp, qty){
     return {
-        ingredient_name : name,
-        ingredient_img : img, 
+        food_name : name,
+        food_img : img, 
         timestamp : timestamp, 
-        ingredient_qty : qty,
+        food_qty : qty,
     }
 }
 
-// api/ingredients/:pantry_id
-exports.getIngredients = async (req, res) => {
+// api/foods/:pantry_id
+exports.getFoods = async (req, res) => {
     try{
-        const ingredientsRef = await db.collection('pantries').doc(req.params.pantry_id).collection('ingredients');
-        const ingredientsSnapshot = await ingredientsRef.get();
-        if (ingredientsSnapshot.exists){
+        const foodsRef = await db.collection('pantries').doc(req.params.pantry_id).collection('foods');
+        const foodsSnapshot = await foodsRef.get();
+        if (foodsSnapshot.exists){
             return res.status(200).json([])
         }
-        let ingredients = [];
-        ingredientsSnapshot.forEach( (ingredient) => {
-            ingredients.push({
-                ingredient_id: ingredient.id,
-                ...ingredient.data() 
+        let foods = [];
+        foodsSnapshot.forEach( (food) => {
+            foods.push({
+                food_id: food.id,
+                ...food.data() 
             })
         })
-        res.status(200).json(ingredients);
+        res.status(200).json(foods);
     }catch (err) {
         console.log(err)
-        res.status(400).send("Error getting ingredients.")
+        res.status(400).send("Error getting foods.")
     }
 }
 
-exports.postIngredients = async (req, res) => {
+exports.postFoods = async (req, res) => {
     try{
-        if(!req.body.ingredients){
+        if(!req.body.foods){
             return res.status(400).send("Missing body params");
         }
         //Get ref to database
         const pantryRef = await db.collection('pantries').doc(req.params.pantry_id);
-        const ingredientsRef = await pantryRef.collection('ingredients');
-        //Get array of ingredients
-        const ingredientsArray = req.body.ingredients;
+        const foodsRef = await pantryRef.collection('foods');
+        //Get array of foods
+        const foodsArray = req.body.foods;
         //Create a response array
-        const ingredientsRes = ingredientsArray.map( (ingredient) => {
-            const ingredientObj = newIngredient(ingredient, '', Date.now(), 1);
-            const result = ingredientsRef.doc(ingredient).set(ingredientObj);
-            return ingredientObj;
+        const foodsRes = foodsArray.map( (food) => {
+            const foodObj = newFood(food, '', Date.now(), 1);
+            const result = foodsRef.doc(food).set(foodObj);
+            return foodObj;
         })
-        res.status(200).json(ingredientsRes);
+        res.status(200).json(foodsRes);
     }catch (err) {
         console.log(err)
-        res.status(400).send("Failed to write new ingredient obj");
+        res.status(400).send("Failed to write new food obj");
     }
 }
 
 
-// api/ingredients/:pantry_id/:ingredient_id
-exports.getIngredient = async (req, res) => {
+// api/foods/:pantry_id/:food_id
+exports.getFood = async (req, res) => {
     try{
         const pantryRef = await db.collection('pantries').doc(req.params.pantry_id);
-        const ingredientRef = await pantryRef.doc(req.params.pantry_id).collection('ingredients').doc(req.params.ingredient_id);
-        const ingredientsSnapshot = await ingredientRef.get();
+        const foodRef = await pantryRef.doc(req.params.pantry_id).collection('foods').doc(req.params.food_id);
+        const foodsSnapshot = await foodRef.get();
 
-        res.status(200).json(ingredientsSnapshot.data());
+        res.status(200).json(foodsSnapshot.data());
     }catch (err) {
-        res.status(400).send("Error getting ingredient.");
+        res.status(400).send("Error getting food.");
     }
 }
-exports.putIngredient = async (req, res) => {
+exports.putFood = async (req, res) => {
     try{
         const pantryRef = await db.collection('pantries').doc(req.params.pantry_id);
-        const ingredientRef = await pantryRef.collection('ingredients').doc(req.params.ingredient_id);
-        const result = await ingredientRef.update({ingredient_name: req.body.ingredient_name, ingredient_description: req.body.ingredient_description})
+        const foodRef = await pantryRef.collection('foods').doc(req.params.food_id);
+        const result = await foodRef.update({food_name: req.body.food_name, food_description: req.body.food_description})
         res.status(200).send("Success!");
     }catch (err) {
-        res.status(400).send("Failed to update ingredient obj.");
+        res.status(400).send("Failed to update food obj.");
     }
 }
 
-exports.delIngredient = async (req, res) => {
+exports.delFood = async (req, res) => {
     try{
         const pantryRef = await db.collection('pantries').doc(req.params.pantry_id);
-        const ingredientRef = await pantryRef.collection('ingredients').doc(req.params.ingredient_id);
-        const result = await ingredientRef.delete();
+        const foodRef = await pantryRef.collection('foods').doc(req.params.food_id);
+        const result = await foodRef.delete();
         res.status(200).send("Success!");
     }catch (err) {
-        res.status(400).send("Failed to delete ingredient obj.");
+        res.status(400).send("Failed to delete food obj.");
     }
 }
