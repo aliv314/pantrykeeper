@@ -35,7 +35,7 @@ const IngredientsList = () => {
                 <ul className='ingredients__list'>
                     {ingredients && ingredients.map(ingredient => {
                         return ( 
-                        <li className='ingredients__list-item'>
+                        <li key={uuidv4()}className='ingredients__list-item'>
                             <ItemCard key={uuidv4()} itemName={ingredient.ingredient_name} icon ={ingredientIcon}></ItemCard>
                         </li>
                         )

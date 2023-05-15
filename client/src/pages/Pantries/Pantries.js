@@ -1,13 +1,21 @@
 import './Pantries.scss'
+
+//Imports 
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import NewCard from '../../components/Cards/NewCard/NewCard';
-import NewPantryModal from '../../components/Modals/PantriesModals/NewPantryModal/NewPantryModal';
 import { useEffect, useState } from 'react';
 import { backend } from '../../firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
+//Components
 import ItemCard from '../../components/Cards/ItemCard/ItemCard';
+import NewPantryModal from '../../components/Modals/PantriesModals/NewPantryModal/NewPantryModal';
+
+//Icons
+import backIcon from '../../assets/images/icons/arrow_back.svg'
 import pantryIcon from '../../assets/images/icons/kitchen.svg';
+
 const Pantries = () => {
     const [pantries, setPantries] = useState([]);
     const [showNew, setShowNew] = useState(false);
@@ -58,6 +66,7 @@ const Pantries = () => {
         {showNew && <NewPantryModal show={showNew} onSubmit={(e, pantryName) => handleNewSubmit(e, pantryName)} onClose={() => {setShowNew(false)}}></NewPantryModal>}
 
         <div className='pantries__title'>
+            <img src={backIcon} alt={"back icon"}></img>
             <h2> Pantries </h2>
         </div>
         <ul className='pantries__cards'>

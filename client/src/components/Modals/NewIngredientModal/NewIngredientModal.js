@@ -7,6 +7,7 @@ import {useParams} from 'react-router-dom';
 
 import closeIcon from '../../../assets/images/icons/close.svg'
 import { backend } from '../../../firebase';
+import NewIngredientList from '../../NewIngredientList/NewIngredientList';
 const NewIngredientModal = (props) => {
     const {id} = useParams();
     const {show, onCloseHandler} = props;
@@ -106,16 +107,9 @@ const NewIngredientModal = (props) => {
                 </form>
                 {suggestions && <SearchSuggestions suggestions={suggestions} onClickSuggestion={(suggestion)=>{suggestionSelected(suggestion)}}></SearchSuggestions>}
                 <h3 className='new-ingredient__list-title'> Ingredients </h3>
-                <section>
-                    {ingredients && ingredients.map(item => {
-                        return(
-                        <div key={uuidv4()}> 
-                            <p> {item} </p>
-                        </div>)
-                    })}
-                </section>
+                <NewIngredientList ingredients={ingredients}></NewIngredientList>
                 <button className='new-ingredient__button' onClick={submitList}> Submit </button>
-                <button className='new-ingredient__button' onClick={onCloseHandler}> Cancel </button>
+                <button className='new-ingredient__button' onClick={() => {onCloseHandler(); setIngredients([])}}> Cancel </button>
             </div>
         </div>
     )
