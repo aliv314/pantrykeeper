@@ -20,13 +20,11 @@ exports.getIngredients = async (req, res) => {
         }
         let ingredients = [];
         ingredientsSnapshot.forEach( (ingredient) => {
-            console.log(ingredient);
             ingredients.push({
                 ingredient_id: ingredient.id,
                 ...ingredient.data() 
             })
         })
-        console.log("Get ingredients array",ingredients)
         res.status(200).json(ingredients);
     }catch (err) {
         console.log(err)
@@ -50,7 +48,6 @@ exports.postIngredients = async (req, res) => {
             const result = ingredientsRef.doc(ingredient).set(ingredientObj);
             return ingredientObj;
         })
-        console.log("Posted an ingredient", ingredientsRes);
         res.status(200).json(ingredientsRes);
     }catch (err) {
         console.log(err)
