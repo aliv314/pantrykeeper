@@ -3,7 +3,7 @@ const ingredientsRouter = require('../controllers/ingredientsController');
 
 router.route('/:pantry_id')
 .get(ingredientsRouter.getIngredients)
-.post(ingredientsRouter.postIngredient)
+.post(ingredientsRouter.postIngredients)
 
 router.route('/:pantry_id/:leftover_id')
 .get(ingredientsRouter.getIngredient)

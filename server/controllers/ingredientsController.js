@@ -1,4 +1,6 @@
 const {db} = require('../firebase');
+const axios = require('axios');
+process.config;
 function newIngredient (name, img, timestamp, qty){
     return {
         ingredient_name : name,
@@ -30,19 +32,36 @@ exports.getIngredients = async (req, res) => {
     }
 }
 
-exports.postIngredient = async (req, res) => {
+exports.postIngredients = async (req, res) => {
     try{
-        if(!req.body.ingredient_name){
+        //
+        if(!req.body.ingredients){
             return res.status(400).send("Missing body params");
         }
-
+        //Get ref to database
         const pantryRef = await db.collection('pantries').doc(req.params.pantry_id);
         const ingredientsRef = await pantryRef.collection('ingredients');
-
-        const ingredientObj = newIngredient(req.body.ingredient_name, req.body.ingredient_img, Date.now(), 1);
-        const result = await ingredientsRef.add(ingredientObj);
+        //Get array of ingredients
+        const ingredientsArray = req.body.ingredients;
+        const ingredientsRes = [];
+        //Create a new array of ingredients with the async await and axios
+        ingredientsArray.forEach( async (ingredient) => {
+            const exampleUrl = `https://api.edamam.com/api/food-database/v2/parser?app_id=${process.env.EDAMAM_APP_ID}&app_key=${process.env.EDAMAM_APP_KEY}&ingr=${ingredient}&nutrition-type=cooking`
+            await axios.get(exampleUrl)
+            .then( async response => {
+                const ingredientInfo = response.data.hints[0].food
+                const ingredientObj = newIngredient(ingredientInfo.label, ingredientInfo.image, Date.now(), 1);
+                // ingredientsRes.push(ingredientObj);
+                const result = await ingredientsRef.doc(ingredientInfo.knownAs).set(ingredientObj);
+            })
+            .catch(e => {
+                console.log(e)
+                res.status(400).send(`Failed push ${ingredient} to db.`)
+            });  
+        })
         res.status(200).send("Success!");
     }catch (err) {
+        console.log(err)
         res.status(400).send("Failed to write new ingredient obj");
     }
 }
