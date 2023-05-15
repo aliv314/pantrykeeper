@@ -1,16 +1,14 @@
+import './Pantries.scss'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import NewCard from '../../components/Cards/NewCard/NewCard';
 import NewPantryModal from '../../components/Modals/PantriesModals/NewPantryModal/NewPantryModal';
-import './Pantries.scss'
 import { useEffect, useState } from 'react';
 import { backend } from '../../firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import ItemCard from '../../components/Cards/ItemCard/ItemCard';
-
+import pantryIcon from '../../assets/images/icons/kitchen.svg';
 const Pantries = () => {
-    // const nav = useNavigate();
-
     const [pantries, setPantries] = useState([]);
     const [showNew, setShowNew] = useState(false);
     const [user, setUser] = useState();
@@ -33,6 +31,7 @@ const Pantries = () => {
         axios.get(`${backend}/api/users/${user.uid}`)
         .then((res) => {
             setPantries(res.data);
+            console.log(pantries);
         }).catch((e) => {
             console.log(e);
         })
@@ -65,7 +64,7 @@ const Pantries = () => {
             {pantries && pantries.map( (pantry) => {
                 return (
                     <li className='pantries__card' key={pantry && pantry.pantry_id}>
-                        <ItemCard pantry={pantry} onClickItem={() => navigator(`/my-pantry/${pantry.pantry_id}`)}/>
+                        <ItemCard itemName = {pantry.pantry_name} icon={pantryIcon} onClickItem={() => navigator(`/my-pantry/${pantry.pantry_id}`)}/>
                     </li>
                 )
             })}
