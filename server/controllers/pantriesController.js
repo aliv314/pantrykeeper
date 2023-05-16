@@ -54,7 +54,7 @@ exports.getPantry = async (req, res) => {
 exports.putPantry = async (req, res) => {
     try{
         const pantryRef = await db.collection('pantries').doc(req.params.id);
-        const result = pantryRef.update({pantry_name: pantryName, pantry_img: pantryImg});
+        const result = pantryRef.update({pantry_name: req.body.pantry_name});
     
         res.status(200).send("Success!");
     }catch(error){

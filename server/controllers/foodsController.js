@@ -83,12 +83,15 @@ exports.putFood = async (req, res) => {
 }
 
 exports.delFood = async (req, res) => {
+    console.log(req.params.pantry_id)
+    console.log(req.params.food_id)
     try{
         const pantryRef = await db.collection('pantries').doc(req.params.pantry_id);
-        const foodRef = await pantryRef.collection('foods').doc(req.params.food_id);
+        const foodRef = await pantryRef.collection('foods').doc(req.params.foods_id);
         const result = await foodRef.delete();
         res.status(200).send("Success!");
     }catch (err) {
+        console.log(err)
         res.status(400).send("Failed to delete food obj.");
     }
 }

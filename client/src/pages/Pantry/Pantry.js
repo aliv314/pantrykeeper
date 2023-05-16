@@ -60,7 +60,7 @@ const Pantry = () => {
                 </div>  
             </div>
 
-            <FoodsList foods = {displayFood}></FoodsList>
+            <FoodsList pantryId = {id} foods = {displayFood}></FoodsList>
         </div>
     )
 }

@@ -13,14 +13,23 @@ import FoodDetails from '../Modals/FoodsModals/FoodDetails/FoodDetails';
 //Icons
 import foodIcon from '../../assets/images/icons/nutrition.svg'
 import deleteIcon from '../../assets/images/icons/delete.svg'
+import axios from 'axios';
+import { backend } from '../../firebase';
 
 const FoodsList = (props) => {
-    const {foods} = props
+    const {pantryId, foods} = props
     const [food, setFood] = useState({});
     const [showNew, setShowNew] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
     
     
+    const handleDelete = (e, foodId) => {
+        e.preventDefault();
+        axios.delete(`${backend}/api/foods/${pantryId}/${foodId}`)
+        .then(res => {console.log(res)})
+        .catch(err => console.log(err));    
+    }
+
     return (
         <>  
             {showNew &&<NewFood show={showNew} onCloseHandler={() => setShowNew(false)}></NewFood>}
@@ -35,12 +44,13 @@ const FoodsList = (props) => {
                             key={uuidv4()} 
                             itemName={food.food_name} 
                             icon ={foodIcon}
-                            onClickDetail = {async () => {
+                            onClickDetail = {() => {
                                 setFood(foods[i]);
                                 setShowDetails(true);   
                             }}
                             secondaryIcon = {deleteIcon}
-                            onClickSecondary= { () => console.log("Deleted!")} ></ItemCard>
+                            onClickSecondary = {(e) => handleDelete(e, food.food_id)} 
+                            />
                         </li>
                         )
                     })}
