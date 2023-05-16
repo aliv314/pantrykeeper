@@ -27,9 +27,20 @@
         display: flex;
         flex-direction: column;
     }
+    &__label{
+        margin-bottom: 4px;
+    }
+    &__input{
+        @include margin-baseline;
+        @include input
+    }
     &__buttons{
+        @include display-tablet{
+            display: flex;
+        }
     }
     &__button{
-        width: 100%;
+        @include buttons;
+        @include margin-baseline;
     }
 }

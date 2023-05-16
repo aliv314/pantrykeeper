@@ -2,12 +2,12 @@
 
 @mixin display-tablet {
     @media screen and (min-width: $display-tablet) {
-        
+        @content;
     }
 }
 @mixin display-laptop {
     @media screen and (min-width: $display-desktop) {
-        
+        @content;
     }
 }
 
@@ -76,10 +76,19 @@
 @mixin icon{
     height: 2rem;
 }
+@mixin input {
+    width: 100%;
+    border: 3px solid black;
+    background-color: lightcoral;
+    height: 2rem;
+    padding: 0.25rem;
+}
 
 @mixin buttons {
-    border: none;
+    border: 3px solid black;
     color: black;
+    background-color: lightgreen;
     height: 2rem;
     width: 100%;
+    border-radius: 10px;
 }
