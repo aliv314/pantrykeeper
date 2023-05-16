@@ -42,12 +42,13 @@ exports.postFoods = async (req, res) => {
         //Get ref to database
         const pantryRef = await db.collection('pantries').doc(req.params.pantry_id);
         const foodsRef = await pantryRef.collection('foods');
+
         //Get array of foods
         const foodsArray = req.body.foods;
         //Create a response array
         const foodsRes = foodsArray.map( (food) => {
-            const foodObj = newFood(food.name, '', Date.now(), 1, 'food.type');
-            const result = foodsRef.doc(food).set(foodObj);
+            const foodObj = newFood(food.name, '', Date.now(), 1, food.type);
+            const result = foodsRef.doc(food.name).set(foodObj);
             return foodObj;
         })
         res.status(200).json(foodsRes);

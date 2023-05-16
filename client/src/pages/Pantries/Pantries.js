@@ -39,7 +39,6 @@ const Pantries = () => {
         axios.get(`${backend}/api/users/${user.uid}`)
         .then((res) => {
             setPantries(res.data);
-            console.log(pantries);
         }).catch((e) => {
             console.log(e);
         })

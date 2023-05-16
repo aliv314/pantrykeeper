@@ -1,0 +1,16 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.cart{
+    &__item{
+        display: flex;
+        align-items: center;
+        
+    }
+    &__name{
+
+    }
+    &__type{
+        
+    }
+}

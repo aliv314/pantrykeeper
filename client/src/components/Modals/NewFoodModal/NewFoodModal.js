@@ -1,32 +1,29 @@
 import './NewFoodModal.scss'
 
-import { useEffect, useState } from 'react'
 import axios from 'axios';
-import SearchSuggestions from '../../SearchSuggestions/SearchSuggestions';
+import { useEffect, useState } from 'react'
 import {useParams} from 'react-router-dom';
 
 import closeIcon from '../../../assets/images/icons/close.svg'
 import { backend } from '../../../firebase';
+
+import Async, { useAsync } from 'react-select/async';
+//Note: Pass in an array of objects.
 import NewFoodList from '../../NewFoodList/NewFoodList';
+
 const NewFoodModal = (props) => {
     const {id} = useParams();
     const {show, onCloseHandler} = props;
 
-    //Food in search bar
-    const [food, setFood] = useState("");
+    //food type 
+    const [foodType, setFoodType] = useState("")
+    //Object with label, value for react-select
+    const [inputFood, setInputFood] = useState({});
     //Set of foods used to send to the api.
     const [foods, setFoods] = useState([])
-    //Suggestion to update input
-    //Suggestion selected from autocomplete
-    const [suggestion, setSuggestion] = useState("");
-    //List of suggestions sent as prop to suggestion list component
-    const [suggestions, setSuggestions] = useState([]);
-    //Timer to delay api call.
-    const [timer, setTimer] = useState(null);
+    
 
-    useEffect(() => {
-        setFood(suggestion);
-    }, [suggestion])
+    const [timer, setTimer] = useState(null);
 
     if(!show){
         return null;
@@ -34,45 +31,42 @@ const NewFoodModal = (props) => {
     
     const foodsUrl = `https://api.edamam.com/auto-complete?app_id=${process.env.REACT_APP_EDAMAM_APP_ID}&app_key=${process.env.REACT_APP_EDAMAM_APP_KEY}`
     
-    const getSuggestions = e => {
+    //Suggestion is the value currently within the <Async>
+    //Callback is the value sent back to the callback   
+    const getSuggestions = (suggestion, callback) => {
         //Timer undone
         clearTimeout(timer)
         //Create a new timer async.
         const newTimer = setTimeout(() => {
-            axios.get(`${foodsUrl}&q=${food}&limit=3`).then( res => {
-                console.log(res.data)
-                setSuggestions(res.data)
+            axios.get(`${foodsUrl}&q=${suggestion}&limit=3`).then( res => {
+                
+                callback(res.data.map(suggestion => ({ label: suggestion, value: suggestion})))
             }).catch(e => {
                 console.log(e)
             })
-        }, 500)
+        }, 300)
         //Set the timer.
         setTimer(newTimer)
     }
 
-    const suggestionSelected = (suggestion) => {
-        //Set suggestion to update food input bar.
-        setSuggestion(suggestion)
-        //Restarts suggestions
-        setSuggestions([]);
-    } 
-
-    
-
     const handleAddFood = (e) => {
         e.preventDefault();
-        //Food must match suggestion to fit the api.
-        if (food !== suggestion){
-            return;
-        }
+       
         //There can't be repeat foods in array sent to the API
-        //Would normally use a set for this, but useState doesn't allow it.
-        if(foods.includes(food)){
-            //Add error here later for validation.
-            console.log("Already in set!")
-            return;
+        foods.forEach( foodItem =>{
+            if(foodItem.label !== inputFood.label){
+                return;
+            }
+        })
+        const formattedFood = {
+            name: inputFood.label,
+            type: foodType,
         }
-        setFoods([food, ...foods])
+        setFoods([formattedFood, ...foods])
+        setInputFood({})
+
+        console.log(formattedFood);
+        e.target.reset();
     }
 
     const submitList= (e) => {
@@ -102,16 +96,15 @@ const NewFoodModal = (props) => {
                 </div>
                 <form className='new-food__form' onSubmit={handleAddFood}>
                     <p className='new-food__text'> Search </p>
-                    <input className= 'new-food__input' onChange={(e)=>setFood(e.target.value)} onKeyUp={getSuggestions} value={food}></input>
-                    {suggestions && <SearchSuggestions suggestions={suggestions} onClickSuggestion={(suggestion)=>{suggestionSelected(suggestion)}}></SearchSuggestions>}
+                    <Async value={inputFood} onChange={(value) => setInputFood(value)} loadOptions={getSuggestions}></Async>
                     <p className='new-food__text'> Type </p>
                     <div className='new-food__radio-group'>
                         <div className='new-food__radio'>
-                            <input className='new-food__radio-button'  name="foodType" type={"radio"} value = "Ingredient"/>
+                            <input className='new-food__radio-button'  name="foodType" type={"radio"} value={"ingredient"} onChange={(e) => setFoodType(e.target.value)}/>
                             <p className='new-food__radio-text'> Ingredient</p>
                         </div>
                         <div className='new-food__radio'>
-                            <input className='new-food__radio-button' name="foodType" type={"radio"} value = "Dish"/>
+                            <input className='new-food__radio-button' name="foodType" type={"radio"}  value={"dish"} onChange={(e) => setFoodType(e.target.value)}/>
                             <p className='new-food__radio-text'> Dish </p>
                         </div>
                     </div>

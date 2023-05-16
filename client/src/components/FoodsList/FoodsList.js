@@ -19,7 +19,6 @@ const FoodsList = () => {
     useEffect(() =>{
         axios.get(`${backend}/api/foods/${id}`)
         .then(res =>{
-            console.log(res.data);
             setFoods(res.data);
             }
         )
