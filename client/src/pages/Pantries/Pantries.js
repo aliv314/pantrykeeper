@@ -71,8 +71,8 @@ const Pantries = () => {
     return (
     <div className='pantries'>
         {showNew && <NewPantry show={showNew} onSubmit={(e, pantryName) => handleNewSubmit(e, pantryName)} onClose={() => {setShowNew(false)}}/>}
-        {showDetails && pantry && <PantryDetails show={showDetails} pantry={pantry}/>}
-        {showEdit && pantry && <EditPantry show={showEdit} pantry={pantry}></EditPantry>}
+        {showDetails && pantry && <PantryDetails show={showDetails} pantry={pantry} onClose={() => {setShowDetails(false)}}/>}
+        {showEdit && pantry && <EditPantry show={showEdit} pantry={pantry} onClose={() => {setShowEdit(false)}}></EditPantry>}
         <div className='pantries__title'>
             <img src={backIcon} alt={"back icon"}></img>
             <h2> Pantries </h2>

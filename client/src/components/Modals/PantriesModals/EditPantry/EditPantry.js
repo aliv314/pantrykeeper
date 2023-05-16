@@ -17,15 +17,16 @@ const EditPantry = (props) =>{
                     <img className='pantry-edit__icon' src={backIcon} alt="Back arrow icon" onClick={onClose}/>
                     <h2 className='pantry-edit__title'> {pantry.pantry_name}</h2>
                 </div>
-                <img className='pantry-edit__icon' src={pantryIcon} alt="pantry icon"></img>
-                <form>
+                <img className='pantry-edit__img' src={pantryIcon} alt="pantry icon"></img>
+                <form className='pantry-edit__form'>
                     <input placeholder='Pantry Name'/>
                     <button> Submit </button>
                 </form>
-                <form>
+                <form className='pantry-edit__form'>
                     <input placeholder='Add friend'/>
                     <button> Add </button>
                 </form>
+                <button> Delete </button>
             </div>
         </div>
     </>)

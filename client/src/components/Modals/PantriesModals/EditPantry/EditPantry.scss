@@ -7,4 +7,15 @@
     &__content{ 
         @include modal-child;
     }
+    &__header{
+        display:  flex;
+        align-items: center;
+        @include margin-headline;
+    }
+    
+    &__form{
+        @include margin-baseline;
+        display: flex;
+        flex-direction: column;
+    }
 }   
