@@ -1,7 +1,7 @@
 @use '../../../../styles/mixins' as *;
 @use '../../../../styles/variables' as *;
 
-.pantry-details{
+.pantry-edit{
     @include modal-parent;
 
     &__content{ 

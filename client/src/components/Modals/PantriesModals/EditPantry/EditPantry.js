@@ -18,18 +18,14 @@ const EditPantry = (props) =>{
                     <h2 className='pantry-edit__title'> {pantry.pantry_name}</h2>
                 </div>
                 <img className='pantry-edit__icon' src={pantryIcon} alt="pantry icon"></img>
-                <div>
-                    <p> Owner: </p> 
-                    <p> {pantry.pantry_name}</p>
-                </div>
-                <div>
-                    <p> Number of Dishes: </p>
-                    <p> {pantry.num_leftovers}</p>
-                </div>
-                <div>
-                    <p> Number of Leftovers:</p>
-                    <p> {pantry.num_leftovers}</p>
-                </div>
+                <form>
+                    <input placeholder='Pantry Name'/>
+                    <button> Submit </button>
+                </form>
+                <form>
+                    <input placeholder='Add friend'/>
+                    <button> Add </button>
+                </form>
             </div>
         </div>
     </>)
