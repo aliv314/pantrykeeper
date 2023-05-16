@@ -27,6 +27,7 @@ const EditPantry = (props) =>{
                     <button> Add </button>
                 </form>
                 <button> Delete </button>
+                <button onClick={onClose}> Cancel </button>
             </div>
         </div>
     </>)
