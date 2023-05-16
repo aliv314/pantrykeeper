@@ -25,7 +25,7 @@ const Pantries = () => {
 
     const [showNew, setShowNew] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
-    const [showDelete, setShowDelete] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
 
     const navigator = useNavigate();
     
