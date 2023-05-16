@@ -9,7 +9,7 @@ const PantryDetails = (props) =>{
     if(!show){
         return null;
     }
-
+    console.log(pantry);
     return (<>
         <div className='pantry-details'>
             <div className='pantry-details__content'>
@@ -17,18 +17,22 @@ const PantryDetails = (props) =>{
                     <img className='pantry-details__icon' src={backIcon} alt="Back arrow icon" onClick={onClose}/>
                     <h2 className='pantry-details__title'> {pantry.pantry_name}</h2>
                 </div>
-                <img className='pantry-details__icon' src={pantryIcon} alt="pantry icon"></img>
-                <div>
-                    <p> Owner: </p> 
-                    <p> {pantry.pantry_name}</p>
+                <img className='pantry-details__image' src={pantryIcon} alt="pantry icon"></img>
+                <div className='pantry-details__detail'>
+                    <p className='pantry-details__label'> Pantry Owner: </p> 
+                    <p className='pantry-details__info'> {pantry.owner_name}</p>
                 </div>
-                <div>
-                    <p> Number of Dishes: </p>
-                    <p> {pantry.num_dish}</p>
+                <div className='pantry-details__detail'>
+                    <p className='pantry-details__label'> Pantry Name: </p> 
+                    <p className='pantry-details__info'> {pantry.pantry_name}</p>
                 </div>
-                <div>
-                    <p> Number of Leftovers:</p>
-                    <p> {pantry.num_leftovers}</p>
+                <div className='pantry-details__detail'>
+                    <p className='pantry-details__label'> Number of Dishes:</p>
+                    <p className='pantry-details__info'> {pantry.num_leftovers}</p>
+                </div>
+                <div className='pantry-details__detail'>
+                    <p className='pantry-details__label'> Number of Ingredients: </p>
+                    <p className='pantry-details__info'> {pantry.num_foods}</p>
                 </div>
             </div>
         </div>

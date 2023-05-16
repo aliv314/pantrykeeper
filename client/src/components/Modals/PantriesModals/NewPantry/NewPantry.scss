@@ -10,18 +10,22 @@
         @include padding-baseline;
         height: 100%;
         width: 100%;
-        overflow: auto;
     }
-    &__head{
+
+    &__header{
         display: flex;
         align-items: center;
-    }
-    &__title{
-        margin-right: auto;
         @include margin-headline;
     }
+    &__title{
+        margin-left: 8px;
+        margin-right: auto;
+    }
     &__icon{
-        height: 10rem;
+        @include icon;
+    }
+    &__image{
+        max-height: 50%;
     }
     &__form{
         display: flex;
