@@ -10,7 +10,7 @@ import { backend } from '../../../../firebase';
 
 import Async, { useAsync } from 'react-select/async';
 //Note: Pass in an array of objects.
-import NewFoodList from '../../../NewFoodList/NewFoodList'
+import CartList from '../../../CartList/CartList'
 
 const NewFood = (props) => {
     const {id} = useParams();
@@ -113,7 +113,7 @@ const NewFood = (props) => {
                 </form>
                 
                 <h3 className='new-food__list-title'> Foods </h3>
-                <NewFoodList foods={foods}></NewFoodList>
+                <CartList foods={foods}></CartList>
                 <button className='new-food__button' onClick={submitList}> Submit </button>
                 <button className='new-food__button' onClick={() => {onCloseHandler(); setFoods([])}}> Cancel </button>
             </div>

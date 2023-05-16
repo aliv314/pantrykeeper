@@ -1,0 +1,10 @@
+@use '../../../../styles/mixins' as *;
+@use '../../../../styles/variables' as *;
+
+.food-details{
+    @include modal-parent;
+
+    &__content{ 
+        @include modal-child;
+    }
+}   

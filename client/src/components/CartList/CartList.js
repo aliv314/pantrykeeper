@@ -1,7 +1,7 @@
-import './NewFoodList.scss';
+import './CartList.scss';
 import closeIcon from '../../assets/images/icons/close.svg'
 import { uuidv4 } from '@firebase/util';
-const NewFoodList = (props) =>{ 
+const CartList = (props) =>{ 
     const {foods} = props;
     return (<>
         <section className='cart'>
@@ -17,4 +17,4 @@ const NewFoodList = (props) =>{
     </>)
 }
 
-export default NewFoodList;
+export default CartList;
