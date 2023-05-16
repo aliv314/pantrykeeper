@@ -10,6 +10,9 @@
         
     }
 }
+
+
+//Cards 
 @mixin card-list {
     display: flex;
     flex-wrap: wrap;
@@ -32,12 +35,7 @@
     cursor: pointer;
 }
 
-
-
-@mixin icon{
-    height: 2rem;
-}
-
+//Modals 
 @mixin modal-parent{
     position:fixed;
 
@@ -59,8 +57,8 @@
 }
 //Padding 
 @mixin padding-baseline {
-    padding-right:  1rem;
-    padding-left:  1rem;
+    padding-right:  0.75rem;
+    padding-left:  0.75rem;
 }
 
 //Margins 
@@ -72,4 +70,16 @@
 // Vertical Space between elements
 @mixin margin-baseline {
     margin-bottom: 0.5rem;
+}
+
+//Components
+@mixin icon{
+    height: 2rem;
+}
+
+@mixin buttons {
+    border: none;
+    color: black;
+    height: 2rem;
+    width: 100%;
 }

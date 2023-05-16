@@ -5,6 +5,7 @@
     @include padding-baseline;
     &__head{
         display: flex;
+        align-items: center;
     }
     &__header{
         display: flex;
@@ -15,9 +16,11 @@
 
     &__icon{
         @include icon;
-        margin-right: 1rem;
+        margin-right: 0.5rem;
+    }   
+
+    &__buttons{
+        display: flex;
     }
-    &__title{
-        
-    }
+    
 }

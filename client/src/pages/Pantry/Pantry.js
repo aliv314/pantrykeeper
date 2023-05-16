@@ -56,7 +56,6 @@ const Pantry = () => {
     return (
         <div className='pantry'>
             <div className='pantry__head'>
-                {/* Title and Back Arrow */}
                 <div className='pantry__header'>
                     <img className='pantry__icon' src={backIcon} alt="Back arrow icon" onClick={() => nav(-1)}/>
                     <h2 className='pantry__title'> {pantry.pantry_name}</h2>

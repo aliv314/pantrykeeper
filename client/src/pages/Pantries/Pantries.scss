@@ -2,9 +2,18 @@
 @use '../../styles/variables' as *;
 
 .pantries{
-    &__title{
-        @include padding-baseline;
+    @include padding-baseline;
+    
+    &__header{
         @include margin-headline;
+        display:  flex;
+        align-items: center
+    }
+    &__icon{
+        @include icon;
+    }
+    &__title{
+
     }
     &__cards{
         @include card-list;
