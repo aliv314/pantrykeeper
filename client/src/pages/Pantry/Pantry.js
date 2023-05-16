@@ -47,12 +47,11 @@ const Pantry = () => {
             setDisplay(foods.filter(food => food.food_type === "ingredient"))
         }else if (filterD && !filterI){
             setDisplay(foods.filter(food => food.food_type === "dish"))
-        }else {
-            setDisplay(foods);
+        }else{
+            setFilterD(false);
+            setFilterI(false);
         }
-
-
-    }, [foods, filterI, filterD])
+    }, [filterI, filterD])
 
     return (
         <div className='pantry'>
