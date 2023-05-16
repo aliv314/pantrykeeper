@@ -4,7 +4,7 @@ import backIcon from '../../../../assets/images/icons/arrow_back.svg'
 import foodIcon from '../../../../assets/images/icons/kitchen.svg';
 
 const FoodDetails = (props) =>{
-    const {show, food, onClose} = props;
+    const {show, food, onClose} = props; 
 
     if(!show){
         return null;
@@ -19,16 +19,16 @@ const FoodDetails = (props) =>{
                 </div>
                 <img className='food-details__icon' src={foodIcon} alt="food icon"></img>
                 <div>
-                    <p> Owner: </p> 
+                    <p> Added by: </p> 
                     <p> {food.food_name}</p>
                 </div>
                 <div>
-                    <p> Number of Dishes: </p>
-                    <p> {food.num_leftovers}</p>
+                    <p> Added on: </p>
+                    <p> {food.timestamp}</p>
                 </div>
                 <div>
-                    <p> Number of Leftovers:</p>
-                    <p> {food.num_leftovers}</p>
+                    <p> Food Type </p>
+                    <p> {food.food_type}</p>
                 </div>
             </div>
         </div>
