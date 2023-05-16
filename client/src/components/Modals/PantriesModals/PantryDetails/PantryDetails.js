@@ -24,7 +24,7 @@ const PantryDetails = (props) =>{
                 </div>
                 <div>
                     <p> Number of Dishes: </p>
-                    <p> {pantry.num_leftovers}</p>
+                    <p> {pantry.num_dish}</p>
                 </div>
                 <div>
                     <p> Number of Leftovers:</p>

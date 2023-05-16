@@ -18,7 +18,8 @@ const Pantry = () => {
 
     const [foods, setFoods] = useState([])
     const [displayFood,  setDisplay] = useState([])
-    const [filter, setFilter] = useState("")
+    const [filterI, setFilterI] = useState(false)
+    const [filterD, setFilterD] = useState(false)
 
     const nav = useNavigate();
 
@@ -41,10 +42,17 @@ const Pantry = () => {
     }, [id])
 
     useEffect(() => {
-        if(filter){
-            setDisplay(foods.filter(food => food.food_type === filter))
+        console.log("Changed a filter");
+        if (filterI && !filterD){
+            setDisplay(foods.filter(food => food.food_type === "ingredient"))
+        }else if (filterD && !filterI){
+            setDisplay(foods.filter(food => food.food_type === "dish"))
+        }else {
+            setDisplay(foods);
         }
-    }, [filter])
+
+
+    }, [foods, filterI, filterD])
 
     return (
         <div className='pantry'>
@@ -55,8 +63,8 @@ const Pantry = () => {
                     <h2 className='pantry__title'> {pantry.pantry_name}</h2>
                 </div>
                 <div className='pantry__buttons'>
-                    <SectionButton text={"Ingredients"} icon={ingredientIcon} onClickHandler={() => setFilter("ingredient")}></SectionButton>
-                    <SectionButton text={"Dishes"} icon={dishIcon} onClickHandler={() => setFilter("dish")}></SectionButton>
+                    <SectionButton text={"Ingredients"} icon={ingredientIcon} onClickHandler={() => setFilterI(!filterI)}></SectionButton>
+                    <SectionButton text={"Dishes"} icon={dishIcon} onClickHandler={() => setFilterD(!filterD)}></SectionButton>
                 </div>  
             </div>
 
