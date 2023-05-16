@@ -31,7 +31,7 @@ const Pantries = () => {
     const [showDetails, setShowDetails] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
 
-    const navigator = useNavigate();
+    const nav = useNavigate();
     
     const auth = getAuth();
     useEffect(() => {
@@ -77,7 +77,7 @@ const Pantries = () => {
         {showDetails && pantry && <PantryDetails show={showDetails} pantry={pantry} onClose={() => {setShowDetails(false)}}/>}
         {showEdit && pantry && <EditPantry show={showEdit} pantry={pantry} onClose={() => {setShowEdit(false)}}></EditPantry>}
         <div className='pantries__title'>
-            <img src={backIcon} alt={"back icon"}></img>
+            <img src={backIcon} onClick={()=> nav(-1)} alt={"back icon"}></img>
             <h2> Pantries </h2>
         </div>
         

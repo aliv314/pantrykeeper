@@ -2,6 +2,8 @@
 @use '../../styles/variables' as *;
 
 .cart{
+    overflow-y: auto;
+    max-height: 40%;
     &__item{
         display: flex;
         align-items: center;

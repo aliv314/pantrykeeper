@@ -113,7 +113,7 @@ const NewFood = (props) => {
                 </form>
                 
                 <h3 className='new-food__list-title'> Foods </h3>
-                <CartList foods={foods}></CartList>
+                <CartList foods={foods}/>
                 <button className='new-food__button' onClick={submitList}> Submit </button>
                 <button className='new-food__button' onClick={() => {onCloseHandler(); setFoods([])}}> Cancel </button>
             </div>
