@@ -16,6 +16,7 @@ import NewPantry from '../../components/Modals/PantriesModals/NewPantry/NewPantr
 import backIcon from '../../assets/images/icons/arrow_back.svg'
 import pantryIcon from '../../assets/images/icons/kitchen.svg';
 import PantryDetails from '../../components/Modals/PantriesModals/PantryDetails/PantryDetails';
+import EditPantry from '../../components/Modals/PantriesModals/EditPantry/EditPantry';
 
 const Pantries = () => {
     
@@ -71,7 +72,7 @@ const Pantries = () => {
     <div className='pantries'>
         {showNew && <NewPantry show={showNew} onSubmit={(e, pantryName) => handleNewSubmit(e, pantryName)} onClose={() => {setShowNew(false)}}/>}
         {showDetails && pantry && <PantryDetails show={showDetails} pantry={pantry}/>}
-
+        {showEdit && pantry && <EditPantry show={showEdit} pantry={pantry}></EditPantry>}
         <div className='pantries__title'>
             <img src={backIcon} alt={"back icon"}></img>
             <h2> Pantries </h2>
@@ -86,11 +87,13 @@ const Pantries = () => {
                         icon={pantryIcon} 
                         onClickItem={() => navigator(`/my-pantry/${pantry.pantry_id}`)} 
                         onClickDetail = {() => {
-                            console.log(pantries[i]);
                             setPantry(pantries[i]); 
                             setShowDetails(true); 
                         }} 
-                        onClickDelete = { () => console.log("Delete")}/>
+                        onClickEdit= { () => {
+                            setPantry(pantries[i]); 
+                            setShowEdit(true);
+                        }}/>
                     </li>
                 )
             })}

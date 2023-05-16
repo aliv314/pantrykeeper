@@ -1,2 +1,10 @@
 @use '../../../../styles/mixins' as *;
 @use '../../../../styles/variables' as *;
+
+.pantry-details{
+    @include modal-parent;
+
+    &__content{ 
+        @include modal-child;
+    }
+}   
