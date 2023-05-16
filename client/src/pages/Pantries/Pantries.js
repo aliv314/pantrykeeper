@@ -88,7 +88,7 @@ const Pantries = () => {
                         <ItemCard 
                         itemName = {pantry.pantry_name} 
                         icon={pantryIcon} 
-                        onClickItem={() => navigator(`/my-pantry/${pantry.pantry_id}`)} 
+                        onClickItem={() => nav(`/my-pantry/${pantry.pantry_id}`)} 
                         onClickDetail = {() => {
                             setPantry(pantries[i]); 
                             setShowDetails(true); 
