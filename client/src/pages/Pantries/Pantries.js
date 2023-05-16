@@ -49,11 +49,7 @@ const Pantries = () => {
             console.log(e);
         })
     }, [user])
-    //Handle pantry Details.
-    const handleDetails = () =>{
-        setShowDetails(true);
-        console.log("Details", showDetails);
-    }
+
     //Submit for new pantry modal.
     const handleNewSubmit = (e, pantryName) => {
         e.preventDefault();
@@ -74,7 +70,7 @@ const Pantries = () => {
     return (
     <div className='pantries'>
         {showNew && <NewPantry show={showNew} onSubmit={(e, pantryName) => handleNewSubmit(e, pantryName)} onClose={() => {setShowNew(false)}}/>}
-        {showDetails && <PantryDetails show={showDetails} pantry={pantry}/>}
+        {showDetails && pantry && <PantryDetails show={showDetails} pantry={pantry}/>}
 
         <div className='pantries__title'>
             <img src={backIcon} alt={"back icon"}></img>
@@ -82,10 +78,19 @@ const Pantries = () => {
         </div>
         
         <ul className='pantries__cards'>
-            {pantries && pantries.map( (pantry) => {
+            {pantries && pantries.map( (pantry, i) => {
                 return (
                     <li className='pantries__card' key={pantry && pantry.pantry_id}>
-                        <ItemCard itemName = {pantry.pantry_name} icon={pantryIcon} onClickItem={() => navigator(`/my-pantry/${pantry.pantry_id}`)} onClickDetail = {() => handleDetails()} onClickDelete = { () => console.log("Delete")}/>
+                        <ItemCard 
+                        itemName = {pantry.pantry_name} 
+                        icon={pantryIcon} 
+                        onClickItem={() => navigator(`/my-pantry/${pantry.pantry_id}`)} 
+                        onClickDetail = {() => {
+                            console.log(pantries[i]);
+                            setPantry(pantries[i]); 
+                            setShowDetails(true); 
+                        }} 
+                        onClickDelete = { () => console.log("Delete")}/>
                     </li>
                 )
             })}
