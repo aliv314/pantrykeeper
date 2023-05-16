@@ -1,23 +1,28 @@
 import './FoodsList.scss';
-import NewItemCard from '../Cards/NewCard/NewCard';
-import { useEffect, useState } from 'react';
-import NewFood from '../Modals/NewFood/NewFood';
-import ItemCard from '../Cards/ItemCard/ItemCard';
-import axios from 'axios';
 import { uuidv4 } from '@firebase/util';
-import { backend } from '../../firebase';
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+
+//Cards
+import ItemCard from '../Cards/ItemCard/ItemCard';
+import NewItemCard from '../Cards/NewCard/NewCard';
+
+//Modals
+import NewFood from '../Modals/FoodsModals/NewFood/NewFood';
+import FoodDetails from '../Modals/FoodsModals/FoodDetails/FoodDetails';
 
 import foodIcon from '../../assets/images/icons/nutrition.svg'
 
 const FoodsList = (props) => {
     const {foods} = props
     const [showNew, setShowNew] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
+    const [showDetails, setShowDetails] = useState(false);
     
     
     return (
         <>  
             <NewFood show={showNew} onCloseHandler={() => setShowNew(false)}></NewFood>
+            <FoodDetails show={showDetails} onCloseHandler={() => setShowDetails(false)}></FoodDetails>
             <section className='foods'>
                 <h3 className='foods__header'> Foods </h3>
                 <ul className='foods__list'>

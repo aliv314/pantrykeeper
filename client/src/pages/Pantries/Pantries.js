@@ -8,15 +8,18 @@ import { useEffect, useState } from 'react';
 import { backend } from '../../firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-//Components
+//Cards
 import ItemCard from '../../components/Cards/ItemCard/ItemCard';
+//Modals
 import NewPantry from '../../components/Modals/PantriesModals/NewPantry/NewPantry';
+import PantryDetails from '../../components/Modals/PantriesModals/PantryDetails/PantryDetails';
+import EditPantry from '../../components/Modals/PantriesModals/EditPantry/EditPantry';
 
 //Icons
 import backIcon from '../../assets/images/icons/arrow_back.svg'
 import pantryIcon from '../../assets/images/icons/kitchen.svg';
-import PantryDetails from '../../components/Modals/PantriesModals/PantryDetails/PantryDetails';
-import EditPantry from '../../components/Modals/PantriesModals/EditPantry/EditPantry';
+import editIcon from '../../assets/images/icons/edit.svg'
+
 
 const Pantries = () => {
     
@@ -90,7 +93,8 @@ const Pantries = () => {
                             setPantry(pantries[i]); 
                             setShowDetails(true); 
                         }} 
-                        onClickEdit= { () => {
+                        secondaryIcon = {editIcon}
+                        onClickSecondary= { () => {
                             setPantry(pantries[i]); 
                             setShowEdit(true);
                         }}/>

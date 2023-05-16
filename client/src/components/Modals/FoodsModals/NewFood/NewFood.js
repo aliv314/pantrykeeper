@@ -4,12 +4,13 @@ import axios from 'axios';
 import { useEffect, useState } from 'react'
 import {useParams} from 'react-router-dom';
 
-import closeIcon from '../../../assets/images/icons/close.svg'
-import { backend } from '../../../firebase';
+import closeIcon from '../../../../assets/images/icons/close.svg'
+
+import { backend } from '../../../../firebase';
 
 import Async, { useAsync } from 'react-select/async';
 //Note: Pass in an array of objects.
-import NewFoodList from '../../NewFoodList/NewFoodList';
+import NewFoodList from '../../../NewFoodList/NewFoodList'
 
 const NewFood = (props) => {
     const {id} = useParams();

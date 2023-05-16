@@ -1,9 +1,8 @@
 import './ItemCard.scss'
 import detailIcon from '../../../assets/images/icons/info.svg'
-import editIcon from '../../../assets/images/icons/edit.svg'
 
 const ItemCard = (props) => {
-    const {itemName, icon, onClickItem, onClickDetail, onClickEdit} = props;
+    const {itemName, icon, onClickItem, onClickDetail, secondaryIcon, onClickSecondary} = props;
     return (
         <>
             <div className='item-card'>
@@ -15,8 +14,8 @@ const ItemCard = (props) => {
                     <div onClick={onClickDetail} className='item-card__button item-card__button--left'>
                         <img  className='item-card__bt-icon' src={detailIcon} alt="icon"></img>
                     </div>
-                    <div onClick={onClickEdit} className='item-card__button'>
-                        <img  className='item-card__bt-icon' src={editIcon} alt="icon"></img>
+                    <div onClick={onClickSecondary} className='item-card__button'>
+                        <img  className='item-card__bt-icon' src={secondaryIcon} alt="icon"></img>
                     </div>
                 </div>
                 
