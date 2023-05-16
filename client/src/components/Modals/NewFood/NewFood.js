@@ -1,4 +1,4 @@
-import './NewFoodModal.scss'
+import './NewFood.scss'
 
 import axios from 'axios';
 import { useEffect, useState } from 'react'
@@ -11,7 +11,7 @@ import Async, { useAsync } from 'react-select/async';
 //Note: Pass in an array of objects.
 import NewFoodList from '../../NewFoodList/NewFoodList';
 
-const NewFoodModal = (props) => {
+const NewFood = (props) => {
     const {id} = useParams();
     const {show, onCloseHandler} = props;
 
@@ -120,5 +120,5 @@ const NewFoodModal = (props) => {
     )
 }
 
-export default NewFoodModal;
+export default NewFood;
 

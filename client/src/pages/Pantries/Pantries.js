@@ -10,20 +10,25 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 //Components
 import ItemCard from '../../components/Cards/ItemCard/ItemCard';
-import NewPantryModal from '../../components/Modals/PantriesModals/NewPantryModal/NewPantryModal';
-import SectionButton from '../../components/SectionButton/SectionButton';
+import NewPantry from '../../components/Modals/PantriesModals/NewPantry/NewPantry';
 
 //Icons
 import backIcon from '../../assets/images/icons/arrow_back.svg'
 import pantryIcon from '../../assets/images/icons/kitchen.svg';
+import PantryDetails from '../../components/Modals/PantriesModals/PantryDetails/PantryDetails';
 
 const Pantries = () => {
-    const [pantries, setPantries] = useState([]);
-    const [showNew, setShowNew] = useState(false);
+    
     const [user, setUser] = useState();
+    const [pantries, setPantries] = useState([]);
+    const [pantry, setPantry] = useState({});
+
+    const [showNew, setShowNew] = useState(false);
+    const [showDetails, setShowDetails] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
     const navigator = useNavigate();
-
+    
     const auth = getAuth();
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -44,7 +49,12 @@ const Pantries = () => {
             console.log(e);
         })
     }, [user])
-
+    //Handle pantry Details.
+    const handleDetails = () =>{
+        setShowDetails(true);
+        console.log("Details", showDetails);
+    }
+    //Submit for new pantry modal.
     const handleNewSubmit = (e, pantryName) => {
         e.preventDefault();
         if (!user) return;
@@ -63,8 +73,9 @@ const Pantries = () => {
     }
     return (
     <div className='pantries'>
-        {showNew && <NewPantryModal show={showNew} onSubmit={(e, pantryName) => handleNewSubmit(e, pantryName)} onClose={() => {setShowNew(false)}}></NewPantryModal>}
-        
+        {showNew && <NewPantry show={showNew} onSubmit={(e, pantryName) => handleNewSubmit(e, pantryName)} onClose={() => {setShowNew(false)}}/>}
+        {showDetails && <PantryDetails show={showDetails} pantry={pantry}/>}
+
         <div className='pantries__title'>
             <img src={backIcon} alt={"back icon"}></img>
             <h2> Pantries </h2>
@@ -74,12 +85,12 @@ const Pantries = () => {
             {pantries && pantries.map( (pantry) => {
                 return (
                     <li className='pantries__card' key={pantry && pantry.pantry_id}>
-                        <ItemCard itemName = {pantry.pantry_name} icon={pantryIcon} onClickItem={() => navigator(`/my-pantry/${pantry.pantry_id}`)}/>
+                        <ItemCard itemName = {pantry.pantry_name} icon={pantryIcon} onClickItem={() => navigator(`/my-pantry/${pantry.pantry_id}`)} onClickDetail = {() => handleDetails()} onClickDelete = { () => console.log("Delete")}/>
                     </li>
                 )
             })}
             <li className='pantries__card'>
-                <NewCard title = {`Pantry`} onClickHandler={()=>setShowNew(true)}/>
+                <NewCard title = {`Pantry`} onClickHandler={()=>setShowNew(true)} />
             </li>
         </ul>
     </div>

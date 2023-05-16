@@ -1,4 +1,4 @@
-import './NewPantryModal.scss'
+import './NewPantry.scss'
 import {useState} from 'react';
 import closeIcon from '../../../../assets/images/icons/close.svg'
 import pantryIcon from '../../../../assets/images/icons/kitchen.svg'

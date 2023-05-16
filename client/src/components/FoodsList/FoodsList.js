@@ -1,7 +1,7 @@
 import './FoodsList.scss';
 import NewItemCard from '../Cards/NewCard/NewCard';
 import { useEffect, useState } from 'react';
-import NewFoodModal from '../Modals/NewFoodModal/NewFoodModal';
+import NewFood from '../Modals/NewFood/NewFood';
 import ItemCard from '../Cards/ItemCard/ItemCard';
 import axios from 'axios';
 import { uuidv4 } from '@firebase/util';
@@ -17,7 +17,7 @@ const FoodsList = (props) => {
     
     return (
         <>  
-            <NewFoodModal show={showNew} onCloseHandler={() => setShowNew(false)}></NewFoodModal>
+            <NewFood show={showNew} onCloseHandler={() => setShowNew(false)}></NewFood>
             <section className='foods'>
                 <h3 className='foods__header'> Foods </h3>
                 <ul className='foods__list'>
