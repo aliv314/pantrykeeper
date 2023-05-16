@@ -11,6 +11,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 //Components
 import ItemCard from '../../components/Cards/ItemCard/ItemCard';
 import NewPantryModal from '../../components/Modals/PantriesModals/NewPantryModal/NewPantryModal';
+import SectionButton from '../../components/SectionButton/SectionButton';
 
 //Icons
 import backIcon from '../../assets/images/icons/arrow_back.svg'
@@ -63,11 +64,12 @@ const Pantries = () => {
     return (
     <div className='pantries'>
         {showNew && <NewPantryModal show={showNew} onSubmit={(e, pantryName) => handleNewSubmit(e, pantryName)} onClose={() => {setShowNew(false)}}></NewPantryModal>}
-
+        
         <div className='pantries__title'>
             <img src={backIcon} alt={"back icon"}></img>
             <h2> Pantries </h2>
         </div>
+        
         <ul className='pantries__cards'>
             {pantries && pantries.map( (pantry) => {
                 return (

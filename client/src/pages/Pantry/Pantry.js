@@ -1,33 +1,50 @@
 import './Pantry.scss'
+import { backend } from '../../firebase';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { backend } from '../../firebase';
 
 import backIcon from '../../assets/images/icons/arrow_back.svg'
+import ingredientIcon from '../../assets/images/icons/nutrition.svg'
+import dishIcon from '../../assets/images/icons/dinner_dining.svg'
+
 import FoodsList from '../../components/FoodsList/FoodsList';
+import SectionButton from '../../components/SectionButton/SectionButton';
 
 const Pantry = () => {
     const {id} = useParams();
+
     const [pantry, setPantry] = useState({})
+
     const [foods, setFoods] = useState([])
+    const [displayFood,  setDisplay] = useState([])
+    const [filter, setFilter] = useState("")
+
     const nav = useNavigate();
 
     useEffect(() => {
         axios.get(`${backend}/api/pantries/${id}`)
         .then((res) => {
             setPantry(res.data);
+            console.log(res.data);  
         }).catch((e) => {
             console.log(e);
         })
         axios.get(`${backend}/api/foods/${id}`)
         .then((res) => {
             setFoods(res.data);
+            setDisplay(res.data);
+            console.log(res.data);  
         }).catch((e) => {
             console.log(e);
         })
     }, [id])
 
+    useEffect(() => {
+        if(filter){
+            setDisplay(foods.filter(food => food.food_type === filter))
+        }
+    }, [filter])
 
     return (
         <div className='pantry'>
@@ -37,9 +54,13 @@ const Pantry = () => {
                     <img className='pantry__icon' src={backIcon} alt="Back arrow icon" onClick={() => nav(-1)}/>
                     <h2 className='pantry__title'> {pantry.pantry_name}</h2>
                 </div>
+                <div className='pantry__buttons'>
+                    <SectionButton text={"Ingredients"} icon={ingredientIcon} onClickHandler={() => setFilter("ingredient")}></SectionButton>
+                    <SectionButton text={"Dishes"} icon={dishIcon} onClickHandler={() => setFilter("dish")}></SectionButton>
+                </div>  
             </div>
 
-            <FoodsList foods = {foods}></FoodsList>
+            <FoodsList foods = {displayFood}></FoodsList>
         </div>
     )
 }

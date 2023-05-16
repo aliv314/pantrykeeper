@@ -10,22 +10,11 @@ import { useParams } from 'react-router-dom';
 
 import foodIcon from '../../assets/images/icons/nutrition.svg'
 
-const FoodsList = () => {
-    const {id} = useParams();
-
+const FoodsList = (props) => {
+    const {foods} = props
     const [showNew, setShowNew] = useState(false);
-    const [foods, setFoods] = useState([]);
-   
-    useEffect(() =>{
-        axios.get(`${backend}/api/foods/${id}`)
-        .then(res =>{
-            setFoods(res.data);
-            }
-        )
-        .catch( e => {
-            console.log(e);
-        });
-    }, [id])
+    
+    
     return (
         <>  
             <NewFoodModal show={showNew} onCloseHandler={() => setShowNew(false)}></NewFoodModal>
