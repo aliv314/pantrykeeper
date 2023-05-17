@@ -17,7 +17,6 @@ import PantryDetails from '../../components/Modals/PantriesModals/PantryDetails/
 import EditPantry from '../../components/Modals/PantriesModals/EditPantry/EditPantry';
 
 //Icons
-import backIcon from '../../assets/images/icons/arrow_back.svg'
 import pantryIcon from '../../assets/images/icons/kitchen.svg';
 import editIcon from '../../assets/images/icons/edit.svg'
 import BackButton from '../../components/BackButton/BackButton';
@@ -55,9 +54,9 @@ const Pantries = () => {
             console.log(e);
         })
     }, [user])
-
+    
     //Submit for new pantry modal.
-    const handleNewSubmit = (e, pantryName) => {
+    const handleNew = (e, pantryName) => {
         e.preventDefault();
         if (!user) return;
         const newPantryObj = {
@@ -71,6 +70,8 @@ const Pantries = () => {
             setShowNew(false);
             console.log(res.data);
             const newPantry = {
+                //NEED TO FIND A WAY TO RETURN PANTRY ID
+                //THIS WON'T WORK
                 pantry_id: uuidv4(),
                 ...res.data
             }
@@ -79,14 +80,54 @@ const Pantries = () => {
             console.log(e)
         })
     }
+    const handleEdit = (e, pantryName) =>{
+        e.preventDefault();
+        if(!pantryName){
+            return;
+        }
+        const reqBody = {
+            pantry_name: pantryName,
+        }
+        axios.put(`${backend}/api/pantries/${pantry.pantry_id}`, reqBody)
+        .then((res) => {
+            console.log(res);
+            setShowEdit(false);
+        }).catch((e) => {   
+            console.log(e);
+        })
+    }
+    const handleDelete = (e, pantryId) => {
+        axios.post(`${backend}/api/pantries/${pantry.pantry_id}`)
+        .then((res)=>{
+            setShowNew(false);
+            const newPantry = res.data;
+            setPantries([newPantry, ...pantries])
+        }).catch((e) => {
+            console.log(e)
+        })
+    }
+
     return (
     <div className='pantries'>
-        {showNew && <NewPantry show={showNew} onSubmit={(e, pantryName) => handleNewSubmit(e, pantryName)} onClose={() => {setShowNew(false)}}/>}
-        {showDetails && pantry && <PantryDetails show={showDetails} pantry={pantry} onClose={() => {setShowDetails(false)}}/>}
-        {showEdit && pantry && <EditPantry show={showEdit} pantry={pantry} onClose={() => {setShowEdit(false)}}></EditPantry>}
+        {showNew && <NewPantry 
+        show={showNew} 
+        handleNew={(e, pantryName) => handleNew(e, pantryName)} 
+        onClose={() => {setShowNew(false)}}/>}
+
+        {showDetails && pantry && <PantryDetails 
+        show={showDetails} pantry={pantry} 
+        onClose={() => {setShowDetails(false)}} />}
+        {showEdit && pantry && <EditPantry 
+        show={showEdit}
+        pantry={pantry} 
+        onClose={() => {setShowEdit(false)}}
+        handleEdit = {(e, pantryName) => handleEdit(e, pantryName)}
+        handleDelete = {(e, pantryId) => handleDelete(e, pantryId)}
+        />}
         <div className='pantries__header'>
             <BackButton onClose={ () => nav(-1)}/>
             <h2 className='pantries__title'> Pantries </h2>
+            
         </div>
         
         <ul className='pantries__cards'>

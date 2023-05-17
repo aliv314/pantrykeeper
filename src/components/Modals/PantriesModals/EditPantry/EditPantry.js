@@ -1,41 +1,28 @@
 import './EditPantry.scss';
 
-import backIcon from '../../../../assets/images/icons/arrow_back.svg'
+import deleteIcon from '../../../../assets/images/icons/delete.svg';
 import pantryIcon from '../../../../assets/images/icons/kitchen.svg';
 import axios from 'axios';
 import { useState } from 'react';
 import { backend } from '../../../../firebase';
 import BackButton from '../../../BackButton/BackButton';
 const EditPantry = (props) =>{
-    const {show, pantry, onClose} = props;
+    const {show, pantry, handleEdit, handleDelete, onClose} = props;
     const [pantryName, setPantryName] = useState("");
     if(!show){
         return null;
     }
-    const onSubmitName = (e) =>{
-        e.preventDefault();
-        if(!pantryName){
-            return;
-        }
-        const reqBody = {
-            pantry_name: pantryName,
-        }
-        axios.put(`${backend}/api/pantries/${pantry.pantry_id}`, reqBody)
-        .then((res) => {
-            console.log(res);
-        }).catch((e) => {   
-            console.log(e);
-        })
-    }
+    
     return (<>
         <div className='pantry-edit'>
             <div className='pantry-edit__content'>
                 <div className='pantry-edit__header'>
                     <BackButton onClose={onClose}/>
                     <h2 className='pantry-edit__title'> Edit: {pantry.pantry_name} </h2>
+                    <img onClick={handleDelete} src={deleteIcon} alt="garbage"></img>
                 </div>
                 <img className='pantry-edit__image' src={pantryIcon} alt="pantry icon"></img>
-                <form className='pantry-edit__form' onSubmit={onSubmitName}>
+                <form className='pantry-edit__form' onSubmit={(e) => {handleEdit(e, pantryName)}}>
                     <p> Change Name: </p>
                     <input className='pantry-edit__input' placeholder='Pantry Name' value={pantryName} onChange={(e) => setPantryName(e.target.value)}/>
                     <button className='pantry-edit__button' > Submit </button>

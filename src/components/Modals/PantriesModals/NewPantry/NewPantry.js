@@ -4,7 +4,7 @@ import pantryIcon from '../../../../assets/images/icons/kitchen.svg'
 import BackButton from '../../../BackButton/BackButton';
 const NewPantryModal = (props) => {
 
-    const {show, onSubmit, onClose} = props
+    const {show, handleNew, onClose} = props
 
     const [pantryName, setPantryName] = useState("");
 
@@ -19,7 +19,7 @@ const NewPantryModal = (props) => {
                     <BackButton onClose={onClose}/>
                     <h2 className='new-pantry__title'> New Pantry </h2>
                 </div>
-                <form onSubmit={(e) => {onSubmit(e, pantryName)}} className='new-pantry__form'>
+                <form onSubmit={(e) => {handleNew(e, pantryName)}} className='new-pantry__form'>
                     <img className = 'new-pantry__image' src={pantryIcon} alt='Kitchen Icon'/>
                     <p className='new-pantry__label'> Name </p>
                     <input className='new-pantry__input' placeholder="Pantry Name" onChange={(e) => setPantryName(e.target.value)} value={pantryName} ></input>
