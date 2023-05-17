@@ -9,11 +9,17 @@
     height: fit-content;
     border: 3px solid black;
     border-radius: 100%;
-
+    @include display-tablet{
+        border-radius: 25px;
+        padding: 0.5rem 1rem;
+    }
     &__icon{
         @include icon;
     }
     &__label{
         display: none;
+        @include display-tablet{
+            display: contents;
+        }
     }
 }

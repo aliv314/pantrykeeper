@@ -3,6 +3,7 @@ import {getAuth, onAuthStateChanged} from "firebase/auth"
 import {useEffect, useState} from 'react'
 
 import profileIcon from '../../assets/images/icons/face.svg'
+import logo from '../../assets/images/logo/pantrykeeperlogo.png'
 const Header = () => {
 
     const auth = getAuth();
@@ -21,7 +22,7 @@ const Header = () => {
     return (
     <>
         <div className='header'>
-            <h3 className='header__title'> PantryKeeper </h3>
+            <img src={logo} className='header__title'></img>
             <div className='header__user'>
                 <h4 className='header__username'> {username}</h4>
                 <img className = 'header__user-icon' src={profileIcon} alt={`${username}'s profile icon`}/>
