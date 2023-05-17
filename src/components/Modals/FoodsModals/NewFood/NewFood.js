@@ -16,15 +16,11 @@ import BackButton from '../../../BackButton/BackButton';
 
 const NewFood = (props) => {
     const {id} = useParams();
-    const {show, onCloseHandler} = props;
+    const {show, handleNew, onClose} = props;
 
-    //food type 
     const [foodType, setFoodType] = useState("")
-    //Object with label, value for react-select
     const [inputFood, setInputFood] = useState({});
-    //Set of foods used to send to the api.
     const [foods, setFoods] = useState([])
-    //Set user for database
     const [user, setUser] = useState({})
 
     const [timer, setTimer] = useState(null);
@@ -39,21 +35,20 @@ const NewFood = (props) => {
         }
         });
     }, [auth])
+
     if(!show){
         return null;
     }
     
     const foodsUrl = `https://api.edamam.com/auto-complete?app_id=${process.env.REACT_APP_EDAMAM_APP_ID}&app_key=${process.env.REACT_APP_EDAMAM_APP_KEY}`
-    
-    //Suggestion is the value currently within the <Async>
-    //Callback is the value sent back to the callback   
+
+    //Gets suggestions from the EDAMAM API
     const getSuggestions = (suggestion, callback) => {
         //Timer undone
         clearTimeout(timer)
         //Create a new timer async.
         const newTimer = setTimeout(() => {
             axios.get(`${foodsUrl}&q=${suggestion}&limit=3`).then( res => {
-                
                 callback(res.data.map(suggestion => ({ label: suggestion, value: suggestion})))
             }).catch(e => {
                 console.log(e)
@@ -63,9 +58,9 @@ const NewFood = (props) => {
         setTimer(newTimer)
     }
 
-    const handleAddFood = (e) => {
+    //Submit list to the foods
+    const handleCart= (e) => {
         e.preventDefault();
-       
         //There can't be repeat foods in array sent to the API
         foods.forEach( foodItem =>{
             if(foodItem.label !== inputFood.label){
@@ -84,32 +79,15 @@ const NewFood = (props) => {
         e.target.reset();
     }
 
-    const submitList= (e) => {
-        e.preventDefault();
-        //Post body 
-        const foodPost = {
-            foods: foods,
-        }
-        //Axios call to add all foods. 
-        axios.post(`${backend}/api/foods/${id}`, foodPost)
-        .then( res => {
-            //Clear array.
-            setFoods([])
-            //Close modal.
-            onCloseHandler();
-        })
-        .catch( error => {})
-    }
-
 
     return (
         <div className='new-food'>
             <div className='new-food__content'>
                 <div className='new-food__header'>
-                    <BackButton onClose ={onCloseHandler}/>
+                    <BackButton onClose ={onClose}/>
                     <h2> Add Food </h2>
                 </div>
-                <form className='new-food__form' onSubmit={handleAddFood}>
+                <form className='new-food__form' onSubmit={handleCart}>
                     <p className='new-food__text'> Search </p>
                     <Async className = 'new-food__input' value={inputFood} onChange={(value) => setInputFood(value)} loadOptions={getSuggestions}></Async>
                     <p className='new-food__text'> Type </p>
@@ -128,8 +106,8 @@ const NewFood = (props) => {
                 
                 <h3 className='new-food__list-title'> Foods </h3>
                 <CartList foods={foods}/>
-                <button className='new-food__button' onClick={submitList}> Submit </button>
-                <button className='new-food__button' onClick={() => {onCloseHandler(); setFoods([])}}> Cancel </button>
+                <button className='new-food__button' onClick={(e) => handleNew(e, foods)}> Submit </button>
+                <button className='new-food__button' onClick={() => {onClose(); setFoods([])}}> Cancel </button>
             </div>
         </div>
     )

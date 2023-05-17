@@ -27,22 +27,12 @@ const Pantry = () => {
         axios.get(`${backend}/api/pantries/${id}`)
         .then((res) => {
             setPantry(res.data);
-            console.log(res.data);  
-        }).catch((e) => {
-            console.log(e);
-        })
-        axios.get(`${backend}/api/foods/${id}`)
-        .then((res) => {
-            setFoods(res.data);
-            setDisplay(res.data);
-            console.log(res.data);  
         }).catch((e) => {
             console.log(e);
         })
     }, [id])
 
     useEffect(() => {
-        console.log("Changed a filter");
         if (filterI && !filterD){
             setDisplay(foods.filter(food => food.food_type === "ingredient"))
         }else if (filterD && !filterI){
@@ -64,7 +54,7 @@ const Pantry = () => {
                     <SectionButton active={filterD} text={"Dishes"} icon={dishIcon} onClickHandler={() => setFilterD(!filterD)}></SectionButton>
                 </div>  
             </div>
-            <FoodsList pantryId = {id} foods = {displayFood}></FoodsList>
+            <FoodsList/>
         </div>
     )
 }

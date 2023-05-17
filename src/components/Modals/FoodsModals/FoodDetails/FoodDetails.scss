@@ -18,8 +18,8 @@
         max-height: 50%;
     }
     &__detail{
-        display: flex;
         @include margin-baseline;
+        display: flex;
     }
     &__label{
         margin-right: 8px;
