@@ -27,7 +27,7 @@ exports.postPantry = async (req, res) => {
 
         const pantryObj = newPantry(req.body.ownerId, req.body.ownerName, req.body.pantryName, '', 0, 0, 0);
         const result = await db.collection('pantries').add(pantryObj);
-        res.status(200).send("Success!");
+        res.status(200).json(pantryObj);
     }catch(error){
         console.log(error);
         res.status(400).send("Error posting new pantry.");

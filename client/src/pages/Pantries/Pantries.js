@@ -1,12 +1,13 @@
 import './Pantries.scss'
 
 //Imports 
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import NewCard from '../../components/Cards/NewCard/NewCard';
 import { useEffect, useState } from 'react';
 import { backend } from '../../firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { uuidv4 } from '@firebase/util';
 
 //Cards
 import ItemCard from '../../components/Cards/ItemCard/ItemCard';
@@ -68,6 +69,12 @@ const Pantries = () => {
         axios.post(`${backend}/api/pantries`, newPantryObj)
         .then((res)=>{
             setShowNew(false);
+            console.log(res.data);
+            const newPantry = {
+                pantry_id: uuidv4(),
+                ...res.data
+            }
+            setPantries([newPantry, ...pantries])
         }).catch((e) => {
             console.log(e)
         })
@@ -85,7 +92,7 @@ const Pantries = () => {
         <ul className='pantries__cards'>
             {pantries && pantries.map( (pantry, i) => {
                 return (
-                    <li className='pantries__card' key={pantry && pantry.pantry_id}>
+                    <li className='pantries__card' key= {pantry && pantry.pantry_id}>
                         <ItemCard 
                         itemName = {pantry.pantry_name} 
                         icon={pantryIcon} 
