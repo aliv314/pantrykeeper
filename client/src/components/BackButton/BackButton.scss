@@ -1,0 +1,7 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.back{
+    margin-right: 8px;
+    @include icon;
+}

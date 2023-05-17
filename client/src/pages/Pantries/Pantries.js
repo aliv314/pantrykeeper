@@ -19,6 +19,7 @@ import EditPantry from '../../components/Modals/PantriesModals/EditPantry/EditPa
 import backIcon from '../../assets/images/icons/arrow_back.svg'
 import pantryIcon from '../../assets/images/icons/kitchen.svg';
 import editIcon from '../../assets/images/icons/edit.svg'
+import BackButton from '../../components/BackButton/BackButton';
 
 
 const Pantries = () => {
@@ -77,7 +78,7 @@ const Pantries = () => {
         {showDetails && pantry && <PantryDetails show={showDetails} pantry={pantry} onClose={() => {setShowDetails(false)}}/>}
         {showEdit && pantry && <EditPantry show={showEdit} pantry={pantry} onClose={() => {setShowEdit(false)}}></EditPantry>}
         <div className='pantries__header'>
-            <img className = 'pantries__icon' src={backIcon} onClick={()=> nav(-1)} alt={"back icon"}></img>
+            <BackButton onClose={ () => nav(-1)}/>
             <h2 className='pantries__title'> Pantries </h2>
         </div>
         

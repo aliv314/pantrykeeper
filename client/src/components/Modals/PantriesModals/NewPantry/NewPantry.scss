@@ -18,11 +18,10 @@
         @include margin-headline;
     }
     &__title{
-        margin-left: 8px;
-        margin-right: auto;
     }
     &__icon{
         @include icon;
+        margin-right: auto;
     }
     &__image{
         max-height: 50%;

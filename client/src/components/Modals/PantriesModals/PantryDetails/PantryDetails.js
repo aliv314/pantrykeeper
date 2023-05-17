@@ -2,6 +2,7 @@ import './PantryDetails.scss';
 
 import backIcon from '../../../../assets/images/icons/arrow_back.svg'
 import pantryIcon from '../../../../assets/images/icons/kitchen.svg';
+import BackButton from '../../../BackButton/BackButton';
 
 const PantryDetails = (props) =>{
     const {show, pantry, onClose} = props;
@@ -14,7 +15,7 @@ const PantryDetails = (props) =>{
         <div className='pantry-details'>
             <div className='pantry-details__content'>
                 <div className='pantry-details__header'>
-                    <img className='pantry-details__icon' src={backIcon} alt="Back arrow icon" onClick={onClose}/>
+                    <BackButton onClose={onClose}/>
                     <h2 className='pantry-details__title'> {pantry.pantry_name}</h2>
                 </div>
                 <img className='pantry-details__image' src={pantryIcon} alt="pantry icon"></img>

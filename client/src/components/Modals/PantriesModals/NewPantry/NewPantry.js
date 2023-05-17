@@ -1,7 +1,5 @@
 import './NewPantry.scss'
 import {useState} from 'react';
-import backIcon from '../../../../assets/images/icons/arrow_back.svg'
-import closeIcon from '../../../../assets/images/icons/close.svg'
 import pantryIcon from '../../../../assets/images/icons/kitchen.svg'
 const NewPantryModal = (props) => {
 
@@ -17,9 +15,7 @@ const NewPantryModal = (props) => {
         <div className="new-pantry">
             <div className='new-pantry__content'>
                 <div className='new-pantry__header'>
-                    <img className='new-pantry__icon' src={backIcon} alt="Back arrow icon" onClick={onClose}/>
                     <h2 className='new-pantry__title'> New Pantry </h2>
-                    <img className='new-pantry__icon' onClick={onClose} src={closeIcon} alt={'Icon to close modal.'}/>
                 </div>
                 <form onSubmit={(e) => {onSubmit(e, pantryName)}} className='new-pantry__form'>
                     <img className = 'new-pantry__image' src={pantryIcon} alt='Kitchen Icon'/>

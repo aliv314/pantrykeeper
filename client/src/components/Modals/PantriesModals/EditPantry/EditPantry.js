@@ -5,6 +5,7 @@ import pantryIcon from '../../../../assets/images/icons/kitchen.svg';
 import axios from 'axios';
 import { useState } from 'react';
 import { backend } from '../../../../firebase';
+import BackButton from '../../../BackButton/BackButton';
 const EditPantry = (props) =>{
     const {show, pantry, onClose} = props;
     const [pantryName, setPantryName] = useState("");
@@ -30,19 +31,21 @@ const EditPantry = (props) =>{
         <div className='pantry-edit'>
             <div className='pantry-edit__content'>
                 <div className='pantry-edit__header'>
-                    <img className='pantry-edit__icon' src={backIcon} alt="Back arrow icon" onClick={onClose}/>
-                    <h2 className='pantry-edit__title'> {pantry.pantry_name}</h2>
+                    <BackButton onClose={onClose}/>
+                    <h2 className='pantry-edit__title'> Edit: {pantry.pantry_name} </h2>
                 </div>
-                <img className='pantry-edit__img' src={pantryIcon} alt="pantry icon"></img>
+                <img className='pantry-edit__image' src={pantryIcon} alt="pantry icon"></img>
                 <form className='pantry-edit__form' onSubmit={onSubmitName}>
-                    <input placeholder='Pantry Name' value={pantryName} onChange={(e) => setPantryName(e.target.value)}/>
-                    <button> Submit </button>
+                    <p> Change Name: </p>
+                    <input className='pantry-edit__input' placeholder='Pantry Name' value={pantryName} onChange={(e) => setPantryName(e.target.value)}/>
+                    <button className='pantry-edit__button' > Submit </button>
                 </form>
                 <form className='pantry-edit__form'>
-                    <input placeholder='Add friend'/>
-                    <button> Add </button>
+                    <p> Add Friends: </p>
+                    <input className='pantry-edit__input' placeholder='Add friend'/>
+                    <button className='pantry-edit__button' > Add </button>
                 </form>
-                <button onClick={onClose}> Cancel </button>
+                <button className='pantry-edit__button pantry-edit__cancel' onClick={onClose}> Cancel </button>
             </div>
         </div>
     </>)

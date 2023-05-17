@@ -38,7 +38,8 @@
 //Modals 
 @mixin modal-parent{
     position:fixed;
-
+    top: auto;
+    right: auto;
     left: 0;
     bottom: 0;
     
@@ -52,7 +53,9 @@
 }
 @mixin modal-child {
     width: 100%;
-    height: 100%;
+    height: 80%;
+    position: absolute;
+    bottom: 0;
     background-color: white;
 }
 //Padding 
