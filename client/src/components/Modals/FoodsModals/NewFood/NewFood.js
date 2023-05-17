@@ -11,6 +11,7 @@ import { backend } from '../../../../firebase';
 import Async, { useAsync } from 'react-select/async';
 //Note: Pass in an array of objects.
 import CartList from '../../../CartList/CartList'
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const NewFood = (props) => {
     const {id} = useParams();
@@ -22,10 +23,21 @@ const NewFood = (props) => {
     const [inputFood, setInputFood] = useState({});
     //Set of foods used to send to the api.
     const [foods, setFoods] = useState([])
-    
+    //Set user for database
+    const [user, setUser] = useState({})
 
     const [timer, setTimer] = useState(null);
 
+    const auth = getAuth();
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+        if (user) {
+            setUser(user);
+        } else {
+            console.warn("User not logged in")
+        }
+        });
+    }, [auth])
     if(!show){
         return null;
     }
@@ -62,6 +74,7 @@ const NewFood = (props) => {
         const formattedFood = {
             name: inputFood.label,
             type: foodType,
+            user: user.displayName
         }
         setFoods([formattedFood, ...foods])
         setInputFood({})
