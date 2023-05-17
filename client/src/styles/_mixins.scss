@@ -5,7 +5,7 @@
         @content;
     }
 }
-@mixin display-laptop {
+@mixin display-desktop {
     @media screen and (min-width: $display-desktop) {
         @content;
     }
@@ -19,7 +19,16 @@
     list-style: none;
 }
 @mixin card-item {
-    @include padding-baseline;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    @include display-tablet(){
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+    @include display-desktop(){
+        margin-right: 1.5rem;
+        margin-left: 1.5rem;
+    }
 }
 @mixin card-container {
     display: flex;
@@ -31,8 +40,11 @@
     border: 3px solid black;
     margin: auto;
     margin-bottom: 1rem;
-    
     cursor: pointer;
+
+    @include display-tablet(){
+        margin-bottom: 2rem;
+    }
 }
 
 //Modals 
@@ -57,11 +69,24 @@
     position: absolute;
     bottom: 0;
     background-color: white;
+    @include display-tablet(){
+        width: 40%;
+        height: 100%;
+        right: 0;
+    }
 }
 //Padding 
 @mixin padding-baseline {
     padding-right:  0.75rem;
     padding-left:  0.75rem;
+    @include display-tablet(){
+        padding-right:  3rem;
+        padding-left:  3rem;
+    }
+    @include display-desktop(){
+        padding-right:  6rem;
+        padding-left:  6rem;
+    }
 }
 
 //Margins 
