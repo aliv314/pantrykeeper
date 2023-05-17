@@ -117,9 +117,9 @@
 
 //Components
 @mixin icon{
-    width: 2rem;
+    max-width: 2rem;
     @include display-tablet(){
-        width: 3rem;
+        max-width: 3rem;
     }
 }
 @mixin input {

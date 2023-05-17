@@ -20,7 +20,7 @@
         width: 80%;
         @include display-tablet{
             width: fit-content;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
     }
     &__icon{
@@ -28,15 +28,16 @@
         @include icon;
         @include display-tablet{
             display:initial;
-        
+            margin-bottom: 0.5rem;
         }
     }
     &__buttons{
         display: flex;
         @include display-tablet{
-            justify-content: space-around;
+            justify-content:space-between;
             align-items: end;
             width: 100%;
+            padding: 1rem 0
         }
     }
     &__bt{
