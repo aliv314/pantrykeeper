@@ -1,7 +1,6 @@
 import './FoodDetails.scss';
 
-import backIcon from '../../../../assets/images/icons/arrow_back.svg'
-import foodIcon from '../../../../assets/images/icons/kitchen.svg';
+import foodIcon from '../../../../assets/images/icons/nutrition.svg';
 import BackButton from '../../../BackButton/BackButton';
 const FoodDetails = (props) =>{
     const {show, food, onClose} = props; 

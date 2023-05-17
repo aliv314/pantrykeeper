@@ -6,19 +6,20 @@
 
     &__content{ 
         @include modal-child;
-        @include padding-baseline;
         display: flex;
         flex-direction: column;
     }
     &__header{
         @include margin-headline;
         display: flex;
+        align-items: center;
     }
     &__image{
         max-height: 50%;
     }
     &__detail{
         display: flex;
+        @include margin-baseline;
     }
     &__label{
         margin-right: 8px;

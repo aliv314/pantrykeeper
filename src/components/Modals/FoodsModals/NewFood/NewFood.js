@@ -12,6 +12,7 @@ import Async, { useAsync } from 'react-select/async';
 //Note: Pass in an array of objects.
 import CartList from '../../../CartList/CartList'
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import BackButton from '../../../BackButton/BackButton';
 
 const NewFood = (props) => {
     const {id} = useParams();
@@ -104,13 +105,13 @@ const NewFood = (props) => {
     return (
         <div className='new-food'>
             <div className='new-food__content'>
-                <div>
+                <div className='new-food__header'>
+                    <BackButton onClose ={onCloseHandler}/>
                     <h2> Add Food </h2>
-                    <img src={closeIcon} onClick={onCloseHandler} alt='close modal'/>
                 </div>
                 <form className='new-food__form' onSubmit={handleAddFood}>
                     <p className='new-food__text'> Search </p>
-                    <Async value={inputFood} onChange={(value) => setInputFood(value)} loadOptions={getSuggestions}></Async>
+                    <Async className = 'new-food__input' value={inputFood} onChange={(value) => setInputFood(value)} loadOptions={getSuggestions}></Async>
                     <p className='new-food__text'> Type </p>
                     <div className='new-food__radio-group'>
                         <div className='new-food__radio'>
