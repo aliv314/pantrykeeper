@@ -84,8 +84,6 @@ exports.putFood = async (req, res) => {
 }
 
 exports.delFood = async (req, res) => {
-    console.log(req.params.pantry_id)
-    console.log(req.params.food_id)
     try{
         const pantryRef = await db.collection('pantries').doc(req.params.pantry_id);
         const foodRef = await pantryRef.collection('foods').doc(req.params.foods_id);

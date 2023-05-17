@@ -9,7 +9,7 @@ function newPantry (owner_id, owner_name, pantry_name, pantry_img, num_foods, nu
         pantry_img: pantry_img,
         num_foods : num_foods,
         num_dishes: num_dishes,
-        num_ingredients: num_ingredients
+        num_ingredients: num_ingredients,
     }    
 }
 
@@ -25,11 +25,11 @@ exports.postPantry = async (req, res) => {
             return res.status(400).send("Missing parameters");
         }
 
-        const pantryObj = newPantry(req.body.ownerId, req.body.ownerName, req.body.pantryName, 
-            '', 0, 0);
+        const pantryObj = newPantry(req.body.ownerId, req.body.ownerName, req.body.pantryName, '', 0, 0, 0);
         const result = await db.collection('pantries').add(pantryObj);
         res.status(200).send("Success!");
     }catch(error){
+        console.log(error);
         res.status(400).send("Error posting new pantry.");
     }
 }
@@ -47,6 +47,7 @@ exports.getPantry = async (req, res) => {
 
         res.status(200).json(pantry);
     }catch(error){
+        console.log(error)
         res.status(404).send("Error getting pantries.")
     }
 }
@@ -58,6 +59,7 @@ exports.putPantry = async (req, res) => {
     
         res.status(200).send("Success!");
     }catch(error){
+        console.log(error)
         res.status(400).send("Error posting new pantry.");
     }
 }
@@ -69,6 +71,7 @@ exports.delPantry = async(req, res) => {
         
         res.status(200).send('Success!');
     }catch(error){
+        console.log(error)
         res.status(400).send("Error deleting pantry")
     }
 }   
