@@ -2,13 +2,14 @@ const {db} = require('../firebase');
 const axios = require('axios');
 process.config;
 
-function newFood (name, img, timestamp, qty, type){
+function newFood (name, img, timestamp, qty, type, user){
     return {
         food_name : name,
         food_img : img, 
         timestamp : timestamp, 
         food_qty : qty,
         food_type: type,
+        user: user
     }
 }
 
@@ -47,7 +48,7 @@ exports.postFoods = async (req, res) => {
         const foodsArray = req.body.foods;
         //Create a response array
         const foodsRes = foodsArray.map( (food) => {
-            const foodObj = newFood(food.name, '', Date.now(), 1, food.type);
+            const foodObj = newFood(food.name, '', Date.now(), 1, food.type, food.user);
             const result = foodsRef.doc(food.name).set(foodObj);
             return foodObj;
         })

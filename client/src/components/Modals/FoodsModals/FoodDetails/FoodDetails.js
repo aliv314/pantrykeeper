@@ -19,8 +19,12 @@ const FoodDetails = (props) =>{
                 </div>
                 <img className='food-details__image' src={foodIcon} alt="food icon"></img>
                 <div className='food-details__detail'>
-                    <p className='food-details__label'> Added by: </p> 
+                    <p className='food-details__label'> Food: </p> 
                     <p className='food-details__info'> {food.food_name}</p>
+                </div>
+                <div className='food-details__detail'>
+                    <p className='food-details__label'> Added by: </p> 
+                    <p className='food-details__info'> {food.user}</p>
                 </div>
                 <div  className='food-details__detail'>
                     <p className='food-details__label'> Added on: </p>
