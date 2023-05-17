@@ -1,38 +1,27 @@
 @use '../../../styles/mixins' as *;
 @use '../../../styles/variables' as *;
+@use '../../../styles/typography' as *;
 
 .item-card{
     @include card-container;
     &__body{
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        width: 100%;
-        // border-bottom: 3px solid black;
+        margin-right: auto;
     }
     &__title{
-        margin-bottom: 10px;
+        @include font-label;
+        width: 80%;
+    }
+    &__icon{
+        display: none;
     }
     &__buttons{
         display: flex;
-        width: 100%;
-        min-height: 30%;
     }
-
-    &__button{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }  
-    &__button--left{
-        // border-right: 3px solid black;
+    &__bt{
+        @include icon;
+        margin-left: 4px;
     }
-    &__bt-icon{
-        height: 70%;
-    }  
 
 
 }

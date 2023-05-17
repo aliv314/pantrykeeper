@@ -11,12 +11,8 @@ const ItemCard = (props) => {
                     <img  className='item-card__icon'src={icon} alt="icon"></img>
                 </div>
                 <div className='item-card__buttons'>
-                    <div onClick={onClickDetail} className='item-card__button item-card__button--left'>
-                        <img  className='item-card__bt-icon' src={detailIcon} alt="icon"></img>
-                    </div>
-                    <div onClick={onClickSecondary} className='item-card__button'>
-                        <img  className='item-card__bt-icon' src={secondaryIcon} alt="icon"></img>
-                    </div>
+                        <img  onClick={onClickDetail} className='item-card__bt' src={detailIcon} alt="icon"></img>
+                        <img  onClick={onClickSecondary} className='item-card__bt' src={secondaryIcon} alt="icon"></img>
                 </div>
                 
             </div>

@@ -3,9 +3,6 @@
 @use '../../../styles/mixins' as *;
 
 .home-card{
-    display: flex;
-    align-items: center;
-    
     @include card-container;
     
     &__text{
