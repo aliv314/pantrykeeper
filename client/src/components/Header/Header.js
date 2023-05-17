@@ -22,9 +22,9 @@ const Header = () => {
     return (
     <>
         <div className='header'>
-            <img src={logo} className='header__title'></img>
+            <img src={logo} className='header__title' alt="logo"></img>
             <div className='header__user'>
-                <h4 className='header__username'> {username}</h4>
+                <p className='header__username'> {username} </p>
                 <img className = 'header__user-icon' src={profileIcon} alt={`${username}'s profile icon`}/>
             </div>
         </div>

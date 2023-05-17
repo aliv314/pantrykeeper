@@ -1,16 +1,17 @@
 @use '../../styles/mixins' as *;
 @use '../../styles/variables' as *;
+@use '../../styles/typography' as *;
 
 .header{
     @include padding-baseline;
     
     width: 100%;
     height: 4rem;
-    background-color: grey;
+    background-color: $rose-taupe;
     display: flex;
     align-items: center;
     @include display-tablet(){
-        height: 6rem;;
+        height: 5rem;;
     }
     &__logo{
         height: 100%;
@@ -22,6 +23,7 @@
     &__user{
         display: flex;
         align-items: center;
+        @include font-subheader;
     }
     &__username{
         height:fit-content;

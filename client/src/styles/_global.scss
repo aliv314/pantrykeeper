@@ -1,8 +1,14 @@
-@use './typography.scss';
-
+@use './typography.scss' as *;
+@use './variables' as *;
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: 'Cabin';
 }
+
+body {
+    background-color: $parchment;
+}
+
+

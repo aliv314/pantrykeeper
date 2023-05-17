@@ -49,14 +49,16 @@ const Home = () => {
     return (
         <>
             <div className='hero'>
-                <h1>PantryKeeper</h1>
+                <h1 className='hero__title' >PantryKeeper</h1>
             </div>
             <section className='home-body'>
-                <div className='home-body__card' onClick={myKitchenHandler}>
-                    <HomeCard text = "My Kitchen" icon = {myKichenIcon} />
-                </div>
-                <div className='home-body__card' onClick={friendsHandler}>
-                    <HomeCard text = "Friends" icon = {friendsIcon}/>
+                <div className='home-body__cards'>
+                    <div className='home-body__card' onClick={myKitchenHandler}>
+                        <HomeCard text = "My Kitchen" icon = {myKichenIcon} />
+                    </div>
+                    <div className='home-body__card' onClick={friendsHandler}>
+                        <HomeCard text = "Friends" icon = {friendsIcon}/>
+                    </div>
                 </div>
                 {/* If not Logged in or Signed up */}
                 {!user && <p className='home-body__user' onClick = {loginClickHandler}> Login </p>}

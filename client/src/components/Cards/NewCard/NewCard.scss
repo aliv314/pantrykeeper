@@ -2,14 +2,13 @@
 @use '../../../styles/variables' as *;
 
 .new-card{
-    
     @include card-container;
 
     &__title{
         display: flex;
         justify-content: center;
         align-items: center;
-        border-bottom: 3px solid black;
+        // border-bottom: 3px solid black;
         width: 100%;
         height: 40%;
     }

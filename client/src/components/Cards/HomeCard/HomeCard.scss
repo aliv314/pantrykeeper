@@ -5,17 +5,17 @@
 .home-card{
     display: flex;
     align-items: center;
-    border: 3px solid black;
-    height: 60px;
-    width: 100%;
-    min-width: 250px;
-    padding: 0 1rem;
-    border-radius: 25px;
-
+    
+    @include card-container;
+    
     &__text{
         margin-right: auto;
+        @include display-tablet{
+            margin: 0
+        }
     }
     &__icon{
+        margin: auto 0;
         @include icon;
     }
 }
