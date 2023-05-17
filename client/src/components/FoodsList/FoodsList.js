@@ -35,7 +35,6 @@ const FoodsList = (props) => {
             {showNew &&<NewFood show={showNew} onCloseHandler={() => setShowNew(false)}></NewFood>}
             {showDetails && food && <FoodDetails show={showDetails} food={food} onClose={() => setShowDetails(false)}></FoodDetails>}
             <section className='foods'>
-                <h3 className='foods__header'> Foods </h3>
                 <ul className='foods__list'>
                     {foods && foods.map((food, i) => {
                         return ( 
