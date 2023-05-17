@@ -25,10 +25,10 @@
 // card-item
 @mixin card-item {
     display: flex;
-    padding: 1rem;
-
+    @include margin-baseline();
     @include display-tablet(){
         width: 33%;
+        padding: 1rem;
     }
     @include display-desktop(){
         width: 20%;
@@ -39,6 +39,7 @@
     height: 60px;
     width: 100%;
     padding: 0 1rem;
+    padding-top: 1rem;
     border: 3px solid black;
     border-radius: 25px;
     display: flex;

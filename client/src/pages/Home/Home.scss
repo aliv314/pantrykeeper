@@ -44,8 +44,6 @@
     }
     &__card{
         @include card-item;
-        padding: 0;
-        margin-bottom: 1.25rem;
         @include display-tablet{
             height: auto;
             margin: auto auto;
