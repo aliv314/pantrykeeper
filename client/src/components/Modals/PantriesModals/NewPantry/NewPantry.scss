@@ -2,11 +2,10 @@
 @use '../../../../styles/variables' as *;
 
 .new-pantry{
-
     @include modal-parent;
     
     &__content{
-        background-color: white;
+        @include modal-child;
         @include padding-baseline;
         height: 100%;
         width: 100%;

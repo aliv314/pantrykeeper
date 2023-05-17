@@ -8,8 +8,8 @@
     &__body{
         display: flex;
         margin-right: auto;
+        width: 100%;
         @include display-tablet{
-            width: 100%;
             flex-direction: column;
             justify-content: center;
             align-items: center
@@ -17,7 +17,6 @@
     }
     &__title{
         @include font-label;
-        width: 80%;
         @include display-tablet{
             width: fit-content;
             margin-bottom: 1.5rem;

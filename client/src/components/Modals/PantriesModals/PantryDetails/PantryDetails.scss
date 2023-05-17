@@ -3,8 +3,8 @@
 
 .pantry-details{
     @include modal-parent;
+
     &__content{ 
-        @include padding-baseline;
         @include modal-child;
         display: flex;
         flex-direction: column;

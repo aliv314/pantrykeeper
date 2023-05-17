@@ -6,7 +6,6 @@
 
     &__content{ 
         @include modal-child;
-        @include padding-baseline;
         display: flex;
         flex-direction: column;
     }
