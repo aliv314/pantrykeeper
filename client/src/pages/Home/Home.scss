@@ -12,7 +12,7 @@
     background-repeat: no-repeat;
     background-position: center;
     @include padding-baseline;
-
+    @include margin-baseline;
     @include display-tablet{
         height: 50vh;
     }
@@ -21,7 +21,7 @@
     }
     &__title{ 
         @include font-header;
-        color: $rosy-brown;
+        color: $parchment;
     }
 }
 .home-body{
@@ -32,17 +32,22 @@
     height: 100%;
     @include margin-headline;
     @include padding-baseline;
+
     &__cards{
         display: flex;
         flex-direction: column;
         width: 100%;
+        @include card-list;
         @include display-tablet{
             flex-direction: row;
         }
     }
     &__card{
-        @include margin-baseline;
+        @include card-item;
+        padding: 0;
+        margin-bottom: 1.25rem;
         @include display-tablet{
+            height: auto;
             margin: auto auto;
         }
     }

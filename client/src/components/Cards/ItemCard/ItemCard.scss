@@ -4,23 +4,47 @@
 
 .item-card{
     @include card-container;
+    
     &__body{
         display: flex;
         margin-right: auto;
+        @include display-tablet{
+            width: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center
+        }
     }
     &__title{
         @include font-label;
         width: 80%;
+        @include display-tablet{
+            width: fit-content;
+            margin-bottom: 2rem;
+        }
     }
     &__icon{
         display: none;
+        @include icon;
+        @include display-tablet{
+            display:initial;
+        
+        }
     }
     &__buttons{
         display: flex;
+        @include display-tablet{
+            justify-content: space-around;
+            align-items: end;
+            width: 100%;
+        }
     }
     &__bt{
         @include icon;
         margin-left: 4px;
+        @include display-tablet{
+            margin: 0
+        }
     }
 
 

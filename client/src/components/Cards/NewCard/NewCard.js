@@ -9,9 +9,8 @@ const NewItemCard = (props) => {
             <div className='new-card__title'>
                 <h4> New {title} </h4>
             </div>
-            <div className='new-card__icon'>
-                <img src={plusCircle} alt={`Add new item to ${title}`}></img>
-            </div>
+            <img className='new-card__icon' src={plusCircle} alt={`Add new item to ${title}`}></img>
+         
         </div>
     )
 }

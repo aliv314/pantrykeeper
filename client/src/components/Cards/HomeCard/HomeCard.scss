@@ -4,11 +4,12 @@
 
 .home-card{
     @include card-container;
-    
+    padding: 1rem;
     &__text{
         margin-right: auto;
         @include display-tablet{
-            margin: 0
+            margin: auto;
+            margin-bottom: 2rem;
         }
     }
     &__icon{
