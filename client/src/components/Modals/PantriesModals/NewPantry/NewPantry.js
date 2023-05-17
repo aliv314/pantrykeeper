@@ -1,6 +1,7 @@
 import './NewPantry.scss'
 import {useState} from 'react';
 import pantryIcon from '../../../../assets/images/icons/kitchen.svg'
+import BackButton from '../../../BackButton/BackButton';
 const NewPantryModal = (props) => {
 
     const {show, onSubmit, onClose} = props
@@ -15,6 +16,7 @@ const NewPantryModal = (props) => {
         <div className="new-pantry">
             <div className='new-pantry__content'>
                 <div className='new-pantry__header'>
+                    <BackButton onClose={onClose}/>
                     <h2 className='new-pantry__title'> New Pantry </h2>
                 </div>
                 <form onSubmit={(e) => {onSubmit(e, pantryName)}} className='new-pantry__form'>
