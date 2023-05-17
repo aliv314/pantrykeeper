@@ -48,8 +48,7 @@ const Pantry = () => {
         }else if (filterD && !filterI){
             setDisplay(foods.filter(food => food.food_type === "dish"))
         }else{
-            setFilterD(false);
-            setFilterI(false);
+            setDisplay(foods)
         }
     }, [filterI, filterD])
 
@@ -61,8 +60,8 @@ const Pantry = () => {
                     <h2 className='pantry__title'> {pantry.pantry_name}</h2>
                 </div>
                 <div className='pantry__buttons'>
-                    <SectionButton text={"Ingredients"} icon={ingredientIcon} onClickHandler={() => setFilterI(!filterI)}></SectionButton>
-                    <SectionButton text={"Dishes"} icon={dishIcon} onClickHandler={() => setFilterD(!filterD)}></SectionButton>
+                    <SectionButton active={filterI} text={"Ingredients"} icon={ingredientIcon} onClickHandler={() => setFilterI(!filterI)}></SectionButton>
+                    <SectionButton active={filterD} text={"Dishes"} icon={dishIcon} onClickHandler={() => setFilterD(!filterD)}></SectionButton>
                 </div>  
             </div>
             <FoodsList pantryId = {id} foods = {displayFood}></FoodsList>
