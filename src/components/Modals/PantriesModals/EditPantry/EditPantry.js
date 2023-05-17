@@ -19,7 +19,7 @@ const EditPantry = (props) =>{
                 <div className='pantry-edit__header'>
                     <BackButton onClose={onClose}/>
                     <h2 className='pantry-edit__title'> Edit: {pantry.pantry_name} </h2>
-                    <img onClick={handleDelete} src={deleteIcon} alt="garbage"></img>
+                    <img onClick={(e) => handleDelete(e, pantry.pantry_id)} src={deleteIcon} alt="garbage"></img>
                 </div>
                 <img className='pantry-edit__image' src={pantryIcon} alt="pantry icon"></img>
                 <form className='pantry-edit__form' onSubmit={(e) => {handleEdit(e, pantryName)}}>

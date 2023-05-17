@@ -97,11 +97,10 @@ const Pantries = () => {
         })
     }
     const handleDelete = (e, pantryId) => {
-        axios.post(`${backend}/api/pantries/${pantry.pantry_id}`)
+        axios.delete(`${backend}/api/pantries/${pantryId}`)
         .then((res)=>{
-            setShowNew(false);
-            const newPantry = res.data;
-            setPantries([newPantry, ...pantries])
+            setShowEdit(false);
+            setPantries(pantries.filter(pantry => pantry.pantry_id !== pantryId))
         }).catch((e) => {
             console.log(e)
         })
@@ -109,21 +108,24 @@ const Pantries = () => {
 
     return (
     <div className='pantries'>
+
         {showNew && <NewPantry 
         show={showNew} 
         handleNew={(e, pantryName) => handleNew(e, pantryName)} 
         onClose={() => {setShowNew(false)}}/>}
 
         {showDetails && pantry && <PantryDetails 
-        show={showDetails} pantry={pantry} 
+        show={showDetails} 
+        pantry={pantry} 
         onClose={() => {setShowDetails(false)}} />}
+
         {showEdit && pantry && <EditPantry 
         show={showEdit}
         pantry={pantry} 
         onClose={() => {setShowEdit(false)}}
         handleEdit = {(e, pantryName) => handleEdit(e, pantryName)}
-        handleDelete = {(e, pantryId) => handleDelete(e, pantryId)}
-        />}
+        handleDelete = {(e, pantryId) => handleDelete(e, pantryId)}/>}
+
         <div className='pantries__header'>
             <BackButton onClose={ () => nav(-1)}/>
             <h2 className='pantries__title'> Pantries </h2>
