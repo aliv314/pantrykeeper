@@ -40,11 +40,11 @@
 
 ## Screenshots
 
-Markup : ![Picture of Home](/screenshots/home.png "Title is optional")
-Markup : ![Picture of List of Pantries](/screenshots/pantries.png "Title is optional")
-Markup : ![Picture of Create Pantry Modal](/screenshots/new-pantry.png "Title is optional")
-Markup : ![Picture of Food Items](/screenshots/new-foods.png "Title is optional")
-Markup : ![Picture Adding Food Items](/screenshots/new-foods.png "Title is optional")
+Home : ![Picture of Home](/screenshots/home.png "Title is optional")
+List of Pantries : ![Picture of List of Pantries](/screenshots/pantries.png "Title is optional")
+Create a Pantry Modal : ![Picture of Create Pantry Modal](/screenshots/new-pantry.png "Title is optional")
+List of Food Items : ![Picture of Food Items](/screenshots/new-foods.png "Title is optional")
+Add Food Items : ![Picture Adding Food Items](/screenshots/new-foods.png "Title is optional")
 
 ## Lessons Learned & Next Steps
  * Lessons:
