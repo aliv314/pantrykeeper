@@ -30,7 +30,7 @@
 
 ## Installation on Developer and Production Environments
 
-- Project is live at: 
+- Project is live at: https://pantrykeeper.vercel.app/
 - Environmental variables and dependency files will be sent to the TAs.
 
 ## API References
