@@ -30,7 +30,7 @@ const FoodsList = (props) => {
     useEffect(() =>{
         setDisplay(foods);
     }, [foods])
-    
+
     useEffect(() => {
         axios.get(`${backend}/api/foods/${id}`)
         .then((res) => {
@@ -58,15 +58,15 @@ const FoodsList = (props) => {
     }
     
     const handleDelete = (e, foodId) => {
-        console.log(id);
-        console.log(foodId);
         e.preventDefault();
         axios.delete(`${backend}/api/foods/${id}/${foodId}`)
         .then(res => {
             console.log(res)
             setFoods(foods.filter( food => food.food_id !== foodId));
         })
-        .catch(err => console.log(err));    
+        .catch(err =>{
+            console.log(err)
+        });    
     }
     //Filter the foods array without losing data.
     useEffect(() => {

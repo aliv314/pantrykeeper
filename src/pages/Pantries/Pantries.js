@@ -68,13 +68,7 @@ const Pantries = () => {
         axios.post(`${backend}/api/pantries`, newPantryObj)
         .then((res)=>{
             setShowNew(false);
-            console.log(res.data);
-            const newPantry = {
-                //NEED TO FIND A WAY TO RETURN PANTRY ID
-                //THIS WON'T WORK
-                pantry_id: uuidv4(),
-                ...res.data
-            }
+            const newPantry = res.data
             setPantries([newPantry, ...pantries])
         }).catch((e) => {
             console.log(e)
@@ -90,7 +84,6 @@ const Pantries = () => {
         }
         axios.put(`${backend}/api/pantries/${pantry.pantry_id}`, reqBody)
         .then((res) => {
-            console.log(res);
             setShowEdit(false);
         }).catch((e) => {   
             console.log(e);

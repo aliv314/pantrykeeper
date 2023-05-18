@@ -70,8 +70,6 @@ const NewFood = (props) => {
         }
         setFoods([formattedFood, ...foods])
         setInputFood({})
-
-        console.log(formattedFood);
         e.target.reset();
     }
 
