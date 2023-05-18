@@ -12,8 +12,8 @@ const PantryDetails = (props) =>{
     }
     console.log(pantry);
     return (<>
-        <div className='pantry-details'>
-            <div className='pantry-details__content'>
+        <div className='pantry-details' onClick={onClose}>
+            <div className='pantry-details__content' onClick={(e) => e.stopPropagation()}>
                 <div className='pantry-details__header'>
                     <BackButton onClose={onClose}/>
                     <h2 className='pantry-details__title'> {pantry.pantry_name}</h2>
@@ -29,11 +29,11 @@ const PantryDetails = (props) =>{
                 </div>
                 <div className='pantry-details__detail'>
                     <p className='pantry-details__label'> Number of Dishes:</p>
-                    <p className='pantry-details__info'> {pantry.num_leftovers}</p>
+                    <p className='pantry-details__info'> {pantry.num_dishes}</p>
                 </div>
                 <div className='pantry-details__detail'>
                     <p className='pantry-details__label'> Number of Ingredients: </p>
-                    <p className='pantry-details__info'> {pantry.num_foods}</p>
+                    <p className='pantry-details__info'> {pantry.num_ingredients}</p>
                 </div>
             </div>
         </div>

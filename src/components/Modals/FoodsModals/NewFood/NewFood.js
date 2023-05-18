@@ -81,8 +81,8 @@ const NewFood = (props) => {
 
 
     return (
-        <div className='new-food'>
-            <div className='new-food__content'>
+        <div className='new-food' onClick={onClose}>
+            <div className='new-food__content' onClick={(e) => e.stopPropagation()}>
                 <div className='new-food__header'>
                     <BackButton onClose ={onClose}/>
                     <h2> Add Food </h2>
