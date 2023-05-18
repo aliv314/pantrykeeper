@@ -35,12 +35,9 @@
         @include input
     }
     &__buttons{
-        @include display-tablet{
-            display: flex;
-        }
     }
     &__button{
         @include buttons;
-        @include margin-baseline;
+        margin-bottom: 0.5rem;
     }
 }

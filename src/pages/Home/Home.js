@@ -64,14 +64,11 @@ const Home = () => {
                     <div className='home-body__card' onClick={myKitchenHandler}>
                         <HomeCard text = "My Kitchen" icon = {myKichenIcon} />
                     </div>
-                    <div className='home-body__card' onClick={friendsHandler}>
+                    {/* Couldn't get it working in time :sob: */}
+                    {/* <div className='home-body__card' onClick={friendsHandler}>
                         <HomeCard text = "Friends" icon = {friendsIcon}/>
-                    </div>
+                    </div> */}
                 </div>
-                {/* If not Logged in or Signed up */}
-                {!user && <p className='home-body__user' onClick = {loginClickHandler}> Login </p>}
-                {/* If not logged in or signed up */}
-                {!user && <p className='home-body__user' onClick= {signUpClickHandler}> SignUp</p>}
                 {/* If not logged in or signed up */}
                 {user && <p className='home-body__user' onClick= {logOutClickHandler}> Logout </p>}
             </section>
