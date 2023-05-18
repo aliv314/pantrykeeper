@@ -95,7 +95,7 @@ const FoodsList = (props) => {
 
             <section className='foods'>
                 <ul className='foods__list'>
-                    {foods && foods.map((food, i) => {
+                    {foods && foods.map((food) => {
                         return ( 
                         <li key={uuidv4()} className='foods__list-item'>
                             <ItemCard 
@@ -103,12 +103,12 @@ const FoodsList = (props) => {
                             itemName={food.food_name} 
                             icon ={foodIcon}
                             onClickDetail = {() => {
-                                setFood(foods[i]);
+                                setFood(food);
                                 setShowDetails(true);   
                             }}
                             additionalClass = {changeColor(food.timestamp)}
                             secondaryIcon = {deleteIcon}
-                            onClickSecondary = {(e) => {setFood(foods[i]); handleDelete(e, food.food_id)}} 
+                            onClickSecondary = {(e) => {setFood(food); handleDelete(e, food.food_id)}} 
                             />
                         </li>
                         )
