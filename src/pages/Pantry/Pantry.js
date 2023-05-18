@@ -16,8 +16,7 @@ const Pantry = () => {
 
     const [pantry, setPantry] = useState({})
 
-    const [foods, setFoods] = useState([])
-    const [displayFood,  setDisplay] = useState([])
+    
     const [filterI, setFilterI] = useState(false)
     const [filterD, setFilterD] = useState(false)
 
@@ -32,15 +31,7 @@ const Pantry = () => {
         })
     }, [id])
 
-    useEffect(() => {
-        if (filterI && !filterD){
-            setDisplay(foods.filter(food => food.food_type === "ingredient"))
-        }else if (filterD && !filterI){
-            setDisplay(foods.filter(food => food.food_type === "dish"))
-        }else{
-            setDisplay(foods)
-        }
-    }, [filterI, filterD])
+    
 
     
     return (

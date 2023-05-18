@@ -18,17 +18,21 @@ import { backend } from '../../firebase';
 import { useParams } from 'react-router-dom';
 
 const FoodsList = (props) => {
+    const {id} = useParams();
+    const {filterI, filterD} = props;
+
     const [food, setFood] = useState({});
     const [foods, setFoods] = useState([]);
     const [showNew, setShowNew] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
-
-    const {id} = useParams();
+    
+    const [displayFood,  setDisplay] = useState([])
     
     useEffect(() => {
         axios.get(`${backend}/api/foods/${id}`)
         .then((res) => {
             setFoods(res.data);
+            setDisplay(res.data);
         }).catch((e) => {
             console.log(e);
         })
@@ -63,8 +67,18 @@ const FoodsList = (props) => {
         })
         .catch(err => console.log(err));    
     }
+    //Filter the foods array without losing data.
+    useEffect(() => {
+        if (filterI && !filterD){
+            setDisplay(foods.filter(food => food.food_type === "ingredient"))
+        }else if (filterD && !filterI){
+            setDisplay(foods.filter(food => food.food_type === "dish"))
+        }else{
+            setDisplay(foods)
+        }
+    }, [filterI, filterD])
 
-
+    //Change the color of the card based on date.
     const daysSince = (date) =>{
         const today = new Date()
         const diff = today - date;
@@ -95,7 +109,7 @@ const FoodsList = (props) => {
 
             <section className='foods'>
                 <ul className='foods__list'>
-                    {foods && foods.map((food) => {
+                    {displayFood && displayFood.map((food) => {
                         return ( 
                         <li key={uuidv4()} className='foods__list-item'>
                             <ItemCard 
