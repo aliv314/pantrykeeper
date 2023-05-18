@@ -23,9 +23,17 @@ const Home = () => {
     })
 
     const myKitchenHandler = () =>{
+        if(!user) {
+            alert("User must be signed in.");
+            return;
+        }
         nav('/my-pantry');
     }
     const friendsHandler = () =>{
+        if(!user) {
+            alert("User must be signed in.");
+            return;
+        }
         nav('/friend-pantry')
     }
     const loginClickHandler = () => {
