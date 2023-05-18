@@ -45,7 +45,7 @@ const Home = () => {
     const logOutClickHandler = () => {
         try{
             signOut(auth).then(() => {
-                console.log("Signed out!")
+                window.location.reload(false);
             }).catch((error) => {
                 console.log(error);
             });
