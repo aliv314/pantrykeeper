@@ -27,7 +27,7 @@ const Header = () => {
         <div className='header'>
             <img src={logo} className='header__title' alt="logo"  onClick={ () => {navigate('/')}} ></img>
             <div className='header__user'>
-                <p className='header__username'> {username} </p>
+                <p className='header__username'> {username? username : "Please Login/Signup"} </p>
                 <img className = 'header__user-icon' src={profileIcon} alt={`${username}'s profile icon`}/>
             </div>
         </div>
