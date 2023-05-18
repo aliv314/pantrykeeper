@@ -12,8 +12,11 @@
         display: flex;
         align-items: center;
     }
+    &__propmt{
+        margin-bottom: 0.5rem
+    }
     &__text{
-        margin-bottom: 2px;
+        @include margin-baseline;
     }
     &__input{
         @include margin-baseline;
@@ -32,8 +35,7 @@
     }
   
     &__list-title{
-        margin-top: 1rem;
-        margin-bottom: 8px;
+        @include margin-headline;
     }
 
     &__list{
@@ -41,7 +43,6 @@
     }
     
     &__button{
-        width: 100%;
-        padding: 0 2rem
+        @include buttons;
     }
 }
