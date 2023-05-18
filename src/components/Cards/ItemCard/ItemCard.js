@@ -2,10 +2,10 @@ import './ItemCard.scss'
 import detailIcon from '../../../assets/images/icons/info.svg'
 
 const ItemCard = (props) => {
-    const {itemName, icon, onClickItem, onClickDetail, secondaryIcon, onClickSecondary} = props;
+    const {itemName, icon, onClickItem, onClickDetail, secondaryIcon, onClickSecondary, additionalClass} = props;
     return (
         <>
-            <div className='item-card'>
+            <div className={`item-card ${additionalClass}`}>
                 <div onClick={onClickItem} className='item-card__body'>
                     <h4 className='item-card__title'> {itemName} </h4>
                     <img  className='item-card__icon'src={icon} alt="icon"></img>

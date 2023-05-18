@@ -8,7 +8,10 @@ const FoodDetails = (props) =>{
     if(!show){
         return null;
     }
-
+    const convertDate = (date) => {
+        return new Date(date).toDateString();
+    }
+    
     return (<>
         <div className='food-details'>
             <div className='food-details__content'>
@@ -27,7 +30,7 @@ const FoodDetails = (props) =>{
                 </div>
                 <div  className='food-details__detail'>
                     <p className='food-details__label'> Added on: </p>
-                    <p className='food-details__info'> {food.timestamp}</p>
+                    <p className='food-details__info'> {convertDate(food.timestamp)}</p>
                 </div>
                 <div  className='food-details__detail'>
                     <p className='food-details__label'> Food Type </p>

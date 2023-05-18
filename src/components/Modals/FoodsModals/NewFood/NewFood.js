@@ -4,10 +4,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react'
 import {useParams} from 'react-router-dom';
 
-import closeIcon from '../../../../assets/images/icons/close.svg'
-
-import { backend } from '../../../../firebase';
-
 import Async, { useAsync } from 'react-select/async';
 //Note: Pass in an array of objects.
 import CartList from '../../../CartList/CartList'
@@ -59,7 +55,7 @@ const NewFood = (props) => {
     }
 
     //Submit list to the foods
-    const handleCart= (e) => {
+    const handleCartSubmit = (e) => {
         e.preventDefault();
         //There can't be repeat foods in array sent to the API
         foods.forEach( foodItem =>{
@@ -79,6 +75,10 @@ const NewFood = (props) => {
         e.target.reset();
     }
 
+    const handleCartCancel = (foodName) => {
+        setFoods(foods.filter(food => food.name !== foodName))
+    }
+
 
     return (
         <div className='new-food'>
@@ -87,7 +87,7 @@ const NewFood = (props) => {
                     <BackButton onClose ={onClose}/>
                     <h2> Add Food </h2>
                 </div>
-                <form className='new-food__form' onSubmit={handleCart}>
+                <form className='new-food__form' onSubmit={handleCartSubmit}>
                     <p className='new-food__text'> Search </p>
                     <Async className = 'new-food__input' value={inputFood} onChange={(value) => setInputFood(value)} loadOptions={getSuggestions}></Async>
                     <p className='new-food__text'> Type </p>
@@ -105,7 +105,7 @@ const NewFood = (props) => {
                 </form>
                 
                 <h3 className='new-food__list-title'> Foods </h3>
-                <CartList foods={foods}/>
+                <CartList foods={foods} onCancel={(foodName) => handleCartCancel(foodName)}/>
                 <button className='new-food__button' onClick={(e) => handleNew(e, foods)}> Submit </button>
                 <button className='new-food__button' onClick={() => {onClose(); setFoods([])}}> Cancel </button>
             </div>

@@ -106,6 +106,7 @@ const Pantries = () => {
         })
     }
 
+
     return (
     <div className='pantries'>
 

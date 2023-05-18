@@ -18,11 +18,11 @@ import { backend } from '../../firebase';
 import { useParams } from 'react-router-dom';
 
 const FoodsList = (props) => {
-    const {pantryId} = props
     const [food, setFood] = useState({});
     const [foods, setFoods] = useState([]);
     const [showNew, setShowNew] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
+
     const {id} = useParams();
     
     useEffect(() => {
@@ -53,10 +53,33 @@ const FoodsList = (props) => {
     }
     
     const handleDelete = (e, foodId) => {
+        console.log(id);
+        console.log(foodId);
         e.preventDefault();
-        axios.delete(`${backend}/api/foods/${pantryId}/${foodId}`)
-        .then(res => {console.log(res)})
+        axios.delete(`${backend}/api/foods/${id}/${foodId}`)
+        .then(res => {
+            console.log(res)
+            setFoods(foods.filter( food => food.food_id !== foodId));
+        })
         .catch(err => console.log(err));    
+    }
+
+
+    const daysSince = (date) =>{
+        const today = new Date()
+        const diff = today - date;
+        const result = Math.ceil(diff / (1000 * 3600 * 24));
+        return result - 1;
+    }
+    const changeColor = (timestamp) => {
+        const days = daysSince(timestamp)
+        if(days < 15){
+            return "food-new";
+        }else if(days < 32){
+            return "food-stale";
+        }else{
+            return "food-old";
+        }
     }
 
     return (
@@ -74,7 +97,7 @@ const FoodsList = (props) => {
                 <ul className='foods__list'>
                     {foods && foods.map((food, i) => {
                         return ( 
-                        <li key={uuidv4()}className='foods__list-item'>
+                        <li key={uuidv4()} className='foods__list-item'>
                             <ItemCard 
                             key={uuidv4()} 
                             itemName={food.food_name} 
@@ -83,8 +106,9 @@ const FoodsList = (props) => {
                                 setFood(foods[i]);
                                 setShowDetails(true);   
                             }}
+                            additionalClass = {changeColor(food.timestamp)}
                             secondaryIcon = {deleteIcon}
-                            onClickSecondary = {(e) => handleDelete(e, food.food_id)} 
+                            onClickSecondary = {(e) => {setFood(foods[i]); handleDelete(e, food.food_id)}} 
                             />
                         </li>
                         )

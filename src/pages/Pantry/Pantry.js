@@ -42,6 +42,7 @@ const Pantry = () => {
         }
     }, [filterI, filterD])
 
+    
     return (
         <div className='pantry'>
             <div className='pantry__head'>

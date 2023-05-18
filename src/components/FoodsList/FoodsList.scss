@@ -12,3 +12,15 @@
         @include card-item;
     }
 }
+
+.food-new{
+    background-color: rgba($color: $feldgrau, $alpha: 0.5);
+}
+
+.food-stale{
+    background-color: rgba($color: $rosy-brown, $alpha: 0.5);
+}
+
+.food-old{
+    background-color: rgba($color: $rose-taupe, $alpha: 0.5);
+}
