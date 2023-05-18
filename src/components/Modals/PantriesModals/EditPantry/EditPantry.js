@@ -27,11 +27,11 @@ const EditPantry = (props) =>{
                     <input className='pantry-edit__input' placeholder='Pantry Name' value={pantryName} onChange={(e) => setPantryName(e.target.value)}/>
                     <button className='pantry-edit__button' > Submit </button>
                 </form>
-                <form className='pantry-edit__form'>
+                {/* <form className='pantry-edit__form'>
                     <p> Add Friends: </p>
                     <input className='pantry-edit__input' placeholder='Add friend'/>
                     <button className='pantry-edit__button' > Add </button>
-                </form>
+                </form> */}
                 <button className='pantry-edit__button pantry-edit__cancel' onClick={onClose}> Cancel </button>
             </div>
         </div>
