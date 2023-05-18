@@ -6,6 +6,7 @@ import { useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import { backend, auth } from '../../firebase';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import BackButton from '../../components/BackButton/BackButton';
 
 const Register = () => {
     const [mail, setMail] = useState("");
@@ -43,6 +44,7 @@ const Register = () => {
                 updateProfile( userObj, {
                     displayName: user
                 }).then(() => {
+                    alert("Success! Routing you back to Home.")
                     console.log("Profile updated!")
                 }).catch(() => {
                     console.log("Profile failed to update!")
@@ -71,7 +73,10 @@ const Register = () => {
 
     return (
         <section className='register'>
-            <h2 className='register__title'> SignUp </h2>
+            <div className='register__header'>
+                <BackButton onClose={() => nav('/')}></BackButton>
+                <h2 className='register__title'> SignUp </h2>
+            </div>
             <form className='register__form' onSubmit={onSubmitHandler}>
                 <p className='register__label'>Email</p>
                 <input className='register__input' placeholder='e-Mail' type='text' value={mail} onChange={(e) => setMail(e.target.value)}></input>
@@ -82,7 +87,7 @@ const Register = () => {
                 <p className='register__label'>Confirm Password</p>
                 <input className='register__input' placeholder='Confirm Password' type='password' value ={confirm} onChange={(e) => setConfirm(e.target.value)}></input>
 
-                <button type="submit"> Submit </button> 
+                <button className='register__button' type="submit"> Submit </button> 
             </form>
         </section>
     )
