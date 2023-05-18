@@ -134,7 +134,7 @@ const Pantries = () => {
         </div>
         
         <ul className='pantries__cards'>
-            {pantries && pantries.map( (pantry, i) => {
+            {pantries && pantries.map( (pantry) => {
                 return (
                     <li className='pantries__card' key= {pantry && pantry.pantry_id}>
                         <ItemCard 
@@ -142,12 +142,12 @@ const Pantries = () => {
                         icon={pantryIcon} 
                         onClickItem={() => nav(`/my-pantry/${pantry.pantry_id}`)} 
                         onClickDetail = {() => {
-                            setPantry(pantries[i]); 
+                            setPantry(pantry); 
                             setShowDetails(true); 
                         }} 
                         secondaryIcon = {editIcon}
                         onClickSecondary= { () => {
-                            setPantry(pantries[i]); 
+                            setPantry(pantry); 
                             setShowEdit(true);
                         }}/>
                     </li>
