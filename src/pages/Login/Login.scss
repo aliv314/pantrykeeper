@@ -2,17 +2,20 @@
 @use '../../styles/variables' as *;
 .login{
     @include padding-baseline;
+    &__header{
+        @include margin-headline;
+        display: flex;
+        align-items: center;
+    }
     &__form{
         display: flex;
         flex-direction: column;
     }
-    &__title{
-        @include margin-headline;
-    }
     &__input{
+        @include input;
         @include margin-baseline;
     }
-    &__label{
-
+    &__button{
+        @include buttons;
     }
 }
