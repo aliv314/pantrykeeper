@@ -25,14 +25,16 @@ const FoodsList = (props) => {
     const [foods, setFoods] = useState([]);
     const [showNew, setShowNew] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
-    
     const [displayFood,  setDisplay] = useState([])
+    
+    useEffect(() =>{
+        setDisplay(foods);
+    }, [foods])
     
     useEffect(() => {
         axios.get(`${backend}/api/foods/${id}`)
         .then((res) => {
             setFoods(res.data);
-            setDisplay(res.data);
         }).catch((e) => {
             console.log(e);
         })
@@ -51,7 +53,6 @@ const FoodsList = (props) => {
             //Close modal.
             setShowNew(false);
             setFoods([...res.data, ...foods])
-            console.log(res.data)
         })
         .catch( error => {})
     }
