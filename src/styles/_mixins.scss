@@ -1,4 +1,5 @@
 @use './variables' as *;
+@use './typography' as *;
 
 @mixin display-tablet {
     @media screen and (min-width: $display-tablet) {
@@ -137,6 +138,7 @@
     height: 2.5rem;
     padding: 0.25rem;
     border-radius: 10px;
+    @include font-label;
 }
 
 @mixin buttons {
@@ -145,4 +147,97 @@
     height: 2rem;
     width: 100%;
     border-radius: 15px;
+}
+
+//Typography 
+@mixin font-header {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+
+    @include display-tablet {
+        font-size: 3.75rem;
+        line-height: 4.25rem;
+        font-weight: 600;
+    }
+}
+
+@mixin font-section {
+    font-size: 1.75rem;
+    line-height: 2rem;
+    font-weight: 400;
+
+    @include display-tablet {
+        font-size: 2.25rem;
+        line-height: 2.75rem;
+        font-weight: 400;
+    }
+}
+
+@mixin font-section-bold {
+    @include font-section;
+    font-weight: 600;
+}
+
+@mixin font-subheader {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 400;
+
+    @include display-tablet {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+}
+
+@mixin font-subheader-bold {
+    @include font-subheader;
+    font-weight: 600;
+}
+
+@mixin font-body {
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+    font-weight: 400;
+
+    @include display-tablet {
+        font-size: 0.875rem;
+        line-height: 1.375rem;
+    }
+}
+
+@mixin font-body-bold {
+    @include font-body;
+    font-weight: 600;
+}
+
+@mixin font-footer {
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+
+    @include display-tablet {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+}
+
+@mixin font-footer-bold {
+    @include font-footer;
+    font-weight: 600;
+}
+
+@mixin font-label {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+
+    @include display-tablet {
+        font-size: 1rem;
+        line-height: 1.25rem;
+    }
+}
+
+@mixin font-label-bold {
+    @include font-label;
+    font-weight: 600;
 }
