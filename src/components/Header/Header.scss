@@ -29,4 +29,15 @@
         height:fit-content;
         margin-right: 8px;
     }
+    &__auth{
+        display:  flex;
+        @include font-subheader;
+    }
+    &__login{
+        margin-right: 2rem;
+        cursor: pointer;
+    }
+    &__signup{
+        cursor: pointer;
+    }
 }
