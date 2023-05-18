@@ -14,8 +14,8 @@ const EditPantry = (props) =>{
     }
     
     return (<>
-        <div className='pantry-edit'>
-            <div className='pantry-edit__content'>
+        <div className='pantry-edit' onClick={onClose}>
+            <div className='pantry-edit__content' onClick={(e) => e.stopPropagation()}>
                 <div className='pantry-edit__header'>
                     <BackButton onClose={onClose}/>
                     <h2 className='pantry-edit__title'> Edit: {pantry.pantry_name} </h2>

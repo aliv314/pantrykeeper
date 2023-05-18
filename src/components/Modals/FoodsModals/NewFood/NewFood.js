@@ -81,16 +81,16 @@ const NewFood = (props) => {
 
 
     return (
-        <div className='new-food'>
-            <div className='new-food__content'>
+        <div className='new-food' onClick={onClose}>
+            <div className='new-food__content' onClick={(e) => e.stopPropagation()}>
                 <div className='new-food__header'>
                     <BackButton onClose ={onClose}/>
                     <h2> Add Food </h2>
                 </div>
                 <form className='new-food__form' onSubmit={handleCartSubmit}>
-                    <p className='new-food__text'> Search </p>
+                    <p className='new-food__prompt'> Search </p>
                     <Async className = 'new-food__input' value={inputFood} onChange={(value) => setInputFood(value)} loadOptions={getSuggestions}></Async>
-                    <p className='new-food__text'> Type </p>
+                    <p className='new-food__prompt'> Type </p>
                     <div className='new-food__radio-group'>
                         <div className='new-food__radio'>
                             <input className='new-food__radio-button'  name="foodType" type={"radio"} value={"ingredient"} onChange={(e) => setFoodType(e.target.value)}/>
@@ -103,11 +103,13 @@ const NewFood = (props) => {
                     </div>
                     <button className= 'new-food__button' type='Submit'>Add</button>
                 </form>
-                
-                <h3 className='new-food__list-title'> Foods </h3>
-                <CartList foods={foods} onCancel={(foodName) => handleCartCancel(foodName)}/>
-                <button className='new-food__button' onClick={(e) => handleNew(e, foods)}> Submit </button>
-                <button className='new-food__button' onClick={() => {onClose(); setFoods([])}}> Cancel </button>
+                <section className='cart-section'>
+                    <h3 className='cart-section__title'> Cart </h3>
+                    <CartList foods={foods} onCancel={(foodName) => handleCartCancel(foodName)}/>
+                    {!foods.length && <p className='new-food__text'> Nothing in cart </p>}
+                    <button className='cart-section__button' onClick={(e) => handleNew(e, foods)}> Submit </button>
+                    <button className='cart-section__button' onClick={() => {onClose(); setFoods([])}}> Cancel </button>
+                </section>
             </div>
         </div>
     )

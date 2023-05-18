@@ -3,7 +3,10 @@
 
 .cart{
     overflow-y: auto;
-    max-height: 40%;
+    max-height: 60%;
+    @include display-tablet{
+        max-height: 100%;
+    }
     &__item{
         display: flex;
         align-items: center;

@@ -13,8 +13,8 @@ const NewPantryModal = (props) => {
     }
 
     return (
-        <div className="new-pantry">
-            <div className='new-pantry__content'>
+        <div className="new-pantry" onClick={onClose}>
+            <div className='new-pantry__content' onClick={(e) => e.stopPropagation()}>
                 <div className='new-pantry__header'>
                     <BackButton onClose={onClose}/>
                     <h2 className='new-pantry__title'> New Pantry </h2>

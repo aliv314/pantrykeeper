@@ -13,8 +13,8 @@ const FoodDetails = (props) =>{
     }
     
     return (<>
-        <div className='food-details'>
-            <div className='food-details__content'>
+        <div className='food-details' onClick={onClose}>
+            <div className='food-details__content' onClick={ (e) => {e.stopPropagation();}}>
                 <div className='food-details__header'>
                     <BackButton onClose={onClose}/>
                     <h2 className='food-details__title'> {food.food_name}</h2>

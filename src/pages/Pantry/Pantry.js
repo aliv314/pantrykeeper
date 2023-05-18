@@ -55,7 +55,7 @@ const Pantry = () => {
                     <SectionButton active={filterD} text={"Dishes"} icon={dishIcon} onClickHandler={() => setFilterD(!filterD)}></SectionButton>
                 </div>  
             </div>
-            <FoodsList/>
+            <FoodsList filterI = {filterI} filterD = {filterD}/>
         </div>
     )
 }
