@@ -99,7 +99,7 @@ const NewFood = (props) => {
                             <p className='new-food__radio-text'> Dish </p>
                         </div>
                     </div>
-                    <button className= 'new-food__button' type='Submit'>Add</button>
+                    <button className= 'new-food__button' type='Submit'>Add Foods to Cart</button>
                 </form>
                 <section className='cart-section'>
                     <h3 className='cart-section__title'> Cart </h3>
