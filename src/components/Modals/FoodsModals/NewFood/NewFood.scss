@@ -12,6 +12,9 @@
         display: flex;
         align-items: center;
     }
+    &__form{
+        margin-bottom: auto;
+    }
     &__propmt{
         margin-bottom: 0.5rem
     }
@@ -42,6 +45,12 @@
         margin-bottom: 1rem;
     }
     
+    &__button{
+        @include buttons;
+    }
+}
+
+.cart-section{
     &__button{
         @include buttons;
     }

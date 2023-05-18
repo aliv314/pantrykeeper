@@ -103,12 +103,13 @@ const NewFood = (props) => {
                     </div>
                     <button className= 'new-food__button' type='Submit'>Add</button>
                 </form>
-                
-                <h3 className='new-food__list-title'> Cart </h3>
-                <CartList foods={foods} onCancel={(foodName) => handleCartCancel(foodName)}/>
-                {!foods.length && <p className='new-food__text'> Nothing in cart </p>}
-                <button className='new-food__button' onClick={(e) => handleNew(e, foods)}> Submit </button>
-                <button className='new-food__button' onClick={() => {onClose(); setFoods([])}}> Cancel </button>
+                <section className='cart-section'>
+                    <h3 className='cart-section__title'> Cart </h3>
+                    <CartList foods={foods} onCancel={(foodName) => handleCartCancel(foodName)}/>
+                    {!foods.length && <p className='new-food__text'> Nothing in cart </p>}
+                    <button className='cart-section__button' onClick={(e) => handleNew(e, foods)}> Submit </button>
+                    <button className='cart-section__button' onClick={() => {onClose(); setFoods([])}}> Cancel </button>
+                </section>
             </div>
         </div>
     )
