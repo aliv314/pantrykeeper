@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import { backend, auth } from '../../firebase';
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, deleteUser } from "firebase/auth";
 import BackButton from '../../components/BackButton/BackButton';
 
 const Register = () => {
@@ -13,8 +13,12 @@ const Register = () => {
     const [user, setUser] = useState("");
     const [pass, setPass] = useState("");
     const [confirm, setConfirm] = useState("");
-    const [submitted, setSubmitted] = useState(true);
 
+    //Validation/Error Handling
+    const [serverError, setServerError] = useState("")
+    const [userError, setUserError] = useState("");
+    const [submitted, setSubmitted] = useState(false);
+    
     const nav = useNavigate();
 
     const onSubmitHandler = (e) =>{
@@ -27,7 +31,6 @@ const Register = () => {
         //Passwords don't match.
         if(!validator.equals(pass, confirm)){
             console.log("Mismatching passwords");
-
             return
         }  
         //If it's not a valid email address.
@@ -35,33 +38,44 @@ const Register = () => {
             console.log("Invalid Email");
             return
         }
-
+        
         try{
+            //Create the user. (Firebase)
+            //Attempt to create user in db (Backend)
+            //If user is not created, delete user (Auth)
+            //Flash error (Front end)
             createUserWithEmailAndPassword(auth, mail, pass)
             .then((userCredential) => {
-                // Signed in 
                 const userObj = userCredential.user;
-                updateProfile( userObj, {
-                    displayName: user
-                }).then(() => {
-                    alert("Success! Routing you back to Home.")
-                    console.log("Profile updated!")
-                }).catch(() => {
-                    console.log("Profile failed to update!")
-                })
-                console.log(userCredential)
                 const postReq = {
                     userId: userObj.uid,
                     friendCode: String(userObj.uid).substring(0, 7),
                 }
+
                 axios.post(` ${backend}/api/users`, postReq)
                 .then(res => {
+                    updateProfile( userObj, {
+                        displayName: user
+                    }).then(() => {
+                        alert("Success! Routing you back to Home.")
+                        console.log("Profile updated!")
+                        nav('/')
+                    }).catch(() => {
+                        console.log("Profile failed to update!")
+                    })
                     console.log(res);
-                    nav('/')
-                }).catch(err => {
-                    console.log(err);
                 })
+                .catch(err => {
+                    console.log(err);
+                    deleteUser(userObj)
+                    .then(() =>{
+                        console.log("Error creating user in the database. Deleting.")
+                    }).catch((error) => {
+                        console.log(error);
+                    })
+                })                
             })
+
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
