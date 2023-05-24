@@ -2,10 +2,10 @@ import './Register.scss'
 import validator from 'validator';
 import axios from 'axios';
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import { backend, auth } from '../../firebase';
-import { createUserWithEmailAndPassword, updateProfile, deleteUser, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, deleteUser, getAuth, onAuthStateChanged } from "firebase/auth";
 import BackButton from '../../components/BackButton/BackButton';
 
 const Register = () => {
@@ -21,8 +21,15 @@ const Register = () => {
     
     const nav = useNavigate();
     const auth = getAuth();
-
     
+    useEffect (()=>{
+        onAuthStateChanged(auth, (user) => {
+            if (user){
+                nav("/")
+            }
+        })
+    }, [auth])
+
     const onSubmitHandler = (e) =>{
         e.preventDefault();
         //Missing input fields.

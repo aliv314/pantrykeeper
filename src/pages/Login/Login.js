@@ -1,18 +1,29 @@
 import './Login.scss'
 import validator from 'validator';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 
 import { auth } from '../../firebase';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import BackButton from '../../components/BackButton/BackButton';
 
 const Login = () => {
     const [mail, setMail] = useState("");
     const [pass, setPass] = useState("");
+    const [user, setUser] = useState({});
     const [submitted, setSubmitted] = useState(true);
 
     const nav = useNavigate();
+    const auth = getAuth();
+    
+    useEffect (()=>{
+        onAuthStateChanged(auth, (user) => {
+            if (user){
+                nav("/")
+            }
+        })
+    }, [auth])
+
     const onSubmitHandler = (e) =>{
         e.preventDefault();
         //Missing input fields.

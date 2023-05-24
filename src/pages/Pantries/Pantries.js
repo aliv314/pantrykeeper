@@ -6,7 +6,7 @@ import axios from 'axios';
 import NewCard from '../../components/Cards/NewCard/NewCard';
 import { useEffect, useState } from 'react';
 import { backend } from '../../firebase';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, reauthenticateWithRedirect } from 'firebase/auth';
 import { uuidv4 } from '@firebase/util';
 
 //Cards
@@ -24,7 +24,7 @@ import BackButton from '../../components/BackButton/BackButton';
 
 const Pantries = () => {
     
-    const [user, setUser] = useState();
+    const [user, setUser] = useState({});
     const [pantries, setPantries] = useState([]);
     const [pantry, setPantry] = useState({});
 
@@ -40,7 +40,7 @@ const Pantries = () => {
         if (user) {
             setUser(user);
         } else {
-            console.warn("User not logged in")
+            nav("/")
         }
         });
     }, [auth])
@@ -49,6 +49,7 @@ const Pantries = () => {
         if(!user) return
         axios.get(`${backend}/api/users/${user.uid}`)
         .then((res) => {
+            console.log("Res data", res.data);
             setPantries(res.data);
         }).catch((e) => {
             console.log(e);
@@ -102,7 +103,7 @@ const Pantries = () => {
 
     return (
     <div className='pantries'>
-
+        {/* Modals */}
         {showNew && <NewPantry 
         show={showNew} 
         handleNew={(e, pantryName) => handleNew(e, pantryName)} 
@@ -119,11 +120,11 @@ const Pantries = () => {
         onClose={() => {setShowEdit(false)}}
         handleEdit = {(e, pantryName) => handleEdit(e, pantryName)}
         handleDelete = {(e, pantryId) => handleDelete(e, pantryId)}/>}
+        {/* End Modals */}
 
         <div className='pantries__header'>
             <BackButton onClose={ () => nav(-1)}/>
             <h2 className='pantries__title'> Pantries </h2>
-            
         </div>
         
         <ul className='pantries__cards'>
