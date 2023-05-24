@@ -5,12 +5,12 @@ import axios from 'axios';
 import { useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import { backend, auth } from '../../firebase';
-import { createUserWithEmailAndPassword, updateProfile, deleteUser } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, deleteUser, getAuth } from "firebase/auth";
 import BackButton from '../../components/BackButton/BackButton';
 
 const Register = () => {
     const [mail, setMail] = useState("");
-    const [user, setUser] = useState("");
+    const [userName, setUserName] = useState("");
     const [pass, setPass] = useState("");
     const [confirm, setConfirm] = useState("");
 
@@ -20,11 +20,13 @@ const Register = () => {
     const [submitted, setSubmitted] = useState(false);
     
     const nav = useNavigate();
+    const auth = getAuth();
 
+    
     const onSubmitHandler = (e) =>{
         e.preventDefault();
         //Missing input fields.
-        if (!mail || !user || !pass || !confirm){
+        if (!mail || !userName || !pass || !confirm){
             console.log("Missing required fields.");
             return;
         }
@@ -55,7 +57,7 @@ const Register = () => {
                 axios.post(` ${backend}/api/users`, postReq)
                 .then(res => {
                     updateProfile( userObj, {
-                        displayName: user
+                        displayName: userName
                     }).then(() => {
                         alert("Success! Routing you back to Home.")
                         console.log("Profile updated!")
@@ -95,7 +97,7 @@ const Register = () => {
                 <p className='register__label'>Email</p>
                 <input className='register__input' placeholder='e-Mail' type='text' value={mail} onChange={(e) => setMail(e.target.value)}></input>
                 <p className='register__label'>Username</p>
-                <input className='register__input' placeholder='Username' type='text' value ={user} onChange={(e) => setUser(e.target.value)}></input>
+                <input className='register__input' placeholder='Username' type='text' value ={userName} onChange={(e) => setUserName(e.target.value)}></input>
                 <p className='register__label'>Password</p> 
                 <input className='register__input' placeholder='Password' type='password' value ={pass} onChange={(e) => setPass(e.target.value)}></input>
                 <p className='register__label'>Confirm Password</p>

@@ -1,4 +1,14 @@
 @use '../../styles/mixins' as *;
-@use '../../styles/vaiables' as *;
+@use '../../styles/variables' as *;
 
+.error{
+    display: flex;
+    align-items: center;
+    color: $eerie;
 
+    &__icon{
+        margin-right: 8px;
+        @include sm-icon;
+    }
+
+}

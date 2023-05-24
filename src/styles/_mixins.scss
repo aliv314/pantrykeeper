@@ -132,6 +132,12 @@
         max-width: 3rem;
     }
 }
+@mixin sm-icon {
+    max-width: 1rem;
+    @include display-tablet(){
+        max-width: 2rem;
+    }
+}
 @mixin input {
     width: 100%;
     border: 3px solid black;

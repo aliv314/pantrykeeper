@@ -1,5 +1,4 @@
 import './HomeCard.scss'
-
 const HomeCard = (props) => {
     const {text, icon} = props;
     return (

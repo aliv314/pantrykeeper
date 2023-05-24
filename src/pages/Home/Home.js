@@ -1,34 +1,39 @@
 import './Home.scss'
 import HomeCard from '../../components/Cards/HomeCard/HomeCard';
+import Error from '../../components/Error/Error';
 
 import  myKichenIcon from '../../assets/images/icons/kitchen.svg'; 
 import  friendsIcon from '../../assets/images/icons/group.svg'; 
+
 import { useNavigate } from 'react-router-dom';
 
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useState } from 'react';
+
 const Home = () => {
     const nav = useNavigate();  
     const [user, setUser] = useState();
-
+    const [signedInError , setSignedInError] = useState(false);
     const auth = getAuth()
-
-    onAuthStateChanged(auth, (user) => {
-        if (user){
-            setUser(user);
-        } else{
-            setUser(false);
-        }
-    
-    })
+    useState(() =>{
+        onAuthStateChanged(auth, (user) => {
+            if (user){
+                setUser(user);
+            } else{
+                setUser(false);
+            }
+        
+        })
+    }, [auth])
 
     const myKitchenHandler = () =>{
         if(!user) {
-            alert("User must be signed in.");
+            setSignedInError(true)
             return;
         }
         nav('/my-pantry');
     }
+    
     const friendsHandler = () =>{
         if(!user) {
             alert("User must be signed in.");
@@ -36,16 +41,11 @@ const Home = () => {
         }
         nav('/friend-pantry')
     }
-    const loginClickHandler = () => {
-        nav('/login')
-    }
-    const signUpClickHandler = () => {
-        nav('/register')
-    }
+
     const logOutClickHandler = () => {
         try{
             signOut(auth).then(() => {
-                window.location.reload(false);
+                window.location.reload();
             }).catch((error) => {
                 console.log(error);
             });
@@ -60,6 +60,7 @@ const Home = () => {
                 <h1 className='hero__title' >PantryKeeper</h1>
             </div>
             <section className='home-body'>
+                {signedInError && <Error error={"User must be signed in!"}/>}
                 <div className='home-body__cards'>
                     <div className='home-body__card' onClick={myKitchenHandler}>
                         <HomeCard text = "My Kitchen" icon = {myKichenIcon} />

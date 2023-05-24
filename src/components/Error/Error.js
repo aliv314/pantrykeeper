@@ -1,10 +1,10 @@
 import './Error.scss'
-
+import errorIcon from '../../assets/images/icons/error.svg'
 const Error = (props) => {
     const {error} = props;
     return (
         <div className='error'>
-            <img className='error__icon'></img>
+            <img src={errorIcon}className='error__icon'></img>
             <p className='error__text'>{error}</p>
         </div>
     )
