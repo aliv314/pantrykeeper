@@ -19,6 +19,8 @@ const Home = () => {
         onAuthStateChanged(auth, (user) => {
             if (user){
                 setUser(user);
+                //Just in case the server is slow again.
+                setSignedInError(false);
             } else{
                 setUser(false);
             }
@@ -33,7 +35,7 @@ const Home = () => {
         }
         nav('/my-pantry');
     }
-    
+
     const friendsHandler = () =>{
         if(!user) {
             alert("User must be signed in.");
