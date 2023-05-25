@@ -3,6 +3,7 @@ import HomeCard from '../../components/Cards/HomeCard/HomeCard';
 import Error from '../../components/Error/Error';
 
 import  myKichenIcon from '../../assets/images/icons/kitchen.svg'; 
+import userIcon from '../../assets/images/icons/face.svg'
 import  friendsIcon from '../../assets/images/icons/group.svg'; 
 
 import { useNavigate } from 'react-router-dom';
@@ -44,6 +45,14 @@ const Home = () => {
         nav('/friend-pantry')
     }
 
+    const userProfielHandler = () => {
+        if(!user){
+            setSignedInError(true);
+            return
+        }
+
+    }
+
     const logOutClickHandler = () => {
         try{
             signOut(auth).then(() => {
@@ -71,6 +80,9 @@ const Home = () => {
                     {/* <div className='home-body__card' onClick={friendsHandler}>
                         <HomeCard text = "Friends" icon = {friendsIcon}/>
                     </div> */}
+                    <div className='home-body__card' onClick={userProfielHandler}>
+                        <HomeCard text = {user && user.displayName} icon = {userIcon} />
+                    </div>
                 </div>
                 {/* If not logged in or signed up */}
                 {user && <p className='home-body__user' onClick= {logOutClickHandler}> Logout </p>}
