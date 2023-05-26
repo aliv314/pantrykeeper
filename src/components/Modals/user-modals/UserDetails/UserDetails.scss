@@ -1,0 +1,9 @@
+@use '../../../../styles/mixins' as *;
+@use '../../../../styles/variables' as *;
+
+.user-details{
+    @include modal-parent;
+    &__contents{
+        @include modal-middle;
+    }
+}

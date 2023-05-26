@@ -1,15 +1,16 @@
 import './Home.scss'
-import HomeCard from '../../components/Cards/HomeCard/HomeCard';
+import HomeCard from '../../components/cards/HomeCard/HomeCard';
 import Error from '../../components/Error/Error';
 
-import  myKichenIcon from '../../assets/images/icons/kitchen.svg'; 
+import myKichenIcon from '../../assets/images/icons/kitchen.svg'; 
+import friendsIcon from '../../assets/images/icons/group.svg'; 
 import userIcon from '../../assets/images/icons/face.svg'
-import  friendsIcon from '../../assets/images/icons/group.svg'; 
 
 import { useNavigate } from 'react-router-dom';
 
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useState } from 'react';
+import UserDetails from '../../components/modals/user-modals/UserDetails/UserDetails';
 
 const Home = () => {
     const nav = useNavigate();  
@@ -72,6 +73,7 @@ const Home = () => {
             </div>
             <section className='home-body'>
                 {signedInError && <Error error={"User must be signed in!"}/>}
+                {<UserDetails show={true}></UserDetails>}
                 <div className='home-body__cards'>
                     <div className='home-body__card' onClick={myKitchenHandler}>
                         <HomeCard text = "My Kitchen" icon = {myKichenIcon} />

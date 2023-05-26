@@ -2,13 +2,13 @@ import './FoodsList.scss';
 import { uuidv4 } from '@firebase/util';
 import { useEffect, useState } from 'react';
 
-//Cards
-import ItemCard from '../Cards/ItemCard/ItemCard';
-import NewItemCard from '../Cards/NewCard/NewCard';
+//cards
+import ItemCard from '../cards/ItemCard/ItemCard';
+import NewItemCard from '../cards/NewCard/NewCard';
 
-//Modals
-import NewFood from '../Modals/FoodsModals/NewFood/NewFood';
-import FoodDetails from '../Modals/FoodsModals/FoodDetails/FoodDetails';
+//modals
+import NewFood from '../modals/foods-modals/NewFood/NewFood';
+import FoodDetails from '../modals/foods-modals/FoodDetails/FoodDetails';
 
 //Icons
 import foodIcon from '../../assets/images/icons/nutrition.svg'

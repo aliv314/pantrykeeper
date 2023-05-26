@@ -13,7 +13,7 @@
 }
 
 
-//Cards 
+//cards 
 @mixin card-list {
     display: flex;
     flex-wrap: wrap;
@@ -56,7 +56,7 @@
     }
 }
 
-//Modals 
+//modals 
 @mixin modal-parent{
     position:fixed;
     top: auto;
@@ -92,6 +92,26 @@
         width: 40%;
         height: 100%;
         right: 0;
+    }
+}
+@mixin modal-middle {
+    width: 100%;
+    height: 80%;
+    overflow-y: auto;
+    position: absolute;
+    bottom: 0;
+    padding: 1rem;
+    background-color: $feldgrau;
+    color: $parchment;
+    display: flex;
+    flex-direction: column;
+    @include display-tablet(){
+        width: 80%;
+        height: 40%;
+        bottom: auto;
+    }
+    @include display-desktop(){
+        height: 60%;
     }
 }
 //Padding 

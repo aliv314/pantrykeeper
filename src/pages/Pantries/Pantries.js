@@ -3,18 +3,18 @@ import './Pantries.scss'
 //Imports 
 import { redirect, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import NewCard from '../../components/Cards/NewCard/NewCard';
+import NewCard from '../../components/cards/NewCard/NewCard';
 import { useEffect, useState } from 'react';
 import { backend } from '../../firebase';
 import { getAuth, onAuthStateChanged, reauthenticateWithRedirect } from 'firebase/auth';
 import { uuidv4 } from '@firebase/util';
 
-//Cards
-import ItemCard from '../../components/Cards/ItemCard/ItemCard';
-//Modals
-import NewPantry from '../../components/Modals/PantriesModals/NewPantry/NewPantry';
-import PantryDetails from '../../components/Modals/PantriesModals/PantryDetails/PantryDetails';
-import EditPantry from '../../components/Modals/PantriesModals/EditPantry/EditPantry';
+//cards
+import ItemCard from '../../components/cards/ItemCard/ItemCard';
+//modals
+import NewPantry from '../../components/modals/pantries-modals/NewPantry/NewPantry';
+import PantryDetails from '../../components/modals/pantries-modals/PantryDetails/PantryDetails';
+import EditPantry from '../../components/modals/pantries-modals/EditPantry/EditPantry';
 
 //Icons
 import pantryIcon from '../../assets/images/icons/kitchen.svg';
@@ -103,7 +103,7 @@ const Pantries = () => {
 
     return (
     <div className='pantries'>
-        {/* Modals */}
+        {/* modals */}
         {showNew && <NewPantry 
         show={showNew} 
         handleNew={(e, pantryName) => handleNew(e, pantryName)} 
@@ -120,7 +120,7 @@ const Pantries = () => {
         onClose={() => {setShowEdit(false)}}
         handleEdit = {(e, pantryName) => handleEdit(e, pantryName)}
         handleDelete = {(e, pantryId) => handleDelete(e, pantryId)}/>}
-        {/* End Modals */}
+        {/* End modals */}
 
         <div className='pantries__header'>
             <BackButton onClose={ () => nav(-1)}/>
