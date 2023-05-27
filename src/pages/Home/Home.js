@@ -1,16 +1,15 @@
 import './Home.scss'
 import HomeCard from '../../components/cards/HomeCard/HomeCard';
 import Error from '../../components/Error/Error';
+import UserDetails from '../../components/modals/user-modals/UserDetails/UserDetails';
 
 import myKichenIcon from '../../assets/images/icons/kitchen.svg'; 
 import friendsIcon from '../../assets/images/icons/group.svg'; 
 import userIcon from '../../assets/images/icons/face.svg'
 
-import { useNavigate } from 'react-router-dom';
-
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useState } from 'react';
-import UserDetails from '../../components/modals/user-modals/UserDetails/UserDetails';
+import { useNavigate } from 'react-router-dom';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 
 const Home = () => {
     const nav = useNavigate();  
