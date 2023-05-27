@@ -9,5 +9,22 @@
     &__header{
         display: flex;
         align-items: center;
+        @include margin-headline;
+    }
+    &__title{
+        margin-right: auto;
+    }
+    &__icon{
+        @include icon;
+    }
+    &__img{
+        max-height: 40%;
+    }
+    &__detail{
+        display:  flex;
+        @include margin-baseline;
+    }
+    &__label{
+        margin-right: 0.5rem;
     }
 }
