@@ -15,6 +15,7 @@ import UserDetails from '../../components/modals/user-modals/UserDetails/UserDet
 const Home = () => {
     const nav = useNavigate();  
     const [user, setUser] = useState();
+    const [showProfile, setShowProfile] = useState(false)
     const [signedInError , setSignedInError] = useState(false);
     const auth = getAuth()
     useState(() =>{
@@ -46,12 +47,12 @@ const Home = () => {
         nav('/friend-pantry')
     }
 
-    const userProfielHandler = () => {
+    const userProfileHandler = () => {
         if(!user){
             setSignedInError(true);
             return
         }
-
+        setShowProfile(true);
     }
 
     const logOutClickHandler = () => {
@@ -73,7 +74,14 @@ const Home = () => {
             </div>
             <section className='home-body'>
                 {signedInError && <Error error={"User must be signed in!"}/>}
-                {<UserDetails show={true}></UserDetails>}
+
+                {user && showProfile && <UserDetails 
+                show={showProfile} 
+                user={user}
+                onClose = {() => setShowProfile(false)}/>
+                }
+
+
                 <div className='home-body__cards'>
                     <div className='home-body__card' onClick={myKitchenHandler}>
                         <HomeCard text = "My Kitchen" icon = {myKichenIcon} />
@@ -82,7 +90,7 @@ const Home = () => {
                     {/* <div className='home-body__card' onClick={friendsHandler}>
                         <HomeCard text = "Friends" icon = {friendsIcon}/>
                     </div> */}
-                    <div className='home-body__card' onClick={userProfielHandler}>
+                    <div className='home-body__card' onClick={userProfileHandler}>
                         <HomeCard text = {user && user.displayName} icon = {userIcon} />
                     </div>
                 </div>
