@@ -69,6 +69,7 @@ const FoodsList = (props) => {
                     foodsToSet[index] = newFood;
                 }
             });
+            //Only set the new foods once :)
             setFoods(foodsToSet)
         })
         .catch( error => {})
