@@ -52,7 +52,24 @@ const FoodsList = (props) => {
         .then( res => {
             //Close modal.
             setShowNew(false);
-            setFoods([...res.data, ...foods])
+            const newFoods = res.data;
+            const foodsToSet = foods;
+            //Reduce number of useState sets.
+            //For each new food object.
+            newFoods.forEach(newFood => {
+                //Get the name.
+                const foodName = newFood.food_name;
+                //Find the name in the old array of foods to update.
+                const index = foodsToSet.findIndex(oldFood => oldFood.food_name === foodName);
+                if (index < 0){
+                    //If it's not found (ind = -1)
+                    foodsToSet.push(newFood);
+                }else{
+                    //Otherwise at the index it was found, set the new food.
+                    foodsToSet[index] = newFood;
+                }
+            });
+            setFoods(foodsToSet)
         })
         .catch( error => {})
     }
