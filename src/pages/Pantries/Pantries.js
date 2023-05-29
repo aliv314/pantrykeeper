@@ -49,11 +49,9 @@ const Pantries = () => {
         if(!user) return
         axios.get(`${backend}/api/users/${user.uid}`)
         .then((res) => {
-            console.log("Res data", res.data);
-            if(!res.data.length){
-                console.log("Res data glitch!")
-                return;
-            }
+            // if(!res.data.length){
+            //     return;
+            // }
             setPantries(res.data);
         }).catch((e) => {
             console.log(e);
