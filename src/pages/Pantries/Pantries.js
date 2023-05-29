@@ -50,11 +50,15 @@ const Pantries = () => {
         axios.get(`${backend}/api/users/${user.uid}`)
         .then((res) => {
             console.log("Res data", res.data);
+            if(!res.data.length){
+                console.log("Res data glitch!")
+                return;
+            }
             setPantries(res.data);
         }).catch((e) => {
             console.log(e);
         })
-    }, [user])
+    }, [auth, user])
     
     //Submit for new pantry modal.
     const handleNew = (e, pantryName) => {
