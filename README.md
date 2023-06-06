@@ -53,6 +53,7 @@ Add Food Items : ![Picture Adding Food Items](/screenshots/new-foods.png "Title 
     * Interfacing with a database with ExpressJS
  * Next Steps:
     * Animations
+    * Addind people to your pantries
     * Consistent styling 
     * Expended color palette
     * Proper user Auth and Permissions
