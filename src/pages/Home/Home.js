@@ -89,9 +89,9 @@ const Home = () => {
                     {/* <div className='home-body__card' onClick={friendsHandler}>
                         <HomeCard text = "Friends" icon = {friendsIcon}/>
                     </div> */}
-                    <div className='home-body__card' onClick={userProfileHandler}>
+                    {user && <div className='home-body__card' onClick={userProfileHandler}>
                         <HomeCard text = {user && user.displayName} icon = {userIcon} />
-                    </div>
+                    </div>}
                 </div>
                 {/* If not logged in or signed up */}
                 {user && <p className='home-body__user' onClick= {logOutClickHandler}> Logout </p>}
