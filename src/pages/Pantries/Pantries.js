@@ -1,13 +1,12 @@
 import './Pantries.scss'
 
 //Imports 
-import { redirect, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import NewCard from '../../components/cards/NewCard/NewCard';
 import { useEffect, useState } from 'react';
 import { backend } from '../../firebase';
-import { getAuth, onAuthStateChanged, reauthenticateWithRedirect } from 'firebase/auth';
-import { uuidv4 } from '@firebase/util';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 //cards
 import ItemCard from '../../components/cards/ItemCard/ItemCard';
@@ -43,7 +42,7 @@ const Pantries = () => {
             nav("/")
         }
         });
-    }, [auth])
+    }, [nav, auth])
     
     useEffect(() => {
         if(!user) return

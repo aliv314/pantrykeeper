@@ -2,16 +2,14 @@ import './NewFood.scss'
 
 import axios from 'axios';
 import { useEffect, useState } from 'react'
-import {useParams} from 'react-router-dom';
 
-import Async, { useAsync } from 'react-select/async';
+import Async from 'react-select/async';
 //Note: Pass in an array of objects.
 import CartList from '../../../CartList/CartList'
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import BackButton from '../../../BackButton/BackButton';
 
 const NewFood = (props) => {
-    const {id} = useParams();
     const {show, handleNew, onClose} = props;
 
     const [foodType, setFoodType] = useState("")
