@@ -33,6 +33,7 @@ const Pantries = () => {
     const [showEdit, setShowEdit] = useState(false);
 
     const [loading, setLoading] = useState(true);
+    const [apiError, setApiError] = useState(false)
 
     const nav = useNavigate();
     
@@ -62,6 +63,9 @@ const Pantries = () => {
                     timeout += 15000
                 })
             }, timeout)   
+        }
+        if(!loading){
+            setApiError(true);
         }
     }, [user])
     
@@ -140,6 +144,8 @@ const Pantries = () => {
             {loading && <li className='pantries__card'>
                 <LoadCard/>
             </li>}
+            {apiError && <li className='pantries__card'> 
+                </li>}
             {pantries && pantries.map( (pantry) => {
                 return (
                     <li className='pantries__card' key= {pantry && pantry.pantry_id}>
