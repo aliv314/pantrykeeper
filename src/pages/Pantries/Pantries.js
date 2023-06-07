@@ -45,10 +45,11 @@ const Pantries = () => {
     }, [nav, auth])
     
     useEffect(() => {
-        if(!user) return
+        if(!user.uid) return
         axios.get(`${backend}/api/users/${user.uid}`)
         .then((res) => {
             if(!res.data.length){
+                console.log(user.uid)
                 console.log("Pantry glitch! -> ", user.uid)
             }
             console.log(res.data)
