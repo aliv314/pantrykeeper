@@ -19,6 +19,7 @@ import EditPantry from '../../components/modals/pantries-modals/EditPantry/EditP
 import pantryIcon from '../../assets/images/icons/kitchen.svg';
 import editIcon from '../../assets/images/icons/edit.svg'
 import BackButton from '../../components/BackButton/BackButton';
+import LoadCard from '../../components/cards/LoadCard/LoadCard';
 
 
 const Pantries = () => {
@@ -31,9 +32,12 @@ const Pantries = () => {
     const [showDetails, setShowDetails] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
 
+    const [loading, setLoading] = useState(true);
+
     const nav = useNavigate();
     
     const auth = getAuth();
+
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -43,23 +47,25 @@ const Pantries = () => {
         }
         });
     }, [nav, auth])
-    
+
     useEffect(() => {
         if(!user.uid) return
-        axios.get(`${backend}/api/users/${user.uid}`)
-        .then((res) => {
-            if(!res.data.length){
-                console.log(user.uid)
-                console.log("Pantry glitch! -> ", user.uid)
-            }
-            console.log(res.data)
-            setPantries(res.data);
-        }).catch((e) => {
-            console.log(e);
-        })
+        let numberOfTries = 0
+        while(loading && numberOfTries++ < 10){
+            let timeout = 1000
+            setTimeout(() => {
+                axios.get(`${backend}/api/users/${user.uid}`)
+                .then((res) => {
+                    setLoading(false);
+                    setPantries(res.data);
+                }).catch((e) => {
+                    timeout += 15000
+                })
+            }, timeout)   
+        }
     }, [user])
     
-    //Submit for new pantry modal.
+    //Submit for new pantry m   odal.
     const handleNew = (e, pantryName) => {
         e.preventDefault();
         if (!user) return;
@@ -131,6 +137,9 @@ const Pantries = () => {
         </div>
         
         <ul className='pantries__cards'>
+            {loading && <li className='pantries__card'>
+                <LoadCard/>
+            </li>}
             {pantries && pantries.map( (pantry) => {
                 return (
                     <li className='pantries__card' key= {pantry && pantry.pantry_id}>
