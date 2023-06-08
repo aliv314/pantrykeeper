@@ -53,6 +53,7 @@ const Pantries = () => {
         if(!user.uid) return
         let numberOfTries = 0
         while(loading && numberOfTries++ < 10){
+            console.log("1 try.")
             let timeout = 1000
             setTimeout(() => {
                 axios.get(`${backend}/api/users/${user.uid}`)
