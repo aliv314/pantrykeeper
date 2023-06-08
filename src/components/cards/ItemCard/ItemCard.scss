@@ -1,0 +1,51 @@
+@use '../../../styles/mixins' as *;
+@use '../../../styles/variables' as *;
+@use '../../../styles/typography' as *;
+
+.item-card{
+    @include card-container;
+    
+    &__body{
+        display: flex;
+        margin-right: auto;
+        width: 100%;
+        @include display-tablet{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center
+        }
+    }
+    &__title{
+        @include font-label;
+        @include display-tablet{
+            width: fit-content;
+            margin-bottom: 1.5rem;
+        }
+    }
+    &__icon{
+        display: none;
+        @include icon;
+        @include display-tablet{
+            display:initial;
+            margin-bottom: 0.5rem;
+        }
+    }
+    &__buttons{
+        display: flex;
+        @include display-tablet{
+            justify-content:space-between;
+            align-items: end;
+            width: 100%;
+            padding: 1rem 0
+        }
+    }
+    &__bt{
+        @include icon;
+        margin-left: 4px;
+        @include display-tablet{
+            margin: 0
+        }
+    }
+
+
+}

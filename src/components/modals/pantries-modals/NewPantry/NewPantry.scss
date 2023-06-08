@@ -1,0 +1,43 @@
+@use '../../../../styles/mixins' as *;
+@use '../../../../styles/variables' as *;
+
+.new-pantry{
+    @include modal-parent;
+    
+    &__content{
+        @include modal-child;
+    }
+
+    &__header{
+        display: flex;
+        align-items: center;
+        @include margin-headline;
+    }
+    &__title{
+    }
+
+    &__icon{
+        @include icon;
+        margin-right: auto;
+    }
+    &__image{
+        max-height: 40%;
+    }
+    &__form{
+        display: flex;
+        flex-direction: column;
+    }
+    &__label{
+        margin-bottom: 4px;
+    }
+    &__input{
+        @include margin-baseline;
+        @include input
+    }
+    &__buttons{
+    }
+    &__button{
+        @include buttons;
+        margin-bottom: 0.5rem;
+    }
+}

@@ -1,0 +1,57 @@
+@use '../../../../styles/mixins' as *;
+@use '../../../../styles/variables' as *;
+
+.new-food{
+    @include modal-parent;
+
+    &__content{
+        @include modal-child;
+    }
+    &__header{
+        @include margin-headline;
+        display: flex;
+        align-items: center;
+    }
+    &__form{
+        margin-bottom: auto;
+    }
+    &__propmt{
+        margin-bottom: 0.5rem
+    }
+    &__text{
+        @include margin-baseline;
+    }
+    &__input{
+        @include margin-baseline;
+        color: black;
+    }
+    &__radio-group{
+        display: flex;
+        @include margin-baseline;
+    }
+    &__radio{
+        display: flex;
+        margin-right: auto;
+    }
+    &__radio-button{
+        margin-right: 5px;
+    }
+  
+    &__list-title{
+        @include margin-headline;
+    }
+
+    &__list{
+        margin-bottom: 1rem;
+    }
+    
+    &__button{
+        @include buttons;
+    }
+}
+
+.cart-section{
+    &__button{
+        @include buttons;
+    }
+}

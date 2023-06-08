@@ -1,0 +1,33 @@
+@use '../../../../styles/mixins' as *;
+@use '../../../../styles/variables' as *;
+
+.pantry-details{
+    @include modal-parent;
+
+    &__content{ 
+        @include modal-child;
+        display: flex;
+        flex-direction: column;
+    }
+    &__header{
+        display: flex;
+        align-items: center;
+        @include margin-headline;
+    }
+    &__icon{
+        margin-right: 8px;
+    }
+    &__image{
+        max-height: 50%;
+    }
+    &__detail{
+        @include margin-baseline;
+        display: flex;
+    }
+    &__label {
+        margin-right: 8px;
+    }
+    &__icon{
+        @include icon;
+    }
+}   

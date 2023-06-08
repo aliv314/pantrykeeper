@@ -1,0 +1,27 @@
+@use '../../../../styles/mixins' as *;
+@use '../../../../styles/variables' as *;
+
+.food-details{
+    @include modal-parent;
+
+    &__content{ 
+        @include modal-child;
+        display: flex;
+        flex-direction: column;
+    }
+    &__header{
+        @include margin-headline;
+        display: flex;
+        align-items: center;
+    }
+    &__image{
+        max-height: 50%;
+    }
+    &__detail{
+        @include margin-baseline;
+        display: flex;
+    }
+    &__label{
+        margin-right: 0.5rem;
+    }
+}   

@@ -1,0 +1,30 @@
+@use '../../../../styles/mixins' as *;
+@use '../../../../styles/variables' as *;
+
+.user-details{
+    @include modal-parent;
+    &__contents{
+        @include modal-middle;
+    }
+    &__header{
+        display: flex;
+        align-items: center;
+        @include margin-headline;
+    }
+    &__title{
+        margin-right: auto;
+    }
+    &__icon{
+        @include icon;
+    }
+    &__img{
+        max-height: 40%;
+    }
+    &__detail{
+        display:  flex;
+        @include margin-baseline;
+    }
+    &__label{
+        margin-right: 0.5rem;
+    }
+}
