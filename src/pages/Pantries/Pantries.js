@@ -59,12 +59,14 @@ const Pantries = () => {
                 .then((res) => {
                     setLoading(false);
                     setPantries(res.data);
+                    setApiError(false);
                 }).catch((e) => {
                     timeout += 15000
                 })
             }, timeout)   
         }
         if(!loading){
+            setLoading(false);
             setApiError(true);
         }
     }, [user])
@@ -145,6 +147,7 @@ const Pantries = () => {
                 <LoadCard/>
             </li>}
             {apiError && <li className='pantries__card'> 
+                Error
                 </li>}
             {pantries && pantries.map( (pantry) => {
                 return (
