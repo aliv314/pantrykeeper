@@ -21,6 +21,7 @@ import editIcon from '../../assets/images/icons/edit.svg'
 import BackButton from '../../components/BackButton/BackButton';
 import LoadCard from '../../components/cards/LoadCard/LoadCard';
 import { async } from '@firebase/util';
+import { clear } from '@testing-library/user-event/dist/clear';
 
 
 const Pantries = () => {
@@ -54,29 +55,27 @@ const Pantries = () => {
         if(!user.uid) return
         let numberOfTries = 0
         let interval = 1000
-        const intervalId = setInterval(async () =>{
+        const getPantries = async () => {
+            clearInterval(intervalId);
             if (numberOfTries > 9){
-                clearInterval(intervalId);
                 setApiError(true);
                 setLoading(false);
+                return
             }
-            console.log(interval, "Let's go");
-            axios.get(`${backend}/api/users/${user.uid}`)
+            await axios.get(`${backend}/api/users/${user.uid}`)
             .then((res) => {
                 setApiError(false);
                 setLoading(false);
                 setPantries(res.data);
-                clearInterval(intervalId);
             }).catch((error)=>{
-                console.log("Error :D")
+                intervalId = setInterval(getPantries, interval);
             })
             
-            interval += 15000;
+            interval *= 1.2;
             numberOfTries++;
-        }, interval)
-        if(loading){
-            setApiError(true);
         }
+
+        let intervalId = setInterval(getPantries, interval);
     }, [user])
     
     //Submit for new pantry m   odal.
