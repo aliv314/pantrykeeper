@@ -1,0 +1,9 @@
+@use '../../../styles/mixins' as *;
+@use '../../../styles/variables' as *;
+@use '../../../styles/typography' as *;
+
+.error-card{
+    @include card-container;
+    align-items: center;
+    justify-content: center;
+}

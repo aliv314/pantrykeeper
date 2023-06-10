@@ -10,6 +10,8 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 //cards
 import ItemCard from '../../components/cards/ItemCard/ItemCard';
+import LoadCard from '../../components/cards/LoadCard/LoadCard';
+
 //modals
 import NewPantry from '../../components/modals/pantries-modals/NewPantry/NewPantry';
 import PantryDetails from '../../components/modals/pantries-modals/PantryDetails/PantryDetails';
@@ -19,7 +21,7 @@ import EditPantry from '../../components/modals/pantries-modals/EditPantry/EditP
 import pantryIcon from '../../assets/images/icons/kitchen.svg';
 import editIcon from '../../assets/images/icons/edit.svg'
 import BackButton from '../../components/BackButton/BackButton';
-import LoadCard from '../../components/cards/LoadCard/LoadCard';
+import ErrorCard from '../../components/cards/ErrorCard/ErrorCard';
 
 
 const Pantries = () => {
@@ -151,9 +153,9 @@ const Pantries = () => {
             {loading && <li className='pantries__card'>
                 <LoadCard/>
             </li>}
-            {apiError && <li>
-              "Api Error! Try Later. Sorry about that x(
-                </li>}
+            {true && <li className='pantries__card'>
+                <ErrorCard errorMsg = 'Pantries could not be accessed at this time. x('/>
+            </li>}
             {pantries && pantries.map( (pantry) => {
                 return (
                     <li className='pantries__card' key= {pantry && pantry.pantry_id}>
