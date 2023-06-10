@@ -20,8 +20,6 @@ import pantryIcon from '../../assets/images/icons/kitchen.svg';
 import editIcon from '../../assets/images/icons/edit.svg'
 import BackButton from '../../components/BackButton/BackButton';
 import LoadCard from '../../components/cards/LoadCard/LoadCard';
-import { async } from '@firebase/util';
-import { clear } from '@testing-library/user-event/dist/clear';
 
 
 const Pantries = () => {
