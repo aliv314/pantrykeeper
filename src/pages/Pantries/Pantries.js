@@ -56,7 +56,6 @@ const Pantries = () => {
         let numberOfTries = 0
         let interval = 1000
         const getPantries = async () => {
-            console.log(interval);
             clearInterval(intervalId);
             if (numberOfTries > 9){
                 setApiError(true);
@@ -69,11 +68,11 @@ const Pantries = () => {
                 setLoading(false);
                 setPantries(res.data);
             }).catch((error)=>{
+                intervalId = setInterval(getPantries, interval);
             })
             
             interval *= 1.2;
             numberOfTries++;
-            intervalId = setInterval(getPantries, interval);
         }
 
         let intervalId = setInterval(getPantries, interval);
