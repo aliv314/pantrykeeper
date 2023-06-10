@@ -20,6 +20,7 @@ import pantryIcon from '../../assets/images/icons/kitchen.svg';
 import editIcon from '../../assets/images/icons/edit.svg'
 import BackButton from '../../components/BackButton/BackButton';
 import LoadCard from '../../components/cards/LoadCard/LoadCard';
+import { async } from '@firebase/util';
 
 
 const Pantries = () => {
@@ -52,22 +53,28 @@ const Pantries = () => {
     useEffect(() => {
         if(!user.uid) return
         let numberOfTries = 0
-        while(loading && numberOfTries++ < 10){
-            console.log("1 try.")
-            let timeout = 1000
-            setTimeout(() => {
-                axios.get(`${backend}/api/users/${user.uid}`)
-                .then((res) => {
-                    setLoading(false);
-                    setPantries(res.data);
-                    setApiError(false);
-                }).catch((e) => {
-                    timeout += 15000
-                })
-            }, timeout)   
-        }
-        if(!loading){
-            setLoading(false);
+        let interval = 1000
+        const intervalId = setInterval(async () =>{
+            if (numberOfTries > 9){
+                clearInterval(intervalId);
+                setApiError(true);
+                setLoading(false);
+            }
+            console.log(interval, "Let's go");
+            axios.get(`${backend}/api/users/${user.uid}`)
+            .then((res) => {
+                setApiError(false);
+                setLoading(false);
+                setPantries(res.data);
+                clearInterval(intervalId);
+            }).catch((error)=>{
+                console.log("Error :D")
+            })
+            
+            interval += 15000;
+            numberOfTries++;
+        }, interval)
+        if(loading){
             setApiError(true);
         }
     }, [user])
@@ -147,8 +154,8 @@ const Pantries = () => {
             {loading && <li className='pantries__card'>
                 <LoadCard/>
             </li>}
-            {apiError && <li className='pantries__card'> 
-                Error
+            {apiError && <li>
+              "Api Error! Try Later. Sorry about that x(
                 </li>}
             {pantries && pantries.map( (pantry) => {
                 return (
