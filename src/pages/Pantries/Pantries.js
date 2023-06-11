@@ -150,11 +150,11 @@ const Pantries = () => {
         </div>
         
         <ul className='pantries__cards'>
+            {apiError && <li className='pantries__card'>
+                <ErrorCard errorMsg = 'Pantries could not be accessed at this time. x('/>
+            </li>}
             {loading && <li className='pantries__card'>
                 <LoadCard/>
-            </li>}
-            {true && <li className='pantries__card'>
-                <ErrorCard errorMsg = 'Pantries could not be accessed at this time. x('/>
             </li>}
             {pantries && pantries.map( (pantry) => {
                 return (
