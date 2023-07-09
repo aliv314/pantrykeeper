@@ -10,12 +10,20 @@
 
   &__body {
     display: flex;
+    align-items: center;
     margin-right: auto;
     width: 100%;
     @include display-tablet {
       flex-direction: column;
       justify-content: center;
       align-items: center;
+    }
+  }
+  &__title{
+    @include font-label;
+    margin-right:auto;
+    @include display-tablet{
+      margin:auto
     }
   }
 
@@ -34,7 +42,7 @@
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background: #fff;
+    background: #000;
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
   .lds-ellipsis div:nth-child(1) {
