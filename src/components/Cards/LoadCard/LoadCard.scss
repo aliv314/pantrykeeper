@@ -5,6 +5,8 @@
 .load-card {
   @include card-container;
   cursor: default;
+  display:  flex;
+  align-items: center;
 
   &__body {
     display: flex;
@@ -16,6 +18,8 @@
       align-items: center;
     }
   }
+
+  //animation
   .lds-ellipsis {
     display: flex;
     align-items: center;
